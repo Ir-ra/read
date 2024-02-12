@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
-import Burger from '../NavBar/navBar_icons/burger.svg';
-import Cross from '../NavBar/navBar_icons/burger-cross.svg';
+import Burger from '../../assets/burger.svg';
+import Cross from '../../assets/burger-cross.svg';
 
 type Props = {
   openMenu: () => void;

@@ -27,9 +27,37 @@ body {
   }
 } */
 
+.instagram-link:hover {
+  content: url('./assets/instagram_hover.svg');
+}
+
+.facebook-link:hover {
+  content: url('./assets/facebook_hover.svg');
+}
+
+.arrow-up:hover {
+  content: url('./assets/arrow-up_hover.svg');
+}
+
 @layer components {
   .mainNavLinks {
     @apply flex items-center border-l border-Black px-8 h-12
+  }
+
+  .footerCols {
+    @apply text-xxs desktop:text-[18px] tablet:leading-5 desktop:text-sm font-bold uppercase
+  }
+
+  .footerBoxes {
+    @apply flex flex-col items-center gap-4 tablet:gap-6 tablet:items-start w-full uppercase
+  }
+
+  .footerListStiles {
+    @apply flex flex-col items-center tablet:items-start text-xxxs tablet:text-xxs font-light gap-2 tablet:gap-4
+  }
+
+  .footerlinkStyles {
+    @apply hover:font-bold active:font-bold duration-200
   }
 }
 

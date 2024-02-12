@@ -3,9 +3,9 @@ import { styled, alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import InputBase from '@mui/material/InputBase';
 
-import Search_icon from '../navBar_icons/search.svg';
-import Search_cross from '../navBar_icons/search_cross.svg';
-import SearchDis from '../navBar_icons/search_disabled.svg';
+import Search_icon from '../../../assets/search.svg';
+import Search_cross from '../../../assets/search_cross.svg';
+import SearchDis from '../../../assets/search_disabled.svg';
 import Image from 'next/image';
 
 const Search = styled('div')(({ theme }) => ({
@@ -68,6 +68,7 @@ export const SearchAppBar = () => {
           )}
 
           <StyledInputBase
+            id='searchInput'
             placeholder="Search"
             inputProps={{ 'aria-label': 'search' }}
             onChange={handleInputChange}

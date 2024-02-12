@@ -1,7 +1,9 @@
 import { SearchAppBar } from './Search/SearchBar';
 import React from 'react';
-import Cart from '../NavBar/navBar_icons/shopping-bag.svg';
-import Profile from '../NavBar/navBar_icons/profile_icon.svg';
+
+import Cart from '../../assets/shopping-bag.svg';
+import Profile from '../../assets/profile_icon.svg';
+
 import Image from 'next/image';
 import Link from 'next/link';
 
