@@ -1,7 +1,10 @@
+import { Subscribe } from "./components/Subscribe/Subscribe";
+
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="">
       <p>home page</p>
+      <Subscribe />
     </main>
   );
 }
