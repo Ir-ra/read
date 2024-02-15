@@ -1,4 +1,5 @@
 import React from 'react';
+import {getCategoryById} from '../../../services/getAPI';
 
 type ButtonProps = {
   title: string;
@@ -6,6 +7,15 @@ type ButtonProps = {
 
 export const Button: React.FC<ButtonProps> = ({ title }) => {
   const buttonType = title === 'Subscribe' ? 'submit' : 'button';
+  const handleCategory = async () => {
+    try {
+      const category = await getCategoryById(1);
+
+      console.log(category.data)
+    } catch (error) {
+      console.log(error)
+    } 
+  }
 
   return (
     <button
@@ -16,6 +26,7 @@ export const Button: React.FC<ButtonProps> = ({ title }) => {
       transition duration-300 ease-in-out
       hover:bg-White hover:text-Black
       active:bg-White active:text-Black'
+      onClick={handleCategory}
     >
       {title}
     </button>

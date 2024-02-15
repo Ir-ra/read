@@ -25,7 +25,7 @@ export const Footer = () => {
       </Link>
 
       <div className='flex flex-col tablet:flex-row items-center tablet:items-start justify-center tablet:justify-between mb-10 tablet:mb-8 gap-7'>
-        <Link id='desk' href='/' className='text-s font-bold hidden desktop:block uppercase w-full' onClick={scrollToTop}>
+        <Link href='/' className='text-s font-bold hidden desktop:block uppercase w-full' onClick={scrollToTop}>
           Vartoread
         </Link>
 

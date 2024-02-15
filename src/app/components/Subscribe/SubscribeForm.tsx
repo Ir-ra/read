@@ -51,7 +51,7 @@ export const SubscribeForm: React.FC = () => {
               name="firstName"
               placeholder="Your name"
               className={inputStyles}
-              autocomplete="off"
+              autoComplete="off"
             />
           </div>
 
@@ -62,7 +62,7 @@ export const SubscribeForm: React.FC = () => {
               name="email"
               placeholder="Email address"
               className={inputStyles}
-              autocomplete="off"
+              autoComplete="off"
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 handleChange(e);
                 setShowValidationIcon(true);
