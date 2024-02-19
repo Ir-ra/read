@@ -4,7 +4,7 @@ import { SectionTitle } from "./components/SectionTitle/SectionTitle";
 
 export default function Home() {
   return (
-    <main className="">
+    <main className="bg-Background">
       <SectionTitle title="bestsellers" link="#" />
       <Bestsellers />
       <Subscribe />

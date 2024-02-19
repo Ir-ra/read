@@ -46,6 +46,9 @@ const config: Config = {
         'tablet': '744px',
         'desktop': '1440px',
       },
+      boxShadow: {
+        custom: '0px 0px 10px 0px rgba(0, 0, 0, 0.25)',
+      },
     },
   },
   plugins: [],
