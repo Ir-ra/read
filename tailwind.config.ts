@@ -38,6 +38,7 @@ const config: Config = {
         m: ['24px', '32px'],
         l: ['32px', '40px'],
         xl: ['96px', '104px'],
+        cartL: ["20px", '30px']
       },
 
       screens: {

@@ -1,9 +1,12 @@
 import { Subscribe } from "./components/Subscribe/Subscribe";
+import { Bestsellers } from "./components/Bestsellers/Bestsellers";
+import { SectionTitle } from "./components/SectionTitle/SectionTitle";
 
 export default function Home() {
   return (
     <main className="">
-      <p>home page</p>
+      <SectionTitle title="bestsellers" link="#" />
+      <Bestsellers />
       <Subscribe />
     </main>
   );
