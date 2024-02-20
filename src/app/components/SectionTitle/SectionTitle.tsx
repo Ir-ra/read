@@ -66,11 +66,11 @@ export const SectionTitle: React.FC<SectionTitleProps> = ({
           <div className="flex pl-6 tablet:pl-10 desktop:pl-20 py-2.5">
             <button
               onClick={() => {
-                setActiveCategory && setActiveCategory("comingSoon");
+                setActiveCategory && setActiveCategory("coming soon");
               }}
               className="text-xsx text-Black text-center uppercase tablet:text-sm desktop:text-l mr-2 "
               style={
-                activeCategory === "comingSoon"
+                activeCategory === "coming soon"
                   ? { fontWeight: "700" }
                   : { fontWeight: "300" }
               }

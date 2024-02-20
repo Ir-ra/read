@@ -3,15 +3,27 @@ import Image from "next/image";
 import plug_book from "../../assets/img/plugs/plug_book.jpg";
 import Link from "next/link";
 
-export const VerticalCard = () => {
-  const sale = true;
+interface VerticalCardProps {
+  product: {
+    id: string;
+    category?: string;
+    cover?: string;
+    autor?: string;
+    bookName: string;
+    price?: string;
+    new?: string;
+    sale?: boolean;
+  };
+}
+
+export const VerticalCard: React.FC<VerticalCardProps> = ({ product }) => {
 
   return (
     <Link href="#">
-      <div className="p-4 tablet:p-8 border-Black border cursor-pointer hover:shadow-custom focus:shadow-custom">
+      <div className="p-4 tablet:p-8 border-Black border cursor-pointer hover:shadow-custom focus:shadow-custom w-[240px] tablet:w-[325px] whitespace-normal">
         <div className="flex mb-2 justify-between">
           <span className="px-1 py[2px]  border-Black border flex justify-center items-center">
-            Bestseller
+            {product.category}
           </span>
           <button
             type="button"
@@ -33,12 +45,12 @@ export const VerticalCard = () => {
             </svg>
           </button>
         </div>
-        <div className="flex">
-          <div className="px-4 tablet:px-[70px] desktop:px-[96px]">
-            <div className="relative w-[96px] h-[144px] tablet:w-[160px] tablet:h-[234px] desktop:w-[156px]">
+        <div className="flex flex-col">
+          <div className="mb-2 tablet:mb-5">
+            <div className="relative w-[142px] h-[212px] tablet:w-[149px] tablet:h-[220px] mx-auto">
               <Image
-                src={plug_book}
-                alt="Unavailable Image"
+                src={product.cover ? product.cover : plug_book}
+                alt={product.bookName}
                 fill
                 style={{ objectFit: "cover", objectPosition: "center" }}
                 sizes="50vw"
@@ -49,26 +61,26 @@ export const VerticalCard = () => {
           <div className="flex flex-col items-center gap-1 flex-1">
             <div className="flex flex-col items-start gap-1 w-full">
               <p className="text-xxxs tablet:text- xxs font-light uppercase">
-                author
+                {product.autor}
               </p>
               <p className="text-xs tablet:text-cartL uppercase font-normal h-12 target:h-[60px]">
-                book name
+                {product.bookName}
               </p>
             </div>
             <div className="flex justify-between items-center w-full">
               <div className="flex items-start gap-3 flex-1 tablet:gap-4">
-                {sale ? (
+                {product.sale ? (
                   <>
                     <p className="text-m tablet:text-l uppercase font-normal text-AccentRed">
                       $20
                     </p>
                     <p className="text-m tablet:text-l uppercase font-normal line-through">
-                      $25
+                      ${product.price}
                     </p>
                   </>
                 ) : (
                   <p className="text-m tablet:text-l uppercase font-normal">
-                    $25
+                    ${product.price}
                   </p>
                 )}
               </div>

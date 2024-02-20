@@ -6,7 +6,7 @@ import { ProductsCarousel } from "./components/ProductsCarousel/ProductsCarousel
 import { Bestsellers } from "./components/Bestsellers/Bestsellers";
 
 export default function Home() {
-  const [activeCategory, setActiveCategory] = useState<"new" | "comingSoon">(
+  const [activeCategory, setActiveCategory] = useState<"new" | "coming soon">(
     "new"
   );
   return (
