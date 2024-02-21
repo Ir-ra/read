@@ -39,6 +39,15 @@ body {
   content: url('./assets/arrow-up_hover.svg');
 }
 
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 @layer components {
   .mainNavLinks {
     @apply flex items-center border-l border-Black px-8 h-12
