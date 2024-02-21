@@ -1,9 +1,11 @@
 "use client";
 import { useState } from "react";
 import { Subscribe } from "./components/Subscribe/Subscribe";
+
 import { SectionTitle } from "./components/SectionTitle/SectionTitle";
 import { ProductsCarousel } from "./components/ProductsCarousel/ProductsCarousel";
 import { Bestsellers } from "./components/Bestsellers/Bestsellers";
+import { Hero } from "./components/Hero/Hero";
 
 export default function Home() {
   const [activeCategory, setActiveCategory] = useState<"new" | "coming soon">(
@@ -11,6 +13,7 @@ export default function Home() {
   );
   return (
     <main className="bg-Background">
+            <Hero />
       <SectionTitle
         title1="New"
         link1="#"
@@ -25,6 +28,7 @@ export default function Home() {
         link1="#"
       />
       <Bestsellers />
+
       <Subscribe />
     </main>
   );
