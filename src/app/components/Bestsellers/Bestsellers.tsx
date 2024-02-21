@@ -4,6 +4,7 @@ import Image from "next/image";
 import plug_book from "../../assets/img/plugs/plug_book.jpg";
 import { HorizontalCard } from "../Card/HorizontalCard";
 
+
 export const Bestsellers = () => {
   const sale = true;
   return (
@@ -84,6 +85,8 @@ export const Bestsellers = () => {
                         fill="none"
                       >
                         <path
+
+
                           d="M8 2.66666L4 8V26.6667C4 27.3739 4.28095 28.0522 4.78105 28.5523C5.28115 29.0524 5.95942 29.3333 6.66667 29.3333H25.3333C26.0406 29.3333 26.7189 29.0524 27.219 28.5523C27.719 28.0522 28 27.3739 28 26.6667V8L24 2.66666H8Z"
                           stroke="#1C1C1C"
                           strokeLinecap="round"

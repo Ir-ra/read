@@ -6,7 +6,8 @@ import Link from "next/link";
 export const HorizontalCard = () => {
   const sale = true;
 
-  return (
+
+return (
     <Link href="#" >
       <div className="p-4 tablet:p-8 border-Black border cursor-pointer hover:shadow-custom focus:shadow-custom">
       <div className="flex mb-2 justify-between">

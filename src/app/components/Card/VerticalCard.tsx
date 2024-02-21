@@ -18,7 +18,7 @@ interface VerticalCardProps {
 
 export const VerticalCard: React.FC<VerticalCardProps> = ({ product }) => {
 
-  return (
+return (
     <Link href="#">
       <div className="p-4 tablet:p-8 border-Black border cursor-pointer hover:shadow-custom focus:shadow-custom w-[240px] tablet:w-[325px] whitespace-normal">
         <div className="flex mb-2 justify-between">
@@ -107,7 +107,8 @@ export const VerticalCard: React.FC<VerticalCardProps> = ({ product }) => {
                   <path
                     d="M21.3332 13.3333C21.3332 14.7478 20.7713 16.1044 19.7711 17.1046C18.7709 18.1048 17.4143 18.6667 15.9998 18.6667C14.5853 18.6667 13.2288 18.1048 12.2286 17.1046C11.2284 16.1044 10.6665 14.7478 10.6665 13.3333"
                     stroke="#1C1C1C"
-                    strokeLinecap="round"
+
+strokeLinecap="round"
                     strokeLinejoin="round"
                   />
                 </svg>

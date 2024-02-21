@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import { Subscribe } from "./components/Subscribe/Subscribe";
-
 import { SectionTitle } from "./components/SectionTitle/SectionTitle";
 import { ProductsCarousel } from "./components/ProductsCarousel/ProductsCarousel";
 import { Bestsellers } from "./components/Bestsellers/Bestsellers";
@@ -13,7 +12,7 @@ export default function Home() {
   );
   return (
     <main className="bg-Background">
-            <Hero />
+      <Hero />
       <SectionTitle
         title1="New"
         link1="#"
@@ -28,7 +27,6 @@ export default function Home() {
         link1="#"
       />
       <Bestsellers />
-
       <Subscribe />
     </main>
   );
