@@ -8,11 +8,6 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      // backgroundImage: {
-      //   "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-      //   "gradient-conic":
-      //     "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-      // },
       fontFamily: {
         fira: ['Fira Sans', 'sans-serif'],
       },
@@ -28,7 +23,6 @@ const config: Config = {
       },
 
       fontSize: {
-        //[fontSize, lineHeight]
         xxxs: ['14px', '20px'],
         xxs: ['16px', '20px'],
         xsx: ['18px', '20px'],
@@ -38,7 +32,8 @@ const config: Config = {
         m: ['24px', '32px'],
         l: ['32px', '40px'],
         xl: ['96px', '104px'],
-        cartL: ["20px", '30px']
+        cartL: ["20px", '30px'],
+        titleHeroMob: ['48px', '64px'],
       },
 
       screens: {
@@ -47,10 +42,12 @@ const config: Config = {
         'desktop': '1440px',
       },
       boxShadow: {
+        booksShadow: '15px 10px 12px 3px rgba(0,0,0,0.75)',
         custom: '0px 0px 10px 0px rgba(0, 0, 0, 0.25)',
       },
     },
   },
   plugins: [],
 };
+
 export default config;

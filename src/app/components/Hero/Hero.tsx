@@ -1,3 +1,4 @@
+
 "use client";
 import Link from "next/link";
 import Image from "next/image";
@@ -104,7 +105,8 @@ export const Hero = () => {
             <ShopLink />
           </div>
 
-          <div className="pl-[1px]">
+
+<div className="pl-[1px]">
             <h3 className={h3}>unique opportunity</h3>
             <h2 className={h2}>
               add the <br />
