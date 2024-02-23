@@ -106,7 +106,7 @@ export const Hero = () => {
           </div>
 
 
-<div className="pl-[1px]">
+          <div className="pl-[1px]">
             <h3 className={h3}>unique opportunity</h3>
             <h2 className={h2}>
               add the <br />
@@ -120,7 +120,7 @@ export const Hero = () => {
         <ul className="flex mb-10 tablet:mb-0 tablet:mt-2 desktop:px-10 items-end">
           <li
             style={{ flex: "flex: 1 0 0" }}
-            className="h-[336px] tablet:h-[452px] desktop:h-[616px] flex hover:shadow-booksShadow active:shadow-booksShadow hover:scale-105 active:scale-105 transition-transform duration-300"
+            className="h-[336px] tablet:h-[452px] desktop:h-[616px] hoverHeroBooks"
           >
             <Link href="/" className="h-[100%] flex cursor-pointer">
               <Image src={Fantasy} alt="to fantasy" />
@@ -128,7 +128,7 @@ export const Hero = () => {
           </li>
           <li
             style={{ flexShrink: "0" }}
-            className="h-[288px] tablet:h-[380px] desktop:h-[544px] flex desktop:w-[88px] hover:shadow-booksShadow active:shadow-booksShadow hover:scale-105 active:scale-105 transition-transform duration-300"
+            className="h-[288px] tablet:h-[380px] desktop:h-[544px] desktop:w-[88px] hoverHeroBooks"
           >
             <Link href="/" className="h-[100%] flex">
               <Image src={Fiction} alt="to fiction" />
@@ -136,7 +136,7 @@ export const Hero = () => {
           </li>
           <li
             style={{ flex: "flex: 1 0 0" }}
-            className="h-[320px] tablet:h-[436px] desktop:h-[600px] flex hover:shadow-booksShadow active:shadow-booksShadow hover:scale-105 active:scale-105 transition-transform duration-300"
+            className="h-[320px] tablet:h-[436px] desktop:h-[600px] hoverHeroBooks"
           >
             <Link href="/" className="h-[100%] flex">
               <Image src={NonFiction} alt="to not-fiction" />
@@ -144,7 +144,7 @@ export const Hero = () => {
           </li>
           <li
             style={{ flex: "flex: 1 0 0" }}
-            className="h-[264px] tablet:h-[324px] desktop:h-[488px] flex hover:shadow-booksShadow active:shadow-booksShadow hover:scale-105 active:scale-105 transition-transform duration-300"
+            className="h-[264px] tablet:h-[324px] desktop:h-[488px] hoverHeroBooks"
           >
             <Link href="/" className="h-[100%] flex">
               <Image src={Mystery} alt="to mystery" />
@@ -152,7 +152,7 @@ export const Hero = () => {
           </li>
           <li
             style={{ flexShrink: "0" }}
-            className="h-[382px] tablet:h-[492px] desktop:h-[656px] flex w-14 desktop:w-[88px] hover:shadow-booksShadow active:shadow-booksShadow hover:scale-105 active:scale-105 transition-transform duration-300"
+            className="h-[382px] tablet:h-[492px] desktop:h-[656px] w-14 desktop:w-[88px] hoverHeroBooks"
           >
             <Link href="/" className="h-[100%] flex">
               <Image src={Drama} alt="to drama" />
