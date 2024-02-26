@@ -13,8 +13,6 @@ export const SortBy = ({ isOpen }: {
 
   const sortByItems = ['Newest first', 'Popular first', 'Top rated', 'Price: high to low', 'Price: Low to high'];
 
-  // console.log('selectedOption', selectedOption);
-  
   return (
     <>
       {isOpen && (

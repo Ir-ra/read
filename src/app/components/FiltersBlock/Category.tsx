@@ -21,7 +21,6 @@ export const Category = ({isOpen} : {
               <button
                 key={category}
                 className="flex text-xxxs uppercase font-light tablet:hover:font-bold"
-                // onClick={handleOptionClick}
               >
                 <p>
                   {category}
