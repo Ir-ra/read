@@ -48,6 +48,8 @@ body {
   display: none;
 }
 
+
+
 @layer components {
   .mainNavLinks {
     @apply flex items-center border-l border-Black px-8 h-12
