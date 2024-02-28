@@ -48,7 +48,23 @@ body {
   display: none;
 }
 
+.custom-range-input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #000000;
+  cursor: pointer;
+}
 
+.custom-range-input::-moz-range-thumb {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #000000;
+  cursor: pointer;
+}
 
 @layer components {
   .mainNavLinks {

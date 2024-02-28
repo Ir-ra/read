@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { Breadcrumbs } from "../components/Breadcrumbs/Breadcrumbs";
-import { FilterButton } from "../components/FiltersBlock/FilterButton";
+import { FiltersContainer } from "../components/FiltersBlock/FiltersContainer";
 import { useState } from "react";
 
 function Shop() {
@@ -50,11 +50,13 @@ function Shop() {
     <main className="px-6 py-10 tablet:px-10">
       <Breadcrumbs path={pathname} name={nameBooks} />
 
-      <h1 className="mb-5 text-s tablet:text-sm desktop:text-l font-bold uppercase">{nameBooks}</h1>
+      <h1 className="mb-5 text-s tablet:text-sm desktop:text-l font-bold uppercase">
+        {nameBooks}
+      </h1>
 
-      <div id='page-wrap' className="flex flex-col   tablet:flex-row tablet:relative tablet:gap-10">
+      <div id='page-wrap' className="flex flex-col tablet:flex-row tablet:relative tablet:gap-10">
         {filters.map(el => (
-          <FilterButton
+          <FiltersContainer
             filterName={el.filterName}
             key={el.filterName}
             onClick={() => handleClick(el.filterName)}
