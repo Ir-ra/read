@@ -4,14 +4,13 @@ import { usePathname } from "next/navigation";
 
 const navLinks = [
   {
+    id: "1",
     title: "Payment and delivery",
     path: "/about/payment",
   },
+  { id: "2", title: "Exchange and return", path: "/about/exchange" },
   {
-    title: "Exchange and return",
-    path: "/about/exchange",
-  },
-  {
+    id: "3",
     title: "FAQ",
     path: "/about/questions",
   },
@@ -24,18 +23,16 @@ export const NavBar = () => {
     <ul className="flex justify-center items-center h-[104px] px-6 py-4 border-t border-b border-Black tablet:px-10 desktop:py-5">
       {navLinks.map((link) => {
         return (
-          <>
-            <li
-              className={pathname === link.path ? "text-red-700" : "text-black"}
-              key={link.title}
-            >
-              <Link
-                href={link.path}
-                className="text-xsx text-Black text-center uppercase tablet:text-sm desktop:text-l mr-2"
-              >
-                {link.title}
-              </Link>
-            </li>
+          <li
+            className={pathname === link.path ? "text-red-700" : "text-black"}
+            key={link.id}
+          >
+            <Link
+              href={link.path}
+              className="text-xsx text-Black text-center uppercase tablet:text-sm desktop:text-l mr-2"
+              passHref>
+              {link.title}
+            </Link>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="2"
@@ -45,7 +42,7 @@ export const NavBar = () => {
             >
               <line x1="1" y1="64" x2="1" stroke="#1C1C1C" />
             </svg>
-          </>
+          </li>
         );
       })}
       {/* <li className="flex pl-6 tablet:pl-10 desktop:pl-20 py-2.5">
