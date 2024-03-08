@@ -1,12 +1,14 @@
 "use client"
 
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import FilterOptions from "./FilterOptions";
+import { useLocalStorage } from "@/app/utils/useLocalStorage";
 
 export const Category = ({ isOpen }: {
   isOpen?: boolean;
 }) => {
-  const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedCategory, setSelectedCategory] = useLocalStorage('selectedCategory', '');
+
   const categories = [
     'Fiction',
     'Non-fiction',

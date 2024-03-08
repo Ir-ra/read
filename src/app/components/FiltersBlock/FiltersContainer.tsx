@@ -36,11 +36,11 @@ export const FiltersContainer = ({ filterName, isOpen, onClick, }: {
       <div className={`
         ${isOpen && filterName === 'Sort by' ? `tablet:h-[84px]` : ''} 
         ${isOpen && filterName === 'Category' ? `tablet:h-[80px]` : ''}
-        ${isOpen && filterName === 'Filters' ? `tablet:h-[132px]` : ''} 
-        mb-2 tablet:mb-0 `
+        ${isOpen && filterName === 'Filters' ? `tablet:h-[160px]` : ''} 
+        mb-2 `
       }>
 
-        <div className="w-full tablet:absolute tablet:left-0">
+        <div className="flex flex-col w-full tablet:absolute tablet:left-0 gap-4">
           {isOpen && filterName === 'Sort by' && <SortBy isOpen={isOpen} />}
           {isOpen && filterName === 'Category' && <Category isOpen={isOpen} />}
           {isOpen && filterName === 'Filters' && <Filters isOpen={isOpen} />}

@@ -1,12 +1,13 @@
 "use client"
 
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import FilterOptions from "./FilterOptions";
+import { useLocalStorage } from '../../utils/useLocalStorage';
 
 export const SortBy = ({ isOpen }: {
   isOpen?: boolean;
 }) => {
-  const [selectedOption, setSelectedOption] = useState('');
+  const [selectedOption, setSelectedOption] = useLocalStorage('selectedSortOption', '');
 
   const handleSortChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;

@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import { Breadcrumbs } from "../components/Breadcrumbs/Breadcrumbs";
 import { FiltersContainer } from "../components/FiltersBlock/FiltersContainer";
 import { useState } from "react";
+import { VerticalCard } from "../components/Card/VerticalCard";
 
 function Shop() {
   const pathname = usePathname();
@@ -15,36 +16,121 @@ function Shop() {
   const filters = [
     {
       filterName: 'Category',
-      isOpen : isOpenCategory,
-      setOpen : setIsOpenCategory
+      isOpen: isOpenCategory,
+      setOpen: setIsOpenCategory
     },
     {
       filterName: 'Sort by',
-    isOpen : isOpenSort,
-    setOpen : setIsOpenSort
-  },
+      isOpen: isOpenSort,
+      setOpen: setIsOpenSort
+    },
     {
       filterName: 'Filters',
-      isOpen : isOpenFilter,
-      setOpen : setIsOpenFilter
+      isOpen: isOpenFilter,
+      setOpen: setIsOpenFilter
     }
   ]
 
   const handleClick = (filterName: string) => {
     if (filterName === 'Category') {
-      setIsOpenCategory(prev=>!prev);
+      setIsOpenCategory(prev => !prev);
       setIsOpenSort(false);
       setIsOpenFilter(false);
     } else if (filterName === 'Sort by') {
-      setIsOpenSort(prev=>!prev);
+      setIsOpenSort(prev => !prev);
       setIsOpenCategory(false);
       setIsOpenFilter(false);
     } else if (filterName === 'Filters') {
-      setIsOpenFilter(prev=>!prev);
+      setIsOpenFilter(prev => !prev);
       setIsOpenCategory(false);
       setIsOpenSort(false);
     }
   };
+
+  const productsData = [
+    {
+      id: "1",
+      category: "new",
+      cover: "",
+      autor: "Rebecca Yarros",
+      bookName: "Fourth Wing",
+      price: "36",
+      new: "new",
+      sale: false,
+    },
+    {
+      id: "2",
+      category: "Autograph",
+      autor: "Rebecca Yarros",
+      bookName: "The subtle art of not giving a fuck",
+      price: "36",
+      new: "coming soon",
+      sale: false,
+    },
+    {
+      id: "3",
+      category: "18+",
+      autor: "Rebecca Yarros",
+      bookName: "Fourth Wing",
+      price: "36",
+      new: "coming soon",
+      sale: false,
+    },
+    {
+      id: "4",
+      category: "18+",
+      autor: "Rebecca Yarros",
+      bookName: "Fourth Wing",
+      price: "36",
+      new: "new",
+      sale: false,
+    },
+    {
+      id: "5",
+      category: "Autograph",
+      autor: "Rebecca Yarros",
+      bookName: "The subtle art of not giving a fuck",
+      price: "36",
+      new: "new",
+      sale: false,
+    },
+    {
+      id: "6",
+      category: "New",
+      autor: "Rebecca Yarros",
+      bookName: "Fourth Wing",
+      price: "36",
+      new: "new",
+      sale: false,
+    },
+    {
+      id: "7",
+      category: "Autograph",
+      autor: "Rebecca Yarros",
+      bookName: "The subtle art of not giving a fuck",
+      price: "36",
+      new: "new",
+      sale: false,
+    },
+    {
+      id: "8",
+      category: "Autograph",
+      autor: "Rebecca Yarros",
+      bookName: "The subtle art of not giving a fuck",
+      price: "36",
+      new: "new",
+      sale: false,
+    },
+    {
+      id: "9",
+      category: "Autograph",
+      autor: "Rebecca Yarros",
+      bookName: "The subtle art of not giving a fuck",
+      price: "36",
+      new: "new",
+      sale: false,
+    },
+  ];
 
   return (
     <main className="px-6 py-10 tablet:px-10">
@@ -64,6 +150,18 @@ function Shop() {
           />
         ))}
       </div>
+
+      <section className="pt-10">
+        <ul
+          className="grid grid-cols-2 desktop:grid-cols-4 gap-5 scroll-smooth"
+        >
+          {productsData.map((product) => (
+            <li key={product.id} className="flex m-auto w-full tablet:w-min">
+              <VerticalCard product={product} />
+            </li>
+          ))}
+        </ul>
+      </section>
     </main>
   );
 }
