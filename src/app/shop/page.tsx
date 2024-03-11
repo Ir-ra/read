@@ -3,8 +3,9 @@
 import { usePathname } from "next/navigation";
 import { Breadcrumbs } from "../components/Breadcrumbs/Breadcrumbs";
 import { FiltersContainer } from "../components/FiltersBlock/FiltersContainer";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { VerticalCard } from "../components/Card/VerticalCard";
+import Pagination from "../components/FiltersBlock/Pagination";
 
 function Shop() {
   const pathname = usePathname();
@@ -132,6 +133,15 @@ function Shop() {
     },
   ];
 
+  const [currentPage, setCurrentPage] = useState(1);
+  let PageSize = 4;
+
+  const currentTableData = useMemo(() => {
+    const firstPageIndex = (currentPage - 1) * PageSize;
+    const lastPageIndex = firstPageIndex + PageSize;
+    return productsData.slice(firstPageIndex, lastPageIndex);
+  }, [currentPage]);
+
   return (
     <main className="px-6 py-10 tablet:px-10">
       <Breadcrumbs path={pathname} name={nameBooks} />
@@ -151,16 +161,23 @@ function Shop() {
         ))}
       </div>
 
-      <section className="pt-10">
+      <section className="pt-10 flex flex-col gap-10">
         <ul
           className="grid grid-cols-2 desktop:grid-cols-4 gap-5 scroll-smooth"
         >
-          {productsData.map((product) => (
+          {currentTableData.map((product) => (
             <li key={product.id} className="flex m-auto w-full tablet:w-min">
               <VerticalCard product={product} />
             </li>
           ))}
         </ul>
+
+        <Pagination
+          currentPage={currentPage}
+          totalCount={productsData.length}
+          pageSize={PageSize}
+          onPageChange={page => setCurrentPage(page)}
+        />
       </section>
     </main>
   );
