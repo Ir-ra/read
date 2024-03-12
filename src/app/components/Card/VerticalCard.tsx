@@ -2,6 +2,7 @@ import Image from "next/image";
 
 import plug_book from "../../assets/img/plugs/plug_book.jpg";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 interface VerticalCardProps {
   product: {
@@ -17,10 +18,11 @@ interface VerticalCardProps {
 }
 
 export const VerticalCard: React.FC<VerticalCardProps> = ({ product }) => {
+  const pathname = usePathname();
 
-return (
-    <Link href="#">
-      <div className="p-4 tablet:p-8 border-Black border cursor-pointer hover:shadow-custom focus:shadow-custom w-[240px] tablet:w-[325px] whitespace-normal">
+  return (
+    <Link href="#" className="place-self-stretch flex-auto">
+      <div id='1' className={`p-4 tablet:p-8 border-Black border cursor-pointer hover:shadow-custom focus:shadow-custom ${pathname.slice(1) === 'shop' ? 'w-full' : 'w-[240px]'} tablet:w-[325px] whitespace-normal justify-stretch`}>
         <div className="flex mb-2 justify-between">
           <span className="px-1 py[2px]  border-Black border flex justify-center items-center">
             {product.category}
@@ -47,7 +49,7 @@ return (
         </div>
         <div className="flex flex-col">
           <div className="mb-2 tablet:mb-5">
-            <div className="relative w-[142px] h-[212px] tablet:w-[149px] tablet:h-[220px] mx-auto">
+            <div className={`relative ${pathname.slice(1) === 'shop' ? 'min-w-[130px] tablet:w-full' : 'w-[142px]'} h-[212px] tablet:w-[149px] tablet:h-[220px] mx-auto`}>
               <Image
                 src={product.cover ? product.cover : plug_book}
                 alt={product.bookName}
@@ -108,7 +110,7 @@ return (
                     d="M21.3332 13.3333C21.3332 14.7478 20.7713 16.1044 19.7711 17.1046C18.7709 18.1048 17.4143 18.6667 15.9998 18.6667C14.5853 18.6667 13.2288 18.1048 12.2286 17.1046C11.2284 16.1044 10.6665 14.7478 10.6665 13.3333"
                     stroke="#1C1C1C"
 
-strokeLinecap="round"
+                    strokeLinecap="round"
                     strokeLinejoin="round"
                   />
                 </svg>

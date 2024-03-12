@@ -2,31 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-    background: gray;
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-} */
-
 .instagram-link:hover {
   content: url('./assets/instagram_hover.svg');
 }
@@ -48,6 +23,48 @@ body {
   display: none;
 }
 
+.range-slider {
+  width: 400px;
+  position: relative;
+  margin: 15px 0 30px 0;
+}
+
+.range-fill {
+  height: 2px;
+  background-color: #000000;
+  position: absolute;
+  z-index: 1;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  width: 100%;
+  background: transparent;
+  position: absolute;
+  left: 0;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  background: #000000;
+  cursor: pointer;
+  margin-top: -5px;
+  position: relative;
+  z-index: 1;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 2px;
+  background: #e8e8e8;
+  border-radius: 3px;
+  border: none;
+}
+
+
 @layer components {
   .mainNavLinks {
     @apply flex items-center border-l border-Black px-8 h-12
@@ -67,6 +84,10 @@ body {
 
   .footerlinkStyles {
     @apply hover:font-bold active:font-bold duration-200
+  }
+
+  .hoverHeroBooks {
+    @apply flex hover:shadow-booksShadow active:shadow-booksShadow hover:scale-105 active:scale-105 transition-transform duration-300
   }
 }
 
