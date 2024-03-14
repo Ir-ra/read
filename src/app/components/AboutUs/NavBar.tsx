@@ -2,72 +2,63 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const navLinks = [
-  {
-    id: "1",
-    title: "Payment and delivery",
-    path: "/about/payment",
-  },
-  { id: "2", title: "Exchange and return", path: "/about/exchange" },
-  {
-    id: "3",
-    title: "FAQ",
-    path: "/about/questions",
-  },
-];
-
 export const NavBar = () => {
-  const pathname = usePathname();
+  const activeLink = usePathname();
 
   return (
-    <ul className="flex justify-center items-center h-[104px] px-6 py-4 border-t border-b border-Black tablet:px-10 desktop:py-5">
-      {navLinks.map((link) => {
-        return (
-          <li
-            className={pathname === link.path ? "text-red-700" : "text-black"}
-            key={link.id}
-          >
-            <Link
-              href={link.path}
-              className="text-xsx text-Black text-center uppercase tablet:text-sm desktop:text-l mr-2"
-              passHref>
-              {link.title}
-            </Link>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="2"
-              height="64"
-              viewBox="0 0 2 64"
-              fill="none"
-            >
-              <line x1="1" y1="64" x2="1" stroke="#1C1C1C" />
-            </svg>
-          </li>
-        );
-      })}
-      {/* <li className="flex pl-6 tablet:pl-10 desktop:pl-20 py-2.5">
+    <ul className="navbar-container flex justify-start tablet:justify-center items-center h-[104px] px-6 py-4 border-t border-b border-Black tablet:px-10 desktop:py-5">
+      <li className="flex items-center">
         <Link
-          href="#"
-          className="text-xsx text-Black text-center uppercase tablet:text-sm desktop:text-l mr-2 "
-        ></Link>
+          href="/about/payment"
+          className="text-xsx text-center uppercase tablet:text-sm desktop:text-l mr-5 tablet:mr-10"
+          style={{
+            fontWeight: activeLink === "/about/payment" ? "700" : "300",
+          }}
+        >
+          Payment and delivery
+        </Link>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="2"
+          height="64"
+          viewBox="0 0 2 64"
+          fill="none"
+        >
+          <line x1="1" y1="64" x2="1" stroke="#1C1C1C" />
+        </svg>
       </li>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="2"
-        height="64"
-        viewBox="0 0 2 64"
-        fill="none"
-      >
-        <line x1="1" y1="64" x2="1" stroke="#1C1C1C" />
-      </svg>
-      <li className="flex pl-6 tablet:pl-10 desktop:pl-20 py-2.5">
+
+      <li className="flex items-center">
         <Link
-          href="#"
-          className="text-xsx text-Black text-center uppercase tablet:text-sm desktop:text-l mr-2 "
-        ></Link>
-      </li> */}
+          href="/about/exchange"
+          className="text-xsx text-center uppercase tablet:text-sm desktop:text-l mx-5 tablet:mx-10"
+          style={{
+            fontWeight: activeLink === "/about/exchange" ? "700" : "300",
+          }}
+        >
+          Exchange and return
+        </Link>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="2"
+          height="64"
+          viewBox="0 0 2 64"
+          fill="none"
+        >
+          <line x1="1" y1="64" x2="1" stroke="#1C1C1C" />
+        </svg>
+      </li>
+      <li className="flex ml-5 tablet:ml-10">
+        <Link
+          href="/about/questions"
+          className="text-xsx text-center uppercase tablet:text-sm desktop:text-l "
+          style={{
+            fontWeight: activeLink === "/about/questions" ? "700" : "300",
+          }}
+        >
+          FAQ
+        </Link>
+      </li>
     </ul>
   );
 };
-
-// "flex pr-6 tablet:pr-10 desktop:pr-20 py-2.5"
