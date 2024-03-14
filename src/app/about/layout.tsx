@@ -12,10 +12,10 @@ export default function AboutLayout({
   children: React.ReactNode;
 }) {
   return (
-    <>
+    <main className="pb-20 tablet:pb-[120px] desktop:pb-40">
       <AboutUsInfo />
       <NavBar />
       {children}
-    </>
+    </main>
   );
 }
