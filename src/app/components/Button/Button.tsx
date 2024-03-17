@@ -1,5 +1,5 @@
 import React from 'react';
-import {getAllCategories} from '../../../services/getAPI';
+import {getProduct} from '../../../services/getAPI';
 
 type ButtonProps = {
   title: string;
@@ -9,8 +9,7 @@ export const Button: React.FC<ButtonProps> = ({ title }) => {
   const buttonType = title === 'Subscribe' ? 'submit' : 'button';
   const handleCategory = async () => {
     try {
-      const category = await getAllCategories();
-
+      const category = await getProduct(14);
       console.log(category.data)
     } catch (error) {
       console.log(error)
