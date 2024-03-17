@@ -21,7 +21,7 @@ export const VerticalCard: React.FC<VerticalCardProps> = ({ product }) => {
   const pathname = usePathname();
 
   return (
-    <Link href="#" className="place-self-stretch flex-auto">
+    <Link href={`/shop/${product.id}`} className="place-self-stretch flex-auto">
       <div id='1' className={`p-4 tablet:p-8 border-Black border cursor-pointer hover:shadow-custom focus:shadow-custom ${pathname.slice(1) === 'shop' ? 'w-full' : 'w-[240px]'} tablet:w-[325px] whitespace-normal justify-stretch`}>
         <div className="flex mb-2 justify-between">
           <span className="px-1 py[2px]  border-Black border flex justify-center items-center">

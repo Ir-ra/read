@@ -1,8 +1,9 @@
 import Link from "next/link";
 
-export const Breadcrumbs = ({ path, name }: {
+export const Breadcrumbs = ({ path, name, bookName }: {
   path: string;
-  name: string;
+  name?: string;
+  bookName?: string;
 }) => {
 
   return (
@@ -20,6 +21,10 @@ export const Breadcrumbs = ({ path, name }: {
       <Link href='/shop'>
         {name}
       </Link>
+
+      <div>
+        {`/ ${bookName}`}
+      </div>
 
     </div>
   )
