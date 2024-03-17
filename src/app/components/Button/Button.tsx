@@ -10,7 +10,6 @@ export const Button: React.FC<ButtonProps> = ({ title }) => {
   const handleCategory = async () => {
     try {
       const category = await getProduct(14);
-
       console.log(category.data)
     } catch (error) {
       console.log(error)
