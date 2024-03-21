@@ -42,7 +42,7 @@ export const VerticalCard: React.FC<VerticalCardProps> = ({ product }) => {
                 d="M18.75 23.25L10 17L1.25 23.25V3.25C1.25 2.58696 1.51339 1.95107 1.98223 1.48223C2.45107 1.01339 3.08696 0.75 3.75 0.75H16.25C16.913 0.75 17.5489 1.01339 18.0178 1.48223C18.4866 1.95107 18.75 2.58696 18.75 3.25V23.25Z"
                 stroke="#1C1C1C"
                 strokeLinecap="round"
-                strokeLinejoin="round"
+                stroke-linejoin="round"
               />
             </svg>
           </button>
@@ -98,20 +98,20 @@ export const VerticalCard: React.FC<VerticalCardProps> = ({ product }) => {
                     d="M8 2.66666L4 8V26.6667C4 27.3739 4.28095 28.0522 4.78105 28.5523C5.28115 29.0524 5.95942 29.3333 6.66667 29.3333H25.3333C26.0406 29.3333 26.7189 29.0524 27.219 28.5523C27.719 28.0522 28 27.3739 28 26.6667V8L24 2.66666H8Z"
                     stroke="#1C1C1C"
                     strokeLinecap="round"
-                    strokeLinejoin="round"
+                    stroke-linejoin="round"
                   />
                   <path
                     d="M4 8H28"
                     stroke="#1C1C1C"
                     strokeLinecap="round"
-                    strokeLinejoin="round"
+                    stroke-linejoin="round"
                   />
                   <path
                     d="M21.3332 13.3333C21.3332 14.7478 20.7713 16.1044 19.7711 17.1046C18.7709 18.1048 17.4143 18.6667 15.9998 18.6667C14.5853 18.6667 13.2288 18.1048 12.2286 17.1046C11.2284 16.1044 10.6665 14.7478 10.6665 13.3333"
                     stroke="#1C1C1C"
 
                     strokeLinecap="round"
-                    strokeLinejoin="round"
+                    stroke-linejoin="round"
                   />
                 </svg>
               </button>

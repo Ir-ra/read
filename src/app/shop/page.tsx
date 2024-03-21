@@ -140,15 +140,16 @@ function Shop() {
     const firstPageIndex = (currentPage - 1) * PageSize;
     const lastPageIndex = firstPageIndex + PageSize;
     return productsData.slice(firstPageIndex, lastPageIndex);
-  }, [currentPage]);
+  }, [currentPage, PageSize ]);
 
   return (
     <main className="px-6 py-10 tablet:px-10">
-      <Breadcrumbs path={pathname} name={nameBooks} />
-
-      <h1 className="mb-5 text-s tablet:text-sm desktop:text-l font-bold uppercase">
-        {nameBooks}
-      </h1>
+      <div className="flex flex-col gap-4">
+        <Breadcrumbs path={pathname} name={nameBooks} />
+        <h1 className="mb-5 text-s tablet:text-sm desktop:text-l font-bold uppercase">
+          {nameBooks}
+        </h1>
+      </div>
 
       <div id='page-wrap' className="flex flex-col tablet:flex-row tablet:relative tablet:gap-10">
         {filters.map(el => (
