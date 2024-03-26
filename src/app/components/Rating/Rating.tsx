@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 
-export default function Rating() {
-  const [rating, setRating] = useState(2);
+export default function Rating({review}) {
+  const [rating, setRating] = useState(review);
   const [hover, setHover] = useState(0);
 
   const getFillColor = (index: number) => {

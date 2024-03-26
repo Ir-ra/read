@@ -16,10 +16,11 @@ interface State {
   price?: number;
 }
 
-export default function ProductDetails({ state, pathname, paramsID }: {
+export default function ProductDetails({ state, pathname, paramsID, review }: {
   state: State;
   pathname: string;
   paramsID: string;
+  review: number;
 }) {
   const productsData = [
     {
@@ -157,7 +158,7 @@ export default function ProductDetails({ state, pathname, paramsID }: {
             <h1 className="text-s tablet:text-sm desktop:text-l font-bold uppercase">
               {state ? state.name : productT[0].bookName}
             </h1>
-            <Rating />
+            <Rating review={review}/>
           </div>
 
           <div className="border border-Black p-4 desktop:hidden">

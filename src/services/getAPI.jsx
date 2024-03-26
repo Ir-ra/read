@@ -55,3 +55,9 @@ export const getCategoryById = (id) => {
   console.log('CategoryById', response);
   return response;
 }
+
+export const getReviewById = (id) => {
+  const response = api.get(`/api/v1/products/${id}/reviews`);
+
+  return response;
+}
