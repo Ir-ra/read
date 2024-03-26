@@ -29,6 +29,7 @@ export default function Book({ params }: { params: { id: string } }) {
     prods();
   }, [params.id])
 
+  console.log(state)
   return (
     <main className="px-6 py-10 tablet:px-10">
       {loading && <Loader />}

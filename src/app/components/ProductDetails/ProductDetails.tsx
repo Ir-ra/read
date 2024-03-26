@@ -10,6 +10,8 @@ interface State {
   description?: string;
   image?: string;
   name?: string;
+  category_name?: string;
+  status?: string;
   id?: number;
   price?: number;
 }
@@ -135,8 +137,8 @@ export default function ProductDetails({ state, pathname, paramsID }: {
             </button>
           </div>
 
-          <div className="mb-2 tablet:mb-5">
-            <div className={`relative h-[212px] tablet:w-[149px] tablet:h-[220px] mx-auto`}>
+          <div className="mb-2 tablet:mb-5 desktop:h-full desktop:w-full">
+            <div className={`relative h-[212px] tablet:w-[149px] tablet:h-[220px] desktop:h-full desktop:w-full mx-auto`}>
               <Image
                 src={state.image ? `${state.image[0]}` : plug_book}
                 alt={state ? state.name ?? productT[0].bookName : ""}
@@ -161,7 +163,7 @@ export default function ProductDetails({ state, pathname, paramsID }: {
           <div className="border border-Black p-4 desktop:hidden">
             <div className="flex mb-2 justify-between">
               <span className="px-1 py-[2px] border-Black border flex justify-center items-center uppercase text-xxxs tablet:text-cartL font-normal">
-                {productT[0].category}
+                {state.category_name ? state.category_name : 'new'}
               </span>
               <button
                 type="button"
@@ -184,7 +186,7 @@ export default function ProductDetails({ state, pathname, paramsID }: {
               </button>
             </div>
 
-            <div className="mb-2 tablet:mb-5">
+            <div id='gg' className="mb-2 tablet:mb-5">
               <div className={`relative h-[212px] tablet:w-[149px] tablet:h-[220px] mx-auto`}>
                 <Image
                   src={state.image ? `${state.image[0]}` : plug_book}
@@ -206,7 +208,7 @@ export default function ProductDetails({ state, pathname, paramsID }: {
             </p>
 
             <p className="text-xs tablet:text-cartL font-normal uppercase">
-              {productT[0].new}
+              {state.status === 'active' ? 'in stock' : 'out of stock'}
             </p>
 
             <Button title='add to cart' />
@@ -224,13 +226,13 @@ export default function ProductDetails({ state, pathname, paramsID }: {
             </div>
             <div className="flex flex-col gap-2 text-xxs tablet:text-xsx desktop:text-cartL font-light uppercase">
               <p id="autor">{state.fields ? state.fields[0].value : productT[0].autor}</p>
-              <p id="Publication_year">{state.fields ? state.fields[1].value : 17}</p>
+              <p id="Publication_year">{state.fields ? state.fields[1].value : 2014}</p>
               <p id="Format">{state.fields ? state.fields[2].value : 'paper'}</p>
               <p id="Cover">{state.fields ? state.fields[3].value : 'hard'}</p>
               <p id="Pages">{state.fields ? state.fields[4].value : 548}</p>
               <p id="Language">{state.fields ? state.fields[5].value : 'english'}</p>
               {/* <p id="Vendor_code">{Math.floor(Math.random() * 1000000)}</p> */}
-              <p id="Vendor_code">000001</p>
+              <p id="Vendor_code">{`01023${paramsID}`}</p>
             </div>
           </div>
 
