@@ -5,8 +5,10 @@ import { SectionTitle } from "./components/SectionTitle/SectionTitle";
 import { ProductsCarousel } from "./components/ProductsCarousel/ProductsCarousel";
 import { Bestsellers } from "./components/Bestsellers/Bestsellers";
 import { Hero } from "./components/Hero/Hero";
+import { useProducts } from "./context/ProductsContext";
 
 export default function Home() {
+  const { products } = useProducts();
   const [activeCategory, setActiveCategory] = useState<"new" | "coming soon">(
     "new"
   );
@@ -21,7 +23,7 @@ export default function Home() {
         setActiveCategory={setActiveCategory}
         activeCategory={activeCategory}
       />
-      <ProductsCarousel activeCategory={activeCategory}/>
+      <ProductsCarousel activeCategory={activeCategory} products={products}/>
       <SectionTitle
         title1="bestsellers"
         link1="#"

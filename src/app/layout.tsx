@@ -3,6 +3,7 @@ import { Fira_Sans } from "next/font/google";
 import "./globals.css";
 import { NavBar } from "./components/NavBar/NavBar";
 import { Footer } from "./components/Footer/Footer";
+import { ProductsProvider } from "./context/ProductsContext";
 
 const fira = Fira_Sans({ weight: '400', subsets: ["latin"] });
 
@@ -20,7 +21,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={fira.className} suppressHydrationWarning={true}>
         <NavBar />
-        {children}
+        <ProductsProvider>
+          {children}
+        </ProductsProvider>
         <Footer />
       </body>
     </html>

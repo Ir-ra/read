@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 
 import Loader from "@/app/components/Loader/Loader";
 import ProductDetails from "@/app/components/ProductDetails/ProductDetails";
+import Recommended from "@/app/components/Recommended/Recommended";
+import { Product } from "@/app/types/Product";
 
 interface Review {
   rating: number;
@@ -14,7 +16,7 @@ interface Review {
 export default function Book({ params }: { params: { id: string } }) {
   const pathname = usePathname();
   const [loading, setLoading] = useState(false);
-  const [state, setState] = useState({});
+  const [state, setState] = useState<Product>([]);
   const [review, setReview] = useState<Review[]>([]);
 
   useEffect(() => {
@@ -41,12 +43,16 @@ export default function Book({ params }: { params: { id: string } }) {
   }, [params.id]);
 
   return (
-    <main className="px-6 py-10 tablet:px-10">
+    <main>
       {loading && <Loader />}
 
       {!loading && (
-        <ProductDetails state={state} pathname={pathname} paramsID={params.id} review={review.length > 0 ? review[0].rating : 2}/>
-       )}
+        <>
+        <ProductDetails state={state} pathname={pathname} paramsID={params.id} review={review.length ? review[0].rating : 2} />
+        <Recommended />
+        </>
+      )}
+
     </main>
   )
 }

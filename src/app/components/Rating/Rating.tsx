@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-export default function Rating({review}) {
+export default function Rating({review}: {review: number}) {
   const [rating, setRating] = useState(review);
   const [hover, setHover] = useState(0);
 
