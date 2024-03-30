@@ -91,3 +91,22 @@ input[type="range"]::-webkit-slider-runnable-track {
   }
 }
 
+.small-caps {
+  font-variant: small-caps;
+}
+
+
+.navbar-container {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+}
+
+.navbar-container::-webkit-scrollbar {
+  display: none; 
+}
+
+.navbar-container li {
+  flex: 0 0 auto; 
+}

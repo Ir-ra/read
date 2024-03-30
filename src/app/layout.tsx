@@ -5,7 +5,7 @@ import { NavBar } from "./components/NavBar/NavBar";
 import { Footer } from "./components/Footer/Footer";
 import { ProductsProvider } from "./context/ProductsContext";
 
-const fira = Fira_Sans({ weight: '400', subsets: ["latin"] });
+const fira = Fira_Sans({ weight: "400", subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
