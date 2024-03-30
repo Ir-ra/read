@@ -6,6 +6,7 @@ import { FiltersContainer } from "../components/FiltersBlock/FiltersContainer";
 import { useMemo, useState } from "react";
 import { VerticalCard } from "../components/Card/VerticalCard";
 import Pagination from "../components/FiltersBlock/Pagination";
+import { useProducts } from "../context/ProductsContext";
 
 function Shop() {
   const pathname = usePathname();
@@ -48,107 +49,25 @@ function Shop() {
     }
   };
 
-  const productsData = [
-    {
-      id: "1",
-      category: "new",
-      cover: "",
-      autor: "Rebecca Yarros",
-      bookName: "Fourth Wing",
-      price: "36",
-      new: "new",
-      sale: false,
-    },
-    {
-      id: "2",
-      category: "Autograph",
-      autor: "Rebecca Yarros",
-      bookName: "The subtle art of not giving a fuck",
-      price: "36",
-      new: "coming soon",
-      sale: false,
-    },
-    {
-      id: "3",
-      category: "18+",
-      autor: "Rebecca Yarros",
-      bookName: "Fourth Wing",
-      price: "36",
-      new: "coming soon",
-      sale: false,
-    },
-    {
-      id: "4",
-      category: "18+",
-      autor: "Rebecca Yarros",
-      bookName: "Fourth Wing",
-      price: "36",
-      new: "new",
-      sale: false,
-    },
-    {
-      id: "5",
-      category: "Autograph",
-      autor: "Rebecca Yarros",
-      bookName: "The subtle art of not giving a fuck",
-      price: "36",
-      new: "new",
-      sale: false,
-    },
-    {
-      id: "6",
-      category: "New",
-      autor: "Rebecca Yarros",
-      bookName: "Fourth Wing",
-      price: "36",
-      new: "new",
-      sale: false,
-    },
-    {
-      id: "7",
-      category: "Autograph",
-      autor: "Rebecca Yarros",
-      bookName: "The subtle art of not giving a fuck",
-      price: "36",
-      new: "new",
-      sale: false,
-    },
-    {
-      id: "8",
-      category: "Autograph",
-      autor: "Rebecca Yarros",
-      bookName: "The subtle art of not giving a fuck",
-      price: "36",
-      new: "new",
-      sale: false,
-    },
-    {
-      id: "9",
-      category: "Autograph",
-      autor: "Rebecca Yarros",
-      bookName: "The subtle art of not giving a fuck",
-      price: "36",
-      new: "new",
-      sale: false,
-    },
-  ];
+  const {products} = useProducts();
 
   const [currentPage, setCurrentPage] = useState(1);
-  let PageSize = 4;
+  let PageSize = 8;
 
   const currentTableData = useMemo(() => {
     const firstPageIndex = (currentPage - 1) * PageSize;
     const lastPageIndex = firstPageIndex + PageSize;
-    return productsData.slice(firstPageIndex, lastPageIndex);
-  }, [currentPage]);
+    return products.slice(firstPageIndex, lastPageIndex);
+  }, [currentPage, PageSize ]);
 
   return (
     <main className="px-6 py-10 tablet:px-10">
-      <Breadcrumbs path={pathname} name={nameBooks} />
-
-      <h1 className="mb-5 text-s tablet:text-sm desktop:text-l font-bold uppercase">
-        {nameBooks}
-      </h1>
+      <div className="flex flex-col gap-4">
+        <Breadcrumbs path={pathname} name={nameBooks} />
+        <h1 className="mb-5 text-s tablet:text-sm desktop:text-l font-bold uppercase">
+          {nameBooks}
+        </h1>
+      </div>
 
       <div id='page-wrap' className="flex flex-col tablet:flex-row tablet:relative tablet:gap-10">
         {filters.map(el => (
@@ -174,7 +93,7 @@ function Shop() {
 
         <Pagination
           currentPage={currentPage}
-          totalCount={productsData.length}
+          totalCount={products.length}
           pageSize={PageSize}
           onPageChange={page => setCurrentPage(page)}
         />

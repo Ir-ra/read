@@ -19,14 +19,14 @@ export const ArrowLeftIcon = ({
         stroke="#1C1C1C"
         strokeWidth={strokeWidth} 
         strokeLinecap="round"
-        strokeLinejoin="round"
+        stroke-linejoin="round"
       />
       <path
         d="M20 31.6667L8.33331 20L20 8.33337"
         stroke="#1C1C1C"
         strokeWidth={strokeWidth} 
         strokeLinecap="round"
-        strokeLinejoin="round"
+        stroke-linejoin="round"
       />
     </svg>
   );
@@ -53,14 +53,14 @@ export const ArrowRightIcon = ({
         stroke="#1C1C1C"
         strokeWidth={strokeWidth}
         strokeLinecap="round"
-        strokeLinejoin="round"
+        stroke-linejoin="round"
       />
       <path
         d="M20 8.33337L31.6667 20L20 31.6667"
         stroke="#1C1C1C"
         strokeWidth={strokeWidth}
         strokeLinecap="round"
-        strokeLinejoin="round"
+        stroke-linejoin="round"
       />
     </svg>
   );

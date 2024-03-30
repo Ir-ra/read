@@ -23,7 +23,6 @@ export const getProducts = () => {
 export const getProduct = (id) => {
   const response = api.get(`/api/v1/products/${id}`);
 
-  console.log('prod', response);
   return response;
 }
 // має повернути стрінг query=''
@@ -54,5 +53,11 @@ export const getCategoryById = (id) => {
   const response = api.get(`/api/v1/categories/${id}`);
 
   console.log('CategoryById', response);
+  return response;
+}
+
+export const getReviewById = (id) => {
+  const response = api.get(`/api/v1/products/${id}/reviews`);
+
   return response;
 }

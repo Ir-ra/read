@@ -62,7 +62,7 @@ const Pagination: React.FC<PaginationProps> = ({
           return (
             <li
               key={pageNumber}
-              className={`flex px-0 py-2 justify-center items-center gap-2 text-xxs desktop:text-cartL font-light uppercase ${pageNumber === currentPage ? 'text-Black' : 'text-Grey'}`}
+              className={`flex px-0 py-2 justify-center items-center gap-2 text-xxs desktop:text-cartL font-light cursor-pointer uppercase ${pageNumber === currentPage ? 'text-Black' : 'text-Grey'}`}
               onClick={() => onPageChange(parseInt(String(pageNumber), 10))}
             >
               <span>{pageNumber}</span>
