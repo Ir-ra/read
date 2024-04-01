@@ -23,7 +23,7 @@ export const VerticalCard = ({ product, onBookClick }: { product: Product, onBoo
             type="button"
             className="border-none w-8 h-8 tablet:w-10 tablet:h-10 flex justify-center items-center"
           >
-            <Image src={fav} alt="add to favourite" />
+            <Image src={fav} alt="add to favourite" priority={false} />
           </button>
         </div>
         <div className="flex flex-col">
@@ -36,6 +36,7 @@ export const VerticalCard = ({ product, onBookClick }: { product: Product, onBoo
                 style={{ objectFit: "contain", objectPosition: "center" }}
                 sizes="50vw"
                 quality={100}
+                priority={true}
               />
             </div>
           </div>
@@ -66,7 +67,7 @@ export const VerticalCard = ({ product, onBookClick }: { product: Product, onBoo
                 )}
               </div>
               <button className="border-none w-8 h-8 tablet:w-10 tablet:h-10 flex justify-center items-center">
-                <Image src={cart} alt="add to cart" />
+                <Image src={cart} alt="add to cart" priority={false}/>
               </button>
             </div>
           </div>

@@ -45,7 +45,7 @@ export default function ProductDetails({ state, pathname, paramsID, review }: {
               type="button"
               className="border-none w-8 h-8 tablet:w-10 tablet:h-10 flex justify-center items-center"
             >
-              <Image src={fav} alt="add to favourite" />
+              <Image src={fav} alt="add to favourite" priority={false}/>
             </button>
           </div>
 
@@ -83,7 +83,7 @@ export default function ProductDetails({ state, pathname, paramsID, review }: {
                 type="button"
                 className="border-none w-8 h-8 tablet:w-10 tablet:h-10 flex justify-center items-center"
               >
-                <Image src={fav} alt="add to favourite" />
+                <Image src={fav} alt="add to favourite" priority={false}/>
               </button>
             </div>
 

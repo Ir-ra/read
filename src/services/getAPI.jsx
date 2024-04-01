@@ -16,7 +16,6 @@ export const getAllCategories = () => {
 export const getProducts = () => {
   const response = api.get('/api/v1/products');
 
-  console.log('prods', response);
   return response;
 }
 

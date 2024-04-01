@@ -13,6 +13,8 @@ import { Product } from "../types/Product";
 import Title from "../components/Title/Title";
 import { ProductsCarousel } from "../components/ProductsCarousel/ProductsCarousel";
 import Loader from "../components/Loader/Loader";
+import ProductList from "../components/ProductList/ProductList";
+import FiltersBlock from "../components/FiltersBlock/FiltersBlock";
 
 function Shop() {
   const pathname = usePathname();
@@ -39,7 +41,7 @@ function Shop() {
     }
   ]
 
-  const handleClick = (filterName: string) => {
+  const handleFilterClick = (filterName: string) => {
     if (filterName === 'Category') {
       setIsOpenCategory(prev => !prev);
       setIsOpenSort(false);
@@ -83,9 +85,6 @@ function Shop() {
     }
   };
 
-  console.log('recentlyViewed', recentlyViewed);
-
-
   return (
     <main>
       {loading && <Loader />}
@@ -93,33 +92,23 @@ function Shop() {
         <>
           <div className="px-6 py-10 tablet:px-10">
             <div className="flex flex-col gap-4">
-              <Breadcrumbs path={pathname} name={nameBooks} />
+              <Breadcrumbs
+                path={pathname}
+                name={nameBooks}
+              />
               <h1 className="mb-5 text-s tablet:text-sm desktop:text-l font-bold uppercase">
                 {nameBooks}
               </h1>
             </div>
-            <div id='page-wrap' className="flex flex-col tablet:flex-row tablet:relative tablet:gap-10">
-              {filters.map(el => (
-                <FiltersContainer
-                  filterName={el.filterName}
-                  key={el.filterName}
-                  onClick={() => handleClick(el.filterName)}
-                  isOpen={el.isOpen}
-                />
-              ))}
-            </div>
+
+            <FiltersBlock filters={filters} onFilterClick={handleFilterClick} />
           </div>
 
           <section className="flex flex-col gap-10 px-6 pb-10 tablet:px-10">
-            <ul
-              className="grid grid-cols-2 desktop:grid-cols-4 gap-5 scroll-smooth"
-            >
-              {currentTableData.map((product) => (
-                <li key={product.id} className="flex m-auto w-full tablet:w-min">
-                  <VerticalCard product={product} onBookClick={onBookClick} />
-                </li>
-              ))}
-            </ul>
+            <ProductList
+              currentTableData={currentTableData}
+              onBookClick={onBookClick}
+            />
 
             <Pagination
               currentPage={currentPage}
@@ -129,7 +118,7 @@ function Shop() {
             />
           </section>
 
-          {recentlyViewed.length > 0 && <RecentlyViewed recentlyViewed={recentlyViewed} />}
+          {!!recentlyViewed.length && <RecentlyViewed recentlyViewed={recentlyViewed} />}
         </>
       )}
 
