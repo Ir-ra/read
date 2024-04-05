@@ -34,6 +34,7 @@ const config: Config = {
         xl: ['96px', '104px'],
         cartL: ["20px", '30px'],
         titleHeroMob: ['48px', '64px'],
+        supperSmall: ['12px', '20px'],
       },
 
       screens: {

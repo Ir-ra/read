@@ -3,15 +3,15 @@
 @tailwind utilities;
 
 .instagram-link:hover {
-  content: url('./assets/instagram_hover.svg');
+  content: url("./assets/instagram_hover.svg");
 }
 
 .facebook-link:hover {
-  content: url('./assets/facebook_hover.svg');
+  content: url("./assets/facebook_hover.svg");
 }
 
 .arrow-up:hover {
-  content: url('./assets/arrow-up_hover.svg');
+  content: url("./assets/arrow-up_hover.svg");
 }
 
 .hide-scrollbar {
@@ -64,37 +64,35 @@ input[type="range"]::-webkit-slider-runnable-track {
   border: none;
 }
 
-
 @layer components {
   .mainNavLinks {
-    @apply flex items-center border-l border-Black px-8 h-12
+    @apply flex items-center border-l border-Black px-8 h-12;
   }
 
   .footerCols {
-    @apply text-xxs desktop:text-[18px] tablet:leading-5 desktop:text-sm font-bold uppercase
+    @apply text-xxs desktop:text-[18px] tablet:leading-5 desktop:text-sm font-bold uppercase;
   }
 
   .footerBoxes {
-    @apply flex flex-col items-center gap-4 tablet:gap-6 tablet:items-start w-full uppercase
+    @apply flex flex-col items-center gap-4 tablet:gap-6 tablet:items-start w-full uppercase;
   }
 
   .footerListStiles {
-    @apply flex flex-col items-center tablet:items-start text-xxxs tablet:text-xxs font-light gap-2 tablet:gap-4
+    @apply flex flex-col items-center tablet:items-start text-xxxs tablet:text-xxs font-light gap-2 tablet:gap-4;
   }
 
   .footerlinkStyles {
-    @apply hover:font-bold active:font-bold duration-200
+    @apply hover:font-bold active:font-bold duration-200;
   }
 
   .hoverHeroBooks {
-    @apply flex hover:shadow-booksShadow active:shadow-booksShadow hover:scale-105 active:scale-105 transition-transform duration-300
+    @apply flex hover:shadow-booksShadow active:shadow-booksShadow hover:scale-105 active:scale-105 transition-transform duration-300;
   }
 }
 
 .small-caps {
   font-variant: small-caps;
 }
-
 
 .navbar-container {
   display: flex;
@@ -104,9 +102,29 @@ input[type="range"]::-webkit-slider-runnable-track {
 }
 
 .navbar-container::-webkit-scrollbar {
-  display: none; 
+  display: none;
 }
 
 .navbar-container li {
-  flex: 0 0 auto; 
+  flex: 0 0 auto;
+}
+
+.backgroundImage-login {
+  background-image: url(./assets/img/auth/log_mob.png);
+  background-size: cover;
+  background-position: center;
+
+  @media screen and (min-width: 1440px) {
+    background-image: url(./assets/img/auth/log_desk.png);
+  }
+}
+
+.backgroundImage-registr {
+  background-image: url(./assets/img/auth/reg_bg_mob.png);
+  background-size: cover;
+  background-position: center;
+
+  @media screen and (min-width: 1440px) {
+    background-image: url(./assets/img/auth/reg_bg_desk.png);
+  }
 }
