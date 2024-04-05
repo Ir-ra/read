@@ -57,9 +57,8 @@ function Registration() {
     };
     try {
       const res = await createUser(newUser);
-
       if (res) {
-        console.log(res.data);
+        console.log(res);
         reset();
       }
     } catch (error) {
