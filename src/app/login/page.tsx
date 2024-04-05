@@ -22,7 +22,10 @@ const schema = yup.object({
   password: yup
     .string()
     .required("Password is required")
-    .min(8, "Password isn’t strong enough. must contain at least 8 characters"),
+    .min(8, "Password isn’t strong enough. must contain at least 8 characters")
+    .matches(/[A-Z]/, "Must contain at least one uppercase letter")
+    .matches(/[a-z]/, "Must contain at least one lowercase letter")
+    .matches(/\d/, "Must contain at least one digit"),
 });
 
 function Login() {
@@ -47,7 +50,7 @@ function Login() {
 
   return (
     <main className="flex flex-col-reverse desktop:flex-row h-[100vh] justify-end">
-      <div>
+      <div className="desktop:pl-10 desktop:pt-10">
         <div className="hidden desktop:block">
           <Logo />
         </div>
@@ -59,7 +62,10 @@ function Login() {
             <h2 className="text-s font-bold uppercase mb-6">login</h2>
             <div className="flex gap-2 mb-10">
               <p className={text}>If you don’t have an account</p>
-              <Link href="/registration" className={text}>
+              <Link
+                href="/registration"
+                className="text-xxxs font-bold uppercase"
+              >
                 sign up
               </Link>
             </div>
