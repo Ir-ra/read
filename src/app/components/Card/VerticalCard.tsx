@@ -7,13 +7,13 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Product } from "@/app/types/Product";
 
-export const VerticalCard = ({ product }: { product: Product }) => {
+export const VerticalCard = ({ product, onBookClick }: { product: Product, onBookClick: (product: Product) => void}) => {
   const pathname = usePathname();
   const author = product.fields?.find(p => p.lable_name === "Author")?.value;
   const { id, category_name, image, name, fields, special_price, price } = product;
 
   return (
-    <Link href={`/shop/${id}`} className="flex-auto">
+    <Link href={`/shop/${id}`} className="flex-auto" onClick={() => onBookClick(product)}>
       <div className={`p-4 tablet:p-8 border-Black border cursor-pointer hover:shadow-custom focus:shadow-custom ${pathname.slice(1) === 'shop' ? 'w-full' : 'w-[240px]'} tablet:w-[325px] whitespace-normal justify-stretch`}>
         <div className="flex mb-2 justify-between">
           <span className="px-1 py[2px]  border-Black border flex justify-center items-center">
@@ -23,7 +23,7 @@ export const VerticalCard = ({ product }: { product: Product }) => {
             type="button"
             className="border-none w-8 h-8 tablet:w-10 tablet:h-10 flex justify-center items-center"
           >
-            <Image src={fav} alt="add to favourite" />
+            <Image src={fav} alt="add to favourite" priority={false} />
           </button>
         </div>
         <div className="flex flex-col">
@@ -36,6 +36,7 @@ export const VerticalCard = ({ product }: { product: Product }) => {
                 style={{ objectFit: "contain", objectPosition: "center" }}
                 sizes="50vw"
                 quality={100}
+                priority={true}
               />
             </div>
           </div>
@@ -66,7 +67,7 @@ export const VerticalCard = ({ product }: { product: Product }) => {
                 )}
               </div>
               <button className="border-none w-8 h-8 tablet:w-10 tablet:h-10 flex justify-center items-center">
-                <Image src={cart} alt="add to cart" />
+                <Image src={cart} alt="add to cart" priority={false}/>
               </button>
             </div>
           </div>

@@ -3,10 +3,18 @@
 import { usePathname } from "next/navigation";
 import { Breadcrumbs } from "../components/Breadcrumbs/Breadcrumbs";
 import { FiltersContainer } from "../components/FiltersBlock/FiltersContainer";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { VerticalCard } from "../components/Card/VerticalCard";
 import Pagination from "../components/FiltersBlock/Pagination";
 import { useProducts } from "../context/ProductsContext";
+import { useLocalStorage } from "../utils/useLocalStorage";
+import RecentlyViewed from "../components/RecentlyViewed/RecentlyViewed";
+import { Product } from "../types/Product";
+import Title from "../components/Title/Title";
+import { ProductsCarousel } from "../components/ProductsCarousel/ProductsCarousel";
+import Loader from "../components/Loader/Loader";
+import ProductList from "../components/ProductList/ProductList";
+import FiltersBlock from "../components/FiltersBlock/FiltersBlock";
 
 function Shop() {
   const pathname = usePathname();
@@ -33,7 +41,7 @@ function Shop() {
     }
   ]
 
-  const handleClick = (filterName: string) => {
+  const handleFilterClick = (filterName: string) => {
     if (filterName === 'Category') {
       setIsOpenCategory(prev => !prev);
       setIsOpenSort(false);
@@ -49,55 +57,71 @@ function Shop() {
     }
   };
 
-  const {products} = useProducts();
+  const { products, loading } = useProducts();
 
   const [currentPage, setCurrentPage] = useState(1);
-  let PageSize = 8;
+  const [recentlyViewed, setRecentlyViewed] = useLocalStorage('recentlyViewed', []);
+  let pageSize = 8;
 
   const currentTableData = useMemo(() => {
-    const firstPageIndex = (currentPage - 1) * PageSize;
-    const lastPageIndex = firstPageIndex + PageSize;
+    const firstPageIndex = (currentPage - 1) * pageSize;
+    const lastPageIndex = firstPageIndex + pageSize;
     return products.slice(firstPageIndex, lastPageIndex);
-  }, [currentPage, PageSize ]);
+  }, [currentPage, pageSize, products]);
+
+
+  const onBookClick = (product: Product) => {
+    const isProductInRecentlyViewed = recentlyViewed.some((item: Product) => item.id === product.id);
+
+    if (!isProductInRecentlyViewed) {
+      const updatedRecentlyViewed = [...recentlyViewed];
+
+      if (updatedRecentlyViewed.length >= 4) {
+        updatedRecentlyViewed.pop();
+      }
+
+      updatedRecentlyViewed.unshift(product);
+      setRecentlyViewed(updatedRecentlyViewed);
+    }
+  };
 
   return (
-    <main className="px-6 py-10 tablet:px-10">
-      <div className="flex flex-col gap-4">
-        <Breadcrumbs path={pathname} name={nameBooks} />
-        <h1 className="mb-5 text-s tablet:text-sm desktop:text-l font-bold uppercase">
-          {nameBooks}
-        </h1>
-      </div>
+    <main>
+      {loading && <Loader />}
+      {!loading && (
+        <>
+          <div className="px-6 py-10 tablet:px-10">
+            <div className="flex flex-col gap-4">
+              <Breadcrumbs
+                path={pathname}
+                name={nameBooks}
+              />
+              <h1 className="mb-5 text-s tablet:text-sm desktop:text-l font-bold uppercase">
+                {nameBooks}
+              </h1>
+            </div>
 
-      <div id='page-wrap' className="flex flex-col tablet:flex-row tablet:relative tablet:gap-10">
-        {filters.map(el => (
-          <FiltersContainer
-            filterName={el.filterName}
-            key={el.filterName}
-            onClick={() => handleClick(el.filterName)}
-            isOpen={el.isOpen}
-          />
-        ))}
-      </div>
+            <FiltersBlock filters={filters} onFilterClick={handleFilterClick} />
+          </div>
 
-      <section className="pt-10 flex flex-col gap-10">
-        <ul
-          className="grid grid-cols-2 desktop:grid-cols-4 gap-5 scroll-smooth"
-        >
-          {currentTableData.map((product) => (
-            <li key={product.id} className="flex m-auto w-full tablet:w-min">
-              <VerticalCard product={product} />
-            </li>
-          ))}
-        </ul>
+          <section className="flex flex-col gap-10 px-6 pb-10 tablet:px-10">
+            <ProductList
+              currentTableData={currentTableData}
+              onBookClick={onBookClick}
+            />
 
-        <Pagination
-          currentPage={currentPage}
-          totalCount={products.length}
-          pageSize={PageSize}
-          onPageChange={page => setCurrentPage(page)}
-        />
-      </section>
+            <Pagination
+              currentPage={currentPage}
+              totalCount={products.length}
+              pageSize={pageSize}
+              onPageChange={page => setCurrentPage(page)}
+            />
+          </section>
+
+          {!!recentlyViewed.length && <RecentlyViewed recentlyViewed={recentlyViewed} />}
+        </>
+      )}
+
     </main>
   );
 }
