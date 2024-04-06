@@ -58,7 +58,6 @@ function Registration() {
     try {
       const res = await createUser(newUser);
       if (res) {
-        console.log(res);
         reset();
       }
     } catch (error) {
@@ -66,7 +65,7 @@ function Registration() {
     }
   };
 
-  const text = "text-xxxs font-light uppercase";
+  const text = "text-xxxs font-light";
   const errText = "text-supperSmall text-AccentRed uppercase font-light";
 
   return (

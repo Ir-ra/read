@@ -7,6 +7,7 @@ import { useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Cross } from "../components/icons";
+import { signIn } from "next-auth/react";
 
 type FormData = {
   email: string;
@@ -40,11 +41,21 @@ function Login() {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data: FormData) => {
-    console.log("data", data);
-    console.log("checkbox", data.rememberMe);
-    reset();
+  const onSubmit = async (data: FormData) => {
+    const res = await signIn("credentials", {
+      redirect: false,
+      email: data.email,
+      password: data.password,
+    });
+
+    if (res?.error) {
+      console.error(res.error);
+    } else {
+      reset();
+      window.location.href = "/account";
+    }
   };
+
   const text = "text-xxxs font-light uppercase";
   const errText = "text-supperSmall text-AccentRed uppercase font-light";
 
