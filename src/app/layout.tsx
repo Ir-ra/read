@@ -4,6 +4,7 @@ import "./globals.css";
 import { NavBar } from "./components/NavBar/NavBar";
 import { Footer } from "./components/Footer/Footer";
 import { ProductsProvider } from "./context/ProductsContext";
+import CartProvider from "./context/CartContext";
 
 const fira = Fira_Sans({ weight: "400", subsets: ["latin"] });
 
@@ -22,7 +23,9 @@ export default function RootLayout({
       <body className={fira.className} suppressHydrationWarning={true}>
         <NavBar />
         <ProductsProvider>
-          {children}
+          <CartProvider>
+            {children}
+          </CartProvider>
         </ProductsProvider>
         <Footer />
       </body>

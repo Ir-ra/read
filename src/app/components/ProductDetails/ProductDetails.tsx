@@ -6,6 +6,7 @@ import Rating from "../Rating/Rating";
 import { Button } from "../Button/Button";
 import { Product } from "@/app/types/Product";
 import fav from "../../assets/favourite.svg";
+import AddToCart from "../Button/AddToCart";
 
 export default function ProductDetails({ state, pathname, paramsID, review }: {
   state: Product;
@@ -65,7 +66,7 @@ export default function ProductDetails({ state, pathname, paramsID, review }: {
 
         <div className="flex flex-col flex-1 gap-10">
           <div className="flex flex-col gap-4">
-            <Breadcrumbs path={pathname.slice(0, -2)} name={nameBooks} bookName={state && name} id={+id} />
+            <Breadcrumbs path={pathname.slice(0, -3)} name={nameBooks} bookName={state && name} id={+id} />
 
             <h1 className="text-s tablet:text-sm desktop:text-l font-bold uppercase">
               {state && name}
@@ -123,7 +124,7 @@ export default function ProductDetails({ state, pathname, paramsID, review }: {
               {status === 'active' ? 'in stock' : 'out of stock'}
             </p>
 
-            <Button title='add to cart' />
+            <AddToCart prodId={id}/>
           </div>
 
           <div className="flex gap-5">

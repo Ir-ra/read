@@ -1,20 +1,21 @@
 import React from 'react';
-import {getProducts} from '../../../services/getAPI';
+// import {getProducts} from '../../../services/getAPI';
 
 type ButtonProps = {
   title: string;
+  onClick?: () => void;
 }
 
-export const Button: React.FC<ButtonProps> = ({ title }) => {
+export const Button: React.FC<ButtonProps> = ({ title, onClick }) => {
   const buttonType = title === 'Subscribe' ? 'submit' : 'button';
-  const handleProducts = async () => {
-    try {
-      const category = await getProducts();
-      console.log(category.data)
-    } catch (error) {
-      console.log(error)
-    } 
-  }
+  // const handleProducts = async () => {
+  //   try {
+  //     const category = await getProducts();
+  //     console.log(category.data)
+  //   } catch (error) {
+  //     console.log(error)
+  //   } 
+  // }
 
   return (
     <button
@@ -25,7 +26,7 @@ export const Button: React.FC<ButtonProps> = ({ title }) => {
       transition duration-300 ease-in-out
       hover:bg-White hover:text-Black
       active:bg-White active:text-Black'
-      onClick={handleProducts}
+      onClick={onClick}
     >
       {title}
     </button>
