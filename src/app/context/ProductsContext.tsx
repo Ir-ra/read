@@ -42,9 +42,6 @@ export const ProductsProvider: React.FC<Props> = ({
     fetchProducts();
   }, []);
 
-  console.log('products context', products);
-  
-
   return (
     <ProductsContext.Provider value={{ products, loading }}>
       {children}

@@ -11,6 +11,18 @@ export const useLocalStorage = (key, defaultValue) => {
       localStorage.setItem(key, JSON.stringify(defaultValue));
       return defaultValue
     }
+
+    // if (typeof window !== 'undefined' && window.localStorage) {
+    //   const storedValue = window.localStorage.getItem(key);
+    //   if (storedValue !== null && storedValue !== undefined) {
+    //     return JSON.parse(storedValue);
+    //   } else {
+    //     window.localStorage.setItem(key, JSON.stringify(defaultValue));
+    //     return defaultValue;
+    //   }
+    // } else {
+    //   return defaultValue;
+    // }
     
   });
 

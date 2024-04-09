@@ -5,12 +5,14 @@ import CartOrder from "../components/CartOrder/CartOrder";
 import { CartContext } from "../context/CartContext";
 import { useContext } from "react";
 import { HorizontalCard } from "../components/Card/HorizontalCard";
+import { Subscribe } from "../components/Subscribe/Subscribe";
 
 function Cart() {
   const pathname = usePathname();
   const { cartItems, removeFromCart } = useContext(CartContext);
 
   return (
+    <>
     <main className="p-6 tablet:p-10">
       <div className="flex flex-col gap-4">
         <Breadcrumbs path={pathname} />
@@ -26,7 +28,6 @@ function Cart() {
               book={cartItem.product}
               pathname={pathname}
               key={cartItem.id}
-              removeFromCart={removeFromCart}
               cartItem={cartItem}
             />
           ))}
@@ -35,6 +36,8 @@ function Cart() {
         <CartOrder />
       </div>
     </main>
+    <Subscribe />
+    </>
   );
 }
 

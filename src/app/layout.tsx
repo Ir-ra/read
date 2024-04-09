@@ -21,13 +21,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={fira.className} suppressHydrationWarning={true}>
-        <NavBar />
-        <ProductsProvider>
-          <CartProvider>
+        <CartProvider>
+          <NavBar />
+          <ProductsProvider>
             {children}
-          </CartProvider>
-        </ProductsProvider>
-        <Footer />
+          </ProductsProvider>
+          <Footer />
+        </CartProvider>
       </body>
     </html>
   );

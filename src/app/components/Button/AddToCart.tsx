@@ -34,6 +34,7 @@ export default function AddToCart({ prodId }: Props) {
       <Button
         title={isButtonSelected ? 'Added to cart' : 'Add to cart'}
         onClick={handleAddToCart}
+        isButtonSelected={isButtonSelected}
       />
     </>
   )

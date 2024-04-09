@@ -1,19 +1,38 @@
+'use client'
 import Image from "next/image";
 
 import plug_book from "../../assets/img/plugs/plug_book.jpg";
 import del from "../../assets/delete.svg";
+import cart from "../../assets/cart.svg";
+import cartFull from "../../assets/cart_full.svg";
 import Link from "next/link";
 import { Product } from "@/app/types/Product";
 import { CartItem } from "@/app/types/CartItem";
+import { useContext, useState } from "react";
+import { CartContext } from "@/app/context/CartContext";
 
 type HorizontalCardType = {
   book?: Product;
   pathname?: string;
-  cartItem: CartItem;
-  removeFromCart: (cartItemToRemove: CartItem) => void;
+  cartItem?: CartItem;
 }
 
-export const HorizontalCard = ({ book, pathname, cartItem, removeFromCart }: HorizontalCardType) => {
+export const HorizontalCard = ({ book, pathname, cartItem }: HorizontalCardType) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const { addToCart, checkAdded, removeFromCart } = useContext(CartContext);
+
+  // const [isButtonSelected, setIsButtonSelected] = useState(checkAdded(book?.id));
+
+  // const handleAddToCart = () => {
+  //   addToCart({
+  //     id: book.id,
+  //     product: book,
+  //     quantity: 1,
+  //     price: book.price,
+  //   });
+  //   setIsButtonSelected(true);
+  // }
+
   const sale = true;
   console.log('book', book);
   const author = book?.fields.find(p => p.lable_name === "Author")?.value;
@@ -40,7 +59,7 @@ export const HorizontalCard = ({ book, pathname, cartItem, removeFromCart }: Hor
                 d="M18.75 23.25L10 17L1.25 23.25V3.25C1.25 2.58696 1.51339 1.95107 1.98223 1.48223C2.45107 1.01339 3.08696 0.75 3.75 0.75H16.25C16.913 0.75 17.5489 1.01339 18.0178 1.48223C18.4866 1.95107 18.75 2.58696 18.75 3.25V23.25Z"
                 stroke="#1C1C1C"
                 strokeLinecap="round"
-                stroke-linejoin="round"
+                strokeLinejoin="round"
               />
             </svg>
           </button>
@@ -124,33 +143,13 @@ export const HorizontalCard = ({ book, pathname, cartItem, removeFromCart }: Hor
                       </p>
                     )}
                   </div>
-                  <button className="border-none w-8 h-8 tablet:w-10 tablet:h-10 flex justify-center items-center">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="32"
-                      height="32"
-                      viewBox="0 0 32 32"
-                      fill="none"
-                    >
-                      <path
-                        d="M8 2.66666L4 8V26.6667C4 27.3739 4.28095 28.0522 4.78105 28.5523C5.28115 29.0524 5.95942 29.3333 6.66667 29.3333H25.3333C26.0406 29.3333 26.7189 29.0524 27.219 28.5523C27.719 28.0522 28 27.3739 28 26.6667V8L24 2.66666H8Z"
-                        stroke="#1C1C1C"
-                        strokeLinecap="round"
-                        stroke-linejoin="round"
-                      />
-                      <path
-                        d="M4 8H28"
-                        stroke="#1C1C1C"
-                        strokeLinecap="round"
-                        stroke-linejoin="round"
-                      />
-                      <path
-                        d="M21.3332 13.3333C21.3332 14.7478 20.7713 16.1044 19.7711 17.1046C18.7709 18.1048 17.4143 18.6667 15.9998 18.6667C14.5853 18.6667 13.2288 18.1048 12.2286 17.1046C11.2284 16.1044 10.6665 14.7478 10.6665 13.3333"
-                        stroke="#1C1C1C"
-                        strokeLinecap="round"
-                        stroke-linejoin="round"
-                      />
-                    </svg>
+                  <button
+                    className="border-none w-8 h-8 tablet:w-10 tablet:h-10 flex justify-center items-center"
+                    onMouseEnter={() => setIsHovered(true)}
+                    onMouseLeave={() => setIsHovered(false)}
+                    onClick={() => cartItem && addToCart(cartItem)}
+                  >
+                    <Image src={isHovered ? cartFull : cart} alt="cart icon" />
                   </button>
                 </>
               )}
@@ -158,32 +157,35 @@ export const HorizontalCard = ({ book, pathname, cartItem, removeFromCart }: Hor
           </div>
         </div>
 
-        <div className="flex justify-between tablet:hidden">
-          <div className="flex">
-            <div className="flex mr-auto">
-              <button className="w-8 h-8 border border-Grey rounded-full">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
-                  <rect x="0.5" y="0.5" width="31" height="31" rx="15.5" stroke="#BFBFBF" />
-                  <path d="M6.66797 16H25.3346" stroke="#1C1C1C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-              </button>
+        {pathname === '/cart' && (
+          <div className="flex justify-between tablet:hidden">
+            <div className="flex">
+              <div className="flex mr-auto">
+                <button className="w-8 h-8 border border-Grey rounded-full">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <rect x="0.5" y="0.5" width="31" height="31" rx="15.5" stroke="#BFBFBF" />
+                    <path d="M6.66797 16H25.3346" stroke="#1C1C1C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </button>
 
-              <p className="text-cartL font-normal uppercase w-[34px] text-center">
-                1
-              </p>
+                <p className="text-cartL font-normal uppercase w-[34px] text-center">
+                  1
+                </p>
 
-              <button className="w-8 h-8 border border-Grey rounded-full">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
-                  <rect x="0.5" y="0.5" width="31" height="31" rx="15.5" stroke="#BFBFBF" />
-                  <path d="M16 6.6665V25.3332" stroke="#1C1C1C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                  <path d="M6.66797 16H25.3346" stroke="#1C1C1C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-              </button>
+                <button className="w-8 h-8 border border-Grey rounded-full">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <rect x="0.5" y="0.5" width="31" height="31" rx="15.5" stroke="#BFBFBF" />
+                    <path d="M16 6.6665V25.3332" stroke="#1C1C1C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M6.66797 16H25.3346" stroke="#1C1C1C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </button>
+              </div>
+
             </div>
-
+            <div className="text-m font-normal uppercase">{`$16`}</div>
           </div>
-          <div className="text-m font-normal uppercase">{`$16`}</div>
-        </div>
+        )}
+
 
       </div>
     </Link>
