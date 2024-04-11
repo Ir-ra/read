@@ -19,22 +19,8 @@ type HorizontalCardType = {
 
 export const HorizontalCard = ({ book, pathname, cartItem }: HorizontalCardType) => {
   const [isHovered, setIsHovered] = useState(false);
-  const { addToCart, checkAdded, removeFromCart } = useContext(CartContext);
+  const { addToCart, removeFromCart, plusItem, minusItem } = useContext(CartContext);
 
-  // const [isButtonSelected, setIsButtonSelected] = useState(checkAdded(book?.id));
-
-  // const handleAddToCart = () => {
-  //   addToCart({
-  //     id: book.id,
-  //     product: book,
-  //     quantity: 1,
-  //     price: book.price,
-  //   });
-  //   setIsButtonSelected(true);
-  // }
-
-  const sale = true;
-  console.log('book', book);
   const author = book?.fields.find(p => p.lable_name === "Author")?.value;
 
   return (
@@ -69,11 +55,12 @@ export const HorizontalCard = ({ book, pathname, cartItem }: HorizontalCardType)
             <div className="relative w-[96px] h-[144px] tablet:w-[160px] tablet:h-[234px] desktop:w-[156px]">
               <Image
                 src={book ? book?.image[0] : plug_book}
-                alt="Unavailable Image"
+                alt={`${author} - ${book?.name}`}
                 fill
                 style={{ objectFit: "cover", objectPosition: "center" }}
                 sizes="50vw"
                 quality={100}
+                priority={true}
               />
             </div>
           </div>
@@ -103,7 +90,10 @@ export const HorizontalCard = ({ book, pathname, cartItem }: HorizontalCardType)
                 <>
                   <div className="hidden tablet:flex">
                     <div className="flex mr-auto">
-                      <button className="w-8 h-8 border border-Grey rounded-full">
+                      <button
+                        className="w-8 h-8 border border-Grey rounded-full"
+                        onClick={() => cartItem && minusItem(cartItem)}
+                      >
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
                           <rect x="0.5" y="0.5" width="31" height="31" rx="15.5" stroke="#BFBFBF" />
                           <path d="M6.66797 16H25.3346" stroke="#1C1C1C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -111,10 +101,13 @@ export const HorizontalCard = ({ book, pathname, cartItem }: HorizontalCardType)
                       </button>
 
                       <p className="text-cartL font-normal uppercase w-[34px] text-center">
-                        1
+                        {cartItem?.quantity}
                       </p>
 
-                      <button className="w-8 h-8 border border-Grey rounded-full">
+                      <button
+                        className="w-8 h-8 border border-Grey rounded-full"
+                        onClick={() => cartItem && plusItem(cartItem)}
+                      >
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
                           <rect x="0.5" y="0.5" width="31" height="31" rx="15.5" stroke="#BFBFBF" />
                           <path d="M16 6.6665V25.3332" stroke="#1C1C1C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -123,23 +116,38 @@ export const HorizontalCard = ({ book, pathname, cartItem }: HorizontalCardType)
                       </button>
                     </div>
                   </div>
-                  <div className="hidden tablet:flex text-m font-normal uppercase">{`$16`}</div>
-                </>
-              ) : (
-                <>
-                  <div className="flex items-start gap-3 flex-1 tablet:gap-4">
-                    {sale ? (
+                  <div className="hidden tablet:flex text-m font-normal uppercase gap-4">
+                    {book && book.special_price ? (
                       <>
                         <p className="text-m tablet:text-l uppercase font-normal text-AccentRed">
-                          $20
+                          ${book.special_price}
                         </p>
                         <p className="text-m tablet:text-l uppercase font-normal line-through">
-                          $25
+                          ${book.price}
                         </p>
                       </>
                     ) : (
                       <p className="text-m tablet:text-l uppercase font-normal">
-                        $25
+                        ${book?.price}
+                      </p>
+                    )}
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="flex items-start gap-3 flex-1 tablet:gap-4">
+                    {book && book.special_price ? (
+                      <>
+                        <p className="text-m tablet:text-l uppercase font-normal text-AccentRed">
+                          ${book.special_price}
+                        </p>
+                        <p className="text-m tablet:text-l uppercase font-normal line-through">
+                          ${book.price}
+                        </p>
+                      </>
+                    ) : (
+                      <p className="text-m tablet:text-l uppercase font-normal">
+                        ${book?.price}
                       </p>
                     )}
                   </div>
@@ -161,7 +169,7 @@ export const HorizontalCard = ({ book, pathname, cartItem }: HorizontalCardType)
           <div className="flex justify-between tablet:hidden">
             <div className="flex">
               <div className="flex mr-auto">
-                <button className="w-8 h-8 border border-Grey rounded-full">
+                <button className="w-8 h-8 border border-Grey rounded-full" onClick={() => cartItem && minusItem(cartItem)}>
                   <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
                     <rect x="0.5" y="0.5" width="31" height="31" rx="15.5" stroke="#BFBFBF" />
                     <path d="M6.66797 16H25.3346" stroke="#1C1C1C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -169,10 +177,10 @@ export const HorizontalCard = ({ book, pathname, cartItem }: HorizontalCardType)
                 </button>
 
                 <p className="text-cartL font-normal uppercase w-[34px] text-center">
-                  1
+                  {cartItem?.quantity}
                 </p>
 
-                <button className="w-8 h-8 border border-Grey rounded-full">
+                <button className="w-8 h-8 border border-Grey rounded-full" onClick={() => cartItem && plusItem(cartItem)}>
                   <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
                     <rect x="0.5" y="0.5" width="31" height="31" rx="15.5" stroke="#BFBFBF" />
                     <path d="M16 6.6665V25.3332" stroke="#1C1C1C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -182,7 +190,22 @@ export const HorizontalCard = ({ book, pathname, cartItem }: HorizontalCardType)
               </div>
 
             </div>
-            <div className="text-m font-normal uppercase">{`$16`}</div>
+            <div className="flex gap-4 text-m font-normal uppercase">
+              {book && book.special_price ? (
+                <>
+                  <p className="text-m tablet:text-l uppercase font-normal text-AccentRed">
+                    ${book.special_price}
+                  </p>
+                  <p className="text-m tablet:text-l uppercase font-normal line-through">
+                    ${book.price}
+                  </p>
+                </>
+              ) : (
+                <p className="text-m tablet:text-l uppercase font-normal">
+                  ${book?.price}
+                </p>
+              )}
+            </div>
           </div>
         )}
 

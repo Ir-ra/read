@@ -9,7 +9,7 @@ import { Subscribe } from "../components/Subscribe/Subscribe";
 
 function Cart() {
   const pathname = usePathname();
-  const { cartItems, removeFromCart } = useContext(CartContext);
+  const { cartItems } = useContext(CartContext);
 
   return (
     <>

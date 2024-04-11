@@ -74,8 +74,12 @@ const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
 
   useEffect(() => {
     const newCartTotal = cartItems.reduce(
-      (total: number, cartItem: CartItem) => total + cartItem.quantity * cartItem.price,
-      0,
+      (total: number, cartItem: CartItem) =>
+        total +
+        (cartItem.product.special_price === 0
+          ? cartItem.quantity * cartItem.price
+          : cartItem.quantity * cartItem.product.special_price),
+      0
     );
 
     setCartTotalPrice(newCartTotal);
