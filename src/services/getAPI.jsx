@@ -26,14 +26,18 @@ export const getAllCategories = () => {
 export const getProducts = () => {
   const response = api.get("/api/v1/products");
 
+
   console.log("prods", response);
+
   return response;
 };
 
 export const getProduct = (id) => {
   const response = api.get(`/api/v1/products/${id}`);
 
+
   console.log("prod", response);
+
   return response;
 };
 // має повернути стрінг query=''
@@ -64,6 +68,7 @@ export const getCategoryById = (id) => {
 
   console.log("CategoryById", response);
   return response;
+
 };
 
 export const createUser = async (user) => {
@@ -89,3 +94,12 @@ export const singIn = async (user) => {
     console.log(error);
   }
 };
+
+}
+
+export const getReviewById = (id) => {
+  const response = api.get(`/api/v1/products/${id}/reviews`);
+
+  return response;
+}
+

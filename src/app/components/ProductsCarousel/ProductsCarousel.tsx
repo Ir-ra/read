@@ -1,102 +1,18 @@
 "use client";
 import { useEffect, useState, useRef } from "react";
 import { VerticalCard } from "../Card/VerticalCard";
+import { Product } from "@/app/types/Product";
 
 interface ProductsCarouselProps {
-  activeCategory: string;
+  activeCategory?: string;
+  path?: string;
+  products?: Product[];
 }
 
-const productsData = [
-  {
-    id: "1",
-    category: "new",
-    cover: "",
-    autor: "Rebecca Yarros",
-    bookName: "Fourth Wing",
-    price: "36",
-    new: "new",
-    sale: false,
-  },
-  {
-    id: "2",
-    category: "Autograph",
-    autor: "Rebecca Yarros",
-    bookName: "The subtle art of not giving a fuck",
-    price: "36",
-    new: "coming soon",
-    sale: false,
-  },
-  {
-    id: "3",
-    category: "18+",
-    autor: "Rebecca Yarros",
-    bookName: "Fourth Wing",
-    price: "36",
-    new: "coming soon",
-    sale: false,
-  },
-  {
-    id: "4",
-    category: "18+",
-    autor: "Rebecca Yarros",
-    bookName: "Fourth Wing",
-    price: "36",
-    new: "new",
-    sale: false,
-  },
-  {
-    id: "5",
-    category: "Autograph",
-    autor: "Rebecca Yarros",
-    bookName: "The subtle art of not giving a fuck",
-    price: "36",
-    new: "new",
-    sale: false,
-  },
-  {
-    id: "6",
-    category: "New",
-    autor: "Rebecca Yarros",
-    bookName: "Fourth Wing",
-    price: "36",
-    new: "new",
-    sale: false,
-  },
-  {
-    id: "7",
-    category: "Autograph",
-    autor: "Rebecca Yarros",
-    bookName: "The subtle art of not giving a fuck",
-    price: "36",
-    new: "new",
-    sale: false,
-  },
-  {
-    id: "8",
-    category: "Autograph",
-    autor: "Rebecca Yarros",
-    bookName: "The subtle art of not giving a fuck",
-    price: "36",
-    new: "new",
-    sale: false,
-  },
-  {
-    id: "9",
-    category: "Autograph",
-    autor: "Rebecca Yarros",
-    bookName: "The subtle art of not giving a fuck",
-    price: "36",
-    new: "new",
-    sale: false,
-  },
-];
 
 export const ProductsCarousel: React.FC<ProductsCarouselProps> = ({
-  activeCategory,
+  activeCategory, products, path
 }) => {
-  const filteredProducts = productsData.filter(
-    (products) => products.new === activeCategory
-  );
 
   const carouselRef = useRef<HTMLUListElement>(null);
   const [canScroll, setCanScroll] = useState({ left: false, right: false });
@@ -144,24 +60,27 @@ export const ProductsCarousel: React.FC<ProductsCarouselProps> = ({
   }, [activeCategory]);
 
   return (
-    <section className="pt-5 pb-20 tablet:pb-[62px]">
-      <div className="flex justify-between px-6 tablet:px-10 mb-5">
-        <button onClick={() => scrollCarousel(-200)} disabled={!canScroll.left}>
-          назад
-        </button>
-        <button
-          onClick={() => scrollCarousel(200)}
-          disabled={!canScroll.right}
-          className={!canScroll.right ? "text-AccentRed" : "text-green-500"}
-        >
-          вперед
-        </button>
-      </div>
+    <section className="pt-5 pb-20 tablet:pb-[62px] overflow-hidden">
+      {path !== 'shop' && (
+        <div className="flex justify-between px-6 tablet:px-10 mb-5">
+          <button onClick={() => scrollCarousel(-200)} disabled={!canScroll.left}>
+            назад
+          </button>
+          <button
+            onClick={() => scrollCarousel(200)}
+            disabled={!canScroll.right}
+            className={!canScroll.right ? "text-AccentRed" : "text-green-500"}
+          >
+            вперед
+          </button>
+        </div>
+     )}
+
       <ul
         ref={carouselRef}
         className="flex overflow-auto whitespace-nowrap scroll-smooth py-2 px-6 tablet:px-10 gap-5 hide-scrollbar"
       >
-        {filteredProducts.map((product) => (
+        {products && products.map((product) => (
           <li key={product.id} className="inline-block">
             <VerticalCard product={product} />
           </li>
