@@ -86,7 +86,7 @@ input[type="range"]::-webkit-slider-runnable-track {
   }
 
   .hoverHeroBooks {
-    @apply flex hover:shadow-booksShadow active:shadow-booksShadow hover:scale-105 active:scale-105 transition-transform duration-300;
+    @apply flex hover:shadow-booksShadow active:shadow-booksShadow hover:scale-105 active:scale-105 transition-transform duration-300 ;
   }
 }
 

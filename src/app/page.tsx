@@ -21,7 +21,7 @@ export default function Home() {
         setActiveCategory={setActiveCategory}
         activeCategory={activeCategory}
       />
-      <ProductsCarousel activeCategory={activeCategory}/>
+      <ProductsCarousel activeCategory={activeCategory} />
       <SectionTitle
         title1="bestsellers"
         link1="#"

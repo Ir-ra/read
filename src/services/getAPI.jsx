@@ -78,3 +78,14 @@ export const createUser = async (user) => {
   }
 };
 
+export const singIn = async (user) => {
+  try {
+    const response = await api.post("/api/v1/login", user);
+    if (response.data.token) {
+      setAuthHeader(response.data.token);
+    }
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};

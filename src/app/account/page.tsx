@@ -1,7 +1,6 @@
-export const Account = () => {
-    return(
-        <div>
-            Account
-        </div>
-    )
+
+
+export default function Account() {
+
+  return <div>Account</div>;
 }

@@ -4,6 +4,7 @@ import "./globals.css";
 import { NavBar } from "./components/NavBar/NavBar";
 import { Footer } from "./components/Footer/Footer";
 
+
 const fira = Fira_Sans({ weight: "400", subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -18,11 +19,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={fira.className} suppressHydrationWarning={true}>
-        <NavBar />
-        {children}
-        <Footer />
-      </body>
+
+        <body className={fira.className} suppressHydrationWarning={true}>
+          <NavBar />
+          {children}
+          <Footer />
+        </body>
+
     </html>
   );
 }
