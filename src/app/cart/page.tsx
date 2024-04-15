@@ -10,6 +10,7 @@ import { Subscribe } from "../components/Subscribe/Subscribe";
 function Cart() {
   const pathname = usePathname();
   const { cartItems } = useContext(CartContext);
+console.log('cartItems',cartItems);
 
   return (
     <>
@@ -21,7 +22,7 @@ function Cart() {
         </h1>
       </div>
 
-      <div className="flex">
+      <div className="flex flex-col gap-10 desktop:flex-row">
         <div className="flex flex-col gap-6 tablet:gap-10">
           {cartItems && cartItems.map(cartItem => (
             <HorizontalCard

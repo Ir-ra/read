@@ -3,11 +3,11 @@ import React from 'react';
 type ButtonProps = {
   title: string;
   onClick?: () => void;
-  isButtonSelected: boolean;
+  isButtonSelected?: boolean;
 }
 
 export const Button: React.FC<ButtonProps> = ({ title, onClick, isButtonSelected }) => {
-  const buttonType = title === 'Subscribe' ? 'submit' : 'button';
+  const buttonType = title === 'Subscribe' || 'Submit order' ? 'submit' : 'button';
 
   return (
     <button

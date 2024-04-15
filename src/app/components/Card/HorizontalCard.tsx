@@ -57,7 +57,7 @@ export const HorizontalCard = ({ book, pathname, cartItem }: HorizontalCardType)
                 src={book ? book?.image[0] : plug_book}
                 alt={`${author} - ${book?.name}`}
                 fill
-                style={{ objectFit: "cover", objectPosition: "center" }}
+                style={{ objectFit: "contain", objectPosition: "center" }}
                 sizes="50vw"
                 quality={100}
                 priority={true}
