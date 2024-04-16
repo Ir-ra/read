@@ -16,7 +16,11 @@ export const MainNav = () => {
           shop
         </Link>
 
-        <Link href="/about/payment" className="mainNavLinks mr-auto">
+        <Link
+          href="/about/payment"
+          className="mainNavLinks mr-auto"
+          scroll={false}
+        >
           about us
         </Link>
       </ul>
