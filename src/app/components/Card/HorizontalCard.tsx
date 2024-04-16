@@ -65,8 +65,8 @@ export const HorizontalCard = ({ book, pathname, cartItem }: HorizontalCardType)
             </div>
           </div>
 
-          <div className="flex flex-col items-center gap-1 flex-1 justify-between">
-            <div className="flex gap-2">
+          <div className="flex flex-col gap-1 flex-1 justify-between">
+            <div className="flex gap-2 justify-between">
               <div className="flex flex-col items-start gap-1 w-full">
                 <p className="text-xxxs tablet:text- xxs font-light uppercase">
                   {author ? author : 'author name'}

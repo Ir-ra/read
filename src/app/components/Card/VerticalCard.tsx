@@ -31,7 +31,7 @@ export const VerticalCard = ({ product, onBookClick }: { product: Product, onBoo
   }
 
   return (
-    <Link href={`/shop/${id}`} className="flex-auto" onClick={() => onBookClick(product)}>
+    
       <div className={`p-4 tablet:p-8 border-Black border cursor-pointer hover:shadow-custom focus:shadow-custom ${pathname.slice(1) === 'shop' ? 'w-full' : 'w-[240px]'} tablet:w-[325px] whitespace-normal justify-stretch`}>
         <div className="flex mb-2 justify-between">
           <span className="px-1 py[2px]  border-Black border flex justify-center items-center">
@@ -45,6 +45,7 @@ export const VerticalCard = ({ product, onBookClick }: { product: Product, onBoo
           </button>
         </div>
         <div className="flex flex-col">
+        <Link href={`/shop/${id}`} className="flex-auto" onClick={() => onBookClick(product)}>
           <div className="mb-2 tablet:mb-5">
             <div className={`relative ${pathname.slice(1) === 'shop' ? 'min-w-[130px] tablet:w-full' : 'w-[142px]'} h-[212px] tablet:w-[149px] tablet:h-[220px] mx-auto`}>
               <Image
@@ -58,6 +59,7 @@ export const VerticalCard = ({ product, onBookClick }: { product: Product, onBoo
               />
             </div>
           </div>
+          </Link>
           <div className="flex flex-col items-center gap-1 flex-1">
             <div className="flex flex-col items-start gap-1 w-full">
               <p className="text-xxxs tablet:text- xxs font-light uppercase">
@@ -67,6 +69,7 @@ export const VerticalCard = ({ product, onBookClick }: { product: Product, onBoo
                 {name || 'book name'}
               </p>
             </div>
+
             <div className="flex justify-between items-center w-full">
               <div className="flex items-start gap-3 flex-1 tablet:gap-4">
                 {special_price ? (
@@ -94,6 +97,6 @@ export const VerticalCard = ({ product, onBookClick }: { product: Product, onBoo
           </div>
         </div>
       </div>
-    </Link>
+
   );
 };
