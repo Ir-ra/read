@@ -1,7 +1,11 @@
+import { useContext } from "react";
 import { Button } from "../Button/Button";
+import { CartContext } from "@/app/context/CartContext";
 
 export default function CartOrder() {
-
+  const { cartTotalPrice, cartItems, cartCount, cartTotal } = useContext(CartContext);
+  console.log(cartTotal);
+  
 
   return (
     <div className="flex flex-col bg-AccentBackground h-max border border-Black p-6 tablet:py-16 tablet:px-8 gap-10">
@@ -10,7 +14,7 @@ export default function CartOrder() {
           Total order
         </p>
         <p className="text-s tablet:text-cartL font-bold uppercase">
-          $16
+          ${cartTotal}
         </p>
       </div>
 
@@ -19,7 +23,11 @@ export default function CartOrder() {
           Promo Code
         </h2>
         <div className="flex gap-5">
-          <input type="text" className="bg-AccentBackground w-full h-auto font-light box-border border-b border-Black placeholder:text-xxxs tablet:placeholder:text-xxs placeholder:text-Black placeholder:uppercase py-4 px-0 tablet:px-6 outline-none" />
+          <input 
+          type="text" 
+          className="bg-AccentBackground w-full h-auto font-light box-border border-b border-Black placeholder:text-xxxs tablet:placeholder:text-xxs placeholder:text-Grey placeholder:uppercase placeholder:py-2 py-4 px-0 tablet:px-6 outline-none "
+          placeholder="Add code"
+          />
 
           <div className=""><Button title="Add" /></div>
         </div>
@@ -32,7 +40,7 @@ export default function CartOrder() {
               Total discount
             </p>
             <p className="text-s tablet:text-cartL font-bold uppercase">
-              -$16
+              -${cartTotal - cartTotalPrice}
             </p>
           </div>
 
@@ -40,8 +48,8 @@ export default function CartOrder() {
             Total to pay
           </h2>
           <div className="flex justify-between">
-            <p className="flex items-end text-s tablet:text-cartL font-light uppercase">1pc</p>
-            <p className="text-m tablet:text-l font-bold uppercase">$16</p>
+            <p className="flex items-end text-s tablet:text-cartL font-light uppercase">{cartCount}pc</p>
+            <p className="text-m tablet:text-l font-bold uppercase">${cartTotalPrice}</p>
           </div>
         </div>
 

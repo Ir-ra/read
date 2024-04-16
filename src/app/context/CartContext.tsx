@@ -36,6 +36,7 @@ interface Cart {
   minusItem: (cartItem: CartItem) => void,
   cartCount: number;
   cartTotalPrice: number;
+  cartTotal: number;
   checkAdded: (id: string) => boolean;
 }
 
@@ -47,6 +48,7 @@ export const CartContext = createContext<Cart>({
   minusItem: () => { },
   cartCount: 0,
   cartTotalPrice: 0,
+  cartTotal: 0,
   checkAdded: () => false,
 });
 
@@ -58,6 +60,7 @@ const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   const [cartItems, setCartItems] = useLocalStorage('cartItems', []);
   const [cartCount, setCartCount] = useState<number>(0);
   const [cartTotalPrice, setCartTotalPrice] = useState<number>(0);
+  const [cartTotal, setCartTotal] = useState<number>(0);
 
   useEffect(() => {
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
@@ -83,6 +86,19 @@ const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     );
 
     setCartTotalPrice(newCartTotal);
+  }, [cartItems]);
+
+  useEffect(() => {
+    const newCartTotalNoSale = cartItems.reduce(
+      (total: number, cartItem: CartItem) =>
+        total +
+        (cartItem.product.special_price !== 0
+          ? cartItem.quantity * cartItem.price
+          : cartItem.quantity * cartItem.product.special_price),
+      0
+    );
+
+    setCartTotal(newCartTotalNoSale);
   }, [cartItems]);
 
   const addItemToCart = (productToAdd: CartItem) => {
@@ -125,6 +141,7 @@ const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     minusItem,
     cartCount,
     cartTotalPrice,
+    cartTotal,
     checkAdded,
   };
 

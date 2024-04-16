@@ -1,5 +1,5 @@
 import { SearchAppBar } from './Search/SearchBar';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 
 import Cart from '../../assets/shopping-bag.svg';
 import Profile from '../../assets/profile_icon.svg';
@@ -7,6 +7,7 @@ import Profile from '../../assets/profile_icon.svg';
 import Image from 'next/image';
 import Link from 'next/link';
 import { CartContext } from '@/app/context/CartContext';
+import { useLocalStorage } from '@/app/utils/useLocalStorage';
 
 
 type Props = {
@@ -14,7 +15,8 @@ type Props = {
 }
 
 export const LeftSideNav: React.FC<Props> = ({ closeMenu }) => {
-  const { cartCount } = useContext(CartContext);
+  const { cartItems } = useContext(CartContext);
+  
   return (
     <nav className='flex justify-end uppercase text-s '>
       <SearchAppBar />
@@ -29,7 +31,7 @@ export const LeftSideNav: React.FC<Props> = ({ closeMenu }) => {
           width={40}
         />
 
-        <span className='absolute bottom-6 right-1 tablet:right-4 desktop:bottom-4 text-xxs font-light'>{cartCount}</span>
+        <span className='absolute bottom-6 right-1 tablet:right-4 desktop:bottom-4 text-xxs font-light'>{cartItems.length}</span>
       </Link>
 
       <Link href='/login' className='hidden tablet:flex items-center border-l border-Black pl-4 tablet:pl-8 h-12 mr-auto' onClick={closeMenu}>
