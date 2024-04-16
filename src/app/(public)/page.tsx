@@ -7,7 +7,7 @@ import { ProductsCarousel } from "@/components/ProductsCarousel/ProductsCarousel
 import { SectionTitle } from "@/components/SectionTitle/SectionTitle";
 import { Subscribe } from "@/components/Subscribe/Subscribe";
 
-import { useProducts } from "./context/ProductsContext";
+import { useProducts } from "../context/ProductsContext";
 
 export default function Home() {
   const { products } = useProducts();
@@ -30,7 +30,6 @@ export default function Home() {
 
       <SectionTitle title1="bestsellers" link1="#" />
       <Bestsellers />
-      <Subscribe />
     </main>
   );
 }

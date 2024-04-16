@@ -3,9 +3,6 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Fira_Sans } from "next/font/google";
 
-import { Footer } from "@/components/Footer/Footer";
-import { NavBar } from "@/components/NavBar/NavBar";
-
 import CartProvider from "./context/CartContext";
 import { ProductsProvider } from "./context/ProductsContext";
 
@@ -25,9 +22,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={fira.className} suppressHydrationWarning={true}>
         <CartProvider>
-          <NavBar />
           <ProductsProvider>{children}</ProductsProvider>
-          <Footer />
         </CartProvider>
       </body>
     </html>

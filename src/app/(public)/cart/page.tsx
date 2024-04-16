@@ -7,7 +7,7 @@ import { HorizontalCard } from "@/components/Card/HorizontalCard";
 import CartOrder from "@/components/CartOrder/CartOrder";
 import { Subscribe } from "@/components/Subscribe/Subscribe";
 
-import { CartContext } from "../context/CartContext";
+import { CartContext } from "../../context/CartContext";
 
 function Cart() {
   const pathname = usePathname();

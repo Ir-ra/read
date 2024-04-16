@@ -14,9 +14,9 @@ import { ProductsCarousel } from "@/components/ProductsCarousel/ProductsCarousel
 import RecentlyViewed from "@/components/RecentlyViewed/RecentlyViewed";
 import Title from "@/components/Title/Title";
 
-import { useProducts } from "../context/ProductsContext";
-import { Product } from "../../types/Product";
-import { useLocalStorage } from "../../utils/useLocalStorage";
+import { Product } from "../../../types/Product";
+import { useLocalStorage } from "../../../utils/useLocalStorage";
+import { useProducts } from "../../context/ProductsContext";
 
 function Shop() {
   const pathname = usePathname();

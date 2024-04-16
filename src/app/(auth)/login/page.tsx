@@ -9,7 +9,7 @@ import * as yup from "yup";
 import { Cross } from "@/components/icons";
 import { Logo } from "@/components/Logo/Logo";
 
-import { singIn } from "../../services/getAPI";
+import { singIn } from "../../../services/getAPI";
 
 type FormData = {
   email: string;
@@ -60,9 +60,9 @@ function Login() {
   const errText = "text-supperSmall text-AccentRed uppercase font-light";
 
   return (
-    <main className="flex flex-col-reverse desktop:flex-row h-[100vh] justify-end">
-      <div className="desktop:pl-10 desktop:pt-10">
-        <div className="hidden desktop:block">
+    <>
+      <div className=" desktop:mt-10">
+        <div className="hidden desktop:block desktop:mb-[72px]">
           <Logo />
         </div>
         <div className="px-4 desktop:px-[135px] ">
@@ -87,11 +87,14 @@ function Login() {
                   type="text"
                   {...register("email", { required: true })}
                   placeholder="Enter your email address"
-                  className={text.concat(" px-6 py-4 outline-none")}
+                  className="auth"
                   style={{
+                    padding: "16px 24px",
+                    outline: "none",
                     borderBottomWidth: "1px",
                     borderColor: errors.email ? "#E64035" : "#1C1C1C",
                     marginBottom: errors.email ? "8px" : "24px",
+                    backgroundColor: "transparent",
                   }}
                 />
                 {errors.email && (
@@ -114,8 +117,13 @@ function Login() {
                     type={showPassword ? "text" : "password"}
                     {...register("password", { required: true })}
                     placeholder="Enter your password"
-                    className={text.concat(" py-4 pl-6 outline-none")}
-                    style={{ width: "calc(100% - 56px)" }}
+                    className="auth"
+                    style={{
+                      width: "calc(100% - 56px)",
+                      backgroundColor: "transparent",
+                      padding: "16px 24px",
+                      outline: "none",
+                    }}
                   />
 
                   <button
@@ -149,7 +157,17 @@ function Login() {
                 )}
                 <div className="flex justify-between mb-10">
                   <div className="flex gap-2">
-                    <input type="checkbox" {...register("rememberMe")} />
+                    <input
+                      type="checkbox"
+                      {...register("rememberMe")}
+                      style={{
+                        width: "16px",
+                        height: "16px",
+                        border: "1px solid #BFBFBF",
+                        backgroundColor: "transparent",
+                        appearance: "none",
+                      }}
+                    />
                     <p className={text}>remember me</p>
                   </div>
 
@@ -168,9 +186,9 @@ function Login() {
       <div
         className="backgroundImage-login 
       h-[148px] tablet:h-[260px] 
-      desktop:h-full desktop:min-w-[750px] w-full mb-20"
+      desktop:h-full desktop:min-w-[700] w-full mb-20"
       ></div>
-    </main>
+    </>
   );
 }
 

@@ -9,7 +9,7 @@ import * as yup from "yup";
 import { Cross } from "@/components/icons";
 import { Logo } from "@/components/Logo/Logo";
 
-import { createUser } from "../../services/getAPI";
+import { createUser } from "../../../services/getAPI";
 
 type FormData = {
   email: string;
@@ -67,13 +67,13 @@ function Registration() {
     }
   };
 
-  const text = "text-xxxs font-light";
+  const text = "text-xxxs font-light uppercase";
   const errText = "text-supperSmall text-AccentRed uppercase font-light";
 
   return (
-    <main className="flex flex-col-reverse desktop:flex-row h-[100vh] w-full justify-end pb-6 desktop:pb-0">
-      <div className="desktop:pl-10 desktop:pt-10">
-        <div className="hidden desktop:block">
+    <>
+      <div className="desktop:mt-10">
+        <div className="hidden desktop:block desktop:mb-[72px]">
           <Logo />
         </div>
         <div className="px-4 desktop:px-[135px] ">
@@ -95,11 +95,14 @@ function Registration() {
                   type="text"
                   {...register("email", { required: true })}
                   placeholder="Enter your email address"
-                  className={text.concat(" px-6 py-4 outline-none")}
+                  className="auth"
                   style={{
                     borderBottomWidth: "1px",
                     borderColor: errors.email ? "#E64035" : "#1C1C1C",
                     marginBottom: errors.email ? "8px" : "24px",
+                    backgroundColor: "transparent",
+                    padding: "16px 24px",
+                    outline: "none",
                   }}
                 />
                 {errors.email && (
@@ -114,11 +117,14 @@ function Registration() {
                   type="text"
                   {...register("firstName", { required: true })}
                   placeholder="Enter your user name"
-                  className={text.concat(" px-6 py-4 outline-none")}
+                  className="auth"
                   style={{
                     borderBottomWidth: "1px",
                     borderColor: errors.firstName ? "#E64035" : "#1C1C1C",
                     marginBottom: errors.firstName ? "8px" : "24px",
+                    backgroundColor: "transparent",
+                    padding: "16px 24px",
+                    outline: "none",
                   }}
                 />
                 {errors.firstName && (
@@ -142,8 +148,13 @@ function Registration() {
                     type={showPassword ? "text" : "password"}
                     {...register("password", { required: true })}
                     placeholder="Enter your password"
-                    className={text.concat(" py-4 pl-6 outline-none")}
-                    style={{ width: "calc(100% - 56px)" }}
+                    className="auth"
+                    style={{
+                      width: "calc(100% - 56px)",
+                      backgroundColor: "transparent",
+                      padding: "16px 24px",
+                      outline: "none",
+                    }}
                   />
 
                   <button
@@ -189,8 +200,13 @@ function Registration() {
                     type={showConfirmation ? "text" : "password"}
                     {...register("confirmPassword", { required: true })}
                     placeholder="confirm your password"
-                    className={text.concat(" py-4 pl-6 outline-none")}
-                    style={{ width: "calc(100% - 56px)" }}
+                    className="auth"
+                    style={{
+                      width: "calc(100% - 56px)",
+                      backgroundColor: "transparent",
+                      padding: "16px 24px",
+                      outline: "none",
+                    }}
                   />
 
                   <button
@@ -230,8 +246,8 @@ function Registration() {
           </div>
         </div>
       </div>
-      <div className="backgroundImage-registr h-[148px] tablet:h-[260px] desktop:h-full desktop:min-w-[750px] w-full mb-20"></div>
-    </main>
+      <div className="backgroundImage-registr h-[148px] tablet:h-[260px] desktop:h-full desktop:min-w-[700px] w-full mb-20"></div>
+    </>
   );
 }
 

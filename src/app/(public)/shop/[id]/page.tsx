@@ -8,7 +8,7 @@ import Loader from "@/components/Loader/Loader";
 import ProductDetails from "@/components/ProductDetails/ProductDetails";
 import Recommended from "@/components/Recommended/Recommended";
 
-import { getProduct, getReviewById } from "../../../services/getAPI";
+import { getProduct, getReviewById } from "../../../../services/getAPI";
 
 interface Review {
   rating: number;

@@ -88,6 +88,14 @@ input[type="range"]::-webkit-slider-runnable-track {
   .hoverHeroBooks {
     @apply flex hover:shadow-booksShadow active:shadow-booksShadow hover:scale-105 active:scale-105 transition-transform duration-300;
   }
+
+  .auth {
+    @apply text-xxxs font-light;
+  }
+
+  .auth::placeholder {
+    @apply text-xxxs font-light uppercase;
+  }
 }
 
 .small-caps {
@@ -127,4 +135,8 @@ input[type="range"]::-webkit-slider-runnable-track {
   @media screen and (min-width: 1440px) {
     background-image: url(../../public/img/auth/reg_bg_desk.png);
   }
+}
+
+body {
+  background-color: #f8f7f3;
 }
