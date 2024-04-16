@@ -3,15 +3,15 @@
 @tailwind utilities;
 
 .instagram-link:hover {
-  content: url("./assets/instagram_hover.svg");
+  content: url("../../public/img/instagram_hover.svg");
 }
 
 .facebook-link:hover {
-  content: url("./assets/facebook_hover.svg");
+  content: url("../../public/img/facebook_hover.svg");
 }
 
 .arrow-up:hover {
-  content: url("./assets/arrow-up_hover.svg");
+  content: url("../../public/img/arrow-up_hover.svg");
 }
 
 .hide-scrollbar {
@@ -86,7 +86,7 @@ input[type="range"]::-webkit-slider-runnable-track {
   }
 
   .hoverHeroBooks {
-    @apply flex hover:shadow-booksShadow active:shadow-booksShadow hover:scale-105 active:scale-105 transition-transform duration-300 ;
+    @apply flex hover:shadow-booksShadow active:shadow-booksShadow hover:scale-105 active:scale-105 transition-transform duration-300;
   }
 }
 
@@ -110,21 +110,21 @@ input[type="range"]::-webkit-slider-runnable-track {
 }
 
 .backgroundImage-login {
-  background-image: url(./assets/img/auth/log_mob.png);
+  background-image: url(../../public/img/auth/log_mob.png);
   background-size: cover;
   background-position: center;
 
   @media screen and (min-width: 1440px) {
-    background-image: url(./assets/img/auth/log_desk.png);
+    background-image: url(../../public/img/auth/log_desk.png);
   }
 }
 
 .backgroundImage-registr {
-  background-image: url(./assets/img/auth/reg_bg_mob.png);
+  background-image: url(../../public/img/auth/reg_bg_mob.png);
   background-size: cover;
   background-position: center;
 
   @media screen and (min-width: 1440px) {
-    background-image: url(./assets/img/auth/reg_bg_desk.png);
+    background-image: url(../../public/img/auth/reg_bg_desk.png);
   }
 }

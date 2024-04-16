@@ -1,11 +1,13 @@
+import "./globals.css";
+
 import type { Metadata } from "next";
 import { Fira_Sans } from "next/font/google";
-import "./globals.css";
-import { NavBar } from "./components/NavBar/NavBar";
-import { Footer } from "./components/Footer/Footer";
-import { ProductsProvider } from "./context/ProductsContext";
-import CartProvider from "./context/CartContext";
 
+import { Footer } from "@/components/Footer/Footer";
+import { NavBar } from "@/components/NavBar/NavBar";
+
+import CartProvider from "./context/CartContext";
+import { ProductsProvider } from "./context/ProductsContext";
 
 const fira = Fira_Sans({ weight: "400", subsets: ["latin"] });
 
@@ -21,13 +23,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-
       <body className={fira.className} suppressHydrationWarning={true}>
         <CartProvider>
           <NavBar />
-          <ProductsProvider>
-            {children}
-          </ProductsProvider>
+          <ProductsProvider>{children}</ProductsProvider>
           <Footer />
         </CartProvider>
       </body>

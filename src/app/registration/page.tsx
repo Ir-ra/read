@@ -1,12 +1,14 @@
 "use client";
-import { Logo } from "../components/Logo/Logo";
-import Link from "next/link";
-import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { Cross } from "../components/icons";
-import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
+import Link from "next/link";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
+import * as yup from "yup";
+
+import { Cross } from "@/components/icons";
+import { Logo } from "@/components/Logo/Logo";
+
 import { createUser } from "../../services/getAPI";
 
 type FormData = {

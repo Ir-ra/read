@@ -1,7 +1,9 @@
-'use client'
-import { getProducts } from "@/services/getAPI";
+"use client";
 import { createContext, useContext, useEffect, useState } from "react";
-import { Product } from "../types/Product";
+
+import { getProducts } from "@/services/getAPI";
+
+import { Product } from "../../types/Product";
 
 type ContextItems = {
   products: Product[];
@@ -16,9 +18,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-export const ProductsProvider: React.FC<Props> = ({
-  children
-}) => {
+export const ProductsProvider: React.FC<Props> = ({ children }) => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(false);
 
@@ -31,7 +31,6 @@ export const ProductsProvider: React.FC<Props> = ({
         if (response) {
           setProducts(response.data);
         }
-
       } catch (error) {
         console.log(error);
       } finally {
@@ -47,7 +46,7 @@ export const ProductsProvider: React.FC<Props> = ({
       {children}
     </ProductsContext.Provider>
   );
-}
+};
 
 export function useProducts() {
   const context = useContext(ProductsContext);

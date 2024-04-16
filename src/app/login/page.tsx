@@ -1,13 +1,15 @@
 "use client";
-import { Logo } from "../components/Logo/Logo";
+import { yupResolver } from "@hookform/resolvers/yup";
 import Link from "next/link";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
-import { useState } from "react";
-import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { Cross } from "../components/icons";
-import {singIn} from "../../services/getAPI"
+
+import { Cross } from "@/components/icons";
+import { Logo } from "@/components/Logo/Logo";
+
+import { singIn } from "../../services/getAPI";
 
 type FormData = {
   email: string;
@@ -45,13 +47,13 @@ function Login() {
     const user = {
       email: data.email,
       password: data.password,
-    }
+    };
     const res = await singIn(user);
 
     if (res?.data) {
       reset();
       window.location.href = "/account";
-    } 
+    }
   };
 
   const text = "text-xxxs font-light uppercase";

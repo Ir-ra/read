@@ -1,6 +1,7 @@
-import { FC, ReactNode } from "react";
-import { AboutUsInfo } from "../../app/components/AboutUs/AboutUsInfo";
-import { NavBar } from "../../app/components/AboutUs/NavBar";
+import { ReactNode } from "react";
+
+import { AboutUsInfo } from "@/components/AboutUs/AboutUsInfo";
+import { NavBar } from "@/components/AboutUs/NavBar";
 
 interface AboutLayoutProps {
   children: ReactNode;

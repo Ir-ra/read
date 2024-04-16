@@ -1,4 +1,4 @@
-import { Contact } from "@/app/components/AboutUs/Contact";
+import { Contact } from "@/components/AboutUs/Contact";
 
 export default function Exchange() {
   const questionStyles =

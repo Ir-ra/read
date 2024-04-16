@@ -1,57 +1,59 @@
-"use client"
+"use client";
 
 import { usePathname } from "next/navigation";
-import { Breadcrumbs } from "../components/Breadcrumbs/Breadcrumbs";
-import { FiltersContainer } from "../components/FiltersBlock/FiltersContainer";
 import { useEffect, useMemo, useState } from "react";
-import { VerticalCard } from "../components/Card/VerticalCard";
-import Pagination from "../components/FiltersBlock/Pagination";
+
+import { Breadcrumbs } from "@/components/Breadcrumbs/Breadcrumbs";
+import { VerticalCard } from "@/components/Card/VerticalCard";
+import FiltersBlock from "@/components/FiltersBlock/FiltersBlock";
+import { FiltersContainer } from "@/components/FiltersBlock/FiltersContainer";
+import Pagination from "@/components/FiltersBlock/Pagination";
+import Loader from "@/components/Loader/Loader";
+import ProductList from "@/components/ProductList/ProductList";
+import { ProductsCarousel } from "@/components/ProductsCarousel/ProductsCarousel";
+import RecentlyViewed from "@/components/RecentlyViewed/RecentlyViewed";
+import Title from "@/components/Title/Title";
+
 import { useProducts } from "../context/ProductsContext";
-import { useLocalStorage } from "../utils/useLocalStorage";
-import RecentlyViewed from "../components/RecentlyViewed/RecentlyViewed";
-import { Product } from "../types/Product";
-import Title from "../components/Title/Title";
-import { ProductsCarousel } from "../components/ProductsCarousel/ProductsCarousel";
-import Loader from "../components/Loader/Loader";
-import ProductList from "../components/ProductList/ProductList";
-import FiltersBlock from "../components/FiltersBlock/FiltersBlock";
+import { Product } from "../../types/Product";
+import { useLocalStorage } from "../../utils/useLocalStorage";
 
 function Shop() {
   const pathname = usePathname();
-  const nameBooks = 'Books';
+  const nameBooks = "Books";
   const [isOpenCategory, setIsOpenCategory] = useState(false);
   const [isOpenSort, setIsOpenSort] = useState(false);
   const [isOpenFilter, setIsOpenFilter] = useState(false);
 
   const filters = [
     {
-      filterName: 'Category',
+      filterName: "Category",
       isOpen: isOpenCategory,
-      setOpen: setIsOpenCategory
+      setOpen: setIsOpenCategory,
     },
     {
-      filterName: 'Sort by',
+      filterName: "Sort by",
       isOpen: isOpenSort,
-      setOpen: setIsOpenSort
+      setOpen: setIsOpenSort,
     },
     {
-      filterName: 'Filters',
+      filterName: "Filters",
       isOpen: isOpenFilter,
-      setOpen: setIsOpenFilter
-    }
-  ]
+      setOpen: setIsOpenFilter,
+    },
+  ];
 
   const handleFilterClick = (filterName: string) => {
-    if (filterName === 'Category') {
-      setIsOpenCategory(prev => !prev);
+    if (filterName === "Category") {
+      setIsOpenCategory((prev) => !prev);
       setIsOpenSort(false);
       setIsOpenFilter(false);
-    } else if (filterName === 'Sort by') {
-      setIsOpenSort(prev => !prev);
+    } else if (filterName === "Sort by") {
+      setIsOpenSort((prev) => !prev);
       setIsOpenCategory(false);
       setIsOpenFilter(false);
-    } else if (filterName === 'Filters') {
-      setIsOpenFilter(prev => !prev);
+    } else if (filterName === "Filters") {
+      setIsOpenFilter((prev) => !prev);
       setIsOpenCategory(false);
       setIsOpenSort(false);
     }
@@ -60,7 +62,10 @@ function Shop() {
   const { products, loading } = useProducts();
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [recentlyViewed, setRecentlyViewed] = useLocalStorage('recentlyViewed', []);
+  const [recentlyViewed, setRecentlyViewed] = useLocalStorage(
+    "recentlyViewed",
+    []
+  );
   let pageSize = 8;
 
   const currentTableData = useMemo(() => {
@@ -69,9 +74,10 @@ function Shop() {
     return products.slice(firstPageIndex, lastPageIndex);
   }, [currentPage, pageSize, products]);
 
-
   const onBookClick = (product: Product) => {
-    const isProductInRecentlyViewed = recentlyViewed.some((item: Product) => item.id === product.id);
+    const isProductInRecentlyViewed = recentlyViewed.some(
+      (item: Product) => item.id === product.id
+    );
 
     if (!isProductInRecentlyViewed) {
       const updatedRecentlyViewed = [...recentlyViewed];
@@ -92,10 +98,7 @@ function Shop() {
         <>
           <div className="px-6 py-10 tablet:px-10">
             <div className="flex flex-col gap-4">
-              <Breadcrumbs
-                path={pathname}
-                name={nameBooks}
-              />
+              <Breadcrumbs path={pathname} name={nameBooks} />
               <h1 className="mb-5 text-s tablet:text-sm desktop:text-l font-bold uppercase">
                 {nameBooks}
               </h1>
@@ -114,14 +117,15 @@ function Shop() {
               currentPage={currentPage}
               totalCount={products.length}
               pageSize={pageSize}
-              onPageChange={page => setCurrentPage(page)}
+              onPageChange={(page) => setCurrentPage(page)}
             />
           </section>
 
-          {!!recentlyViewed.length && <RecentlyViewed recentlyViewed={recentlyViewed} />}
+          {!!recentlyViewed.length && (
+            <RecentlyViewed recentlyViewed={recentlyViewed} />
+          )}
         </>
       )}
-
     </main>
   );
 }

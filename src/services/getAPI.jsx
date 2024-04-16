@@ -1,5 +1,5 @@
 import axios from "axios";
-import Router from 'next/router';
+import Router from "next/router";
 // import { useSearchParams } from 'next/navigation';
 
 const URL = "https://book-store-api-tc-5855f695cf77.herokuapp.com";
@@ -26,7 +26,6 @@ export const getAllCategories = () => {
 export const getProducts = () => {
   const response = api.get("/api/v1/products");
 
-
   console.log("prods", response);
 
   return response;
@@ -34,7 +33,6 @@ export const getProducts = () => {
 
 export const getProduct = (id) => {
   const response = api.get(`/api/v1/products/${id}`);
-
 
   console.log("prod", response);
 
@@ -68,7 +66,6 @@ export const getCategoryById = (id) => {
 
   console.log("CategoryById", response);
   return response;
-
 };
 
 export const createUser = async (user) => {
@@ -95,11 +92,8 @@ export const singIn = async (user) => {
   }
 };
 
-}
-
 export const getReviewById = (id) => {
   const response = api.get(`/api/v1/products/${id}/reviews`);
 
   return response;
-}
-
+};

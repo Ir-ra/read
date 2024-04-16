@@ -1,15 +1,20 @@
-// /** @type {import('next').NextConfig} */
-// const nextConfig = {};
+import path from "path";
+import { fileURLToPath } from "url";
 
-// export default nextConfig;
+const dirname = fileURLToPath(new URL(".", import.meta.url));
 
-/** @type {import('next').NextConfig} */
 const nextConfig = {
-  // reactStrictMode: true,
-  // swcMinify: true,
   images: {
-    domains: ['book-store-api-tc.s3.amazonaws.com'],
+    domains: ["book-store-api-tc.s3.amazonaws.com"],
   },
-}
+
+  webpack: (config) => {
+    // Добавляем псевдоним '@' для ссылки на корневую директорию проекта
+    config.resolve.alias["@"] = path.resolve(dirname);
+
+    // Возвращаем измененный конфиг
+    return config;
+  },
+};
 
 export default nextConfig;

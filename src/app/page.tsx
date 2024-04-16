@@ -1,10 +1,12 @@
 "use client";
 import { useState } from "react";
-import { Subscribe } from "./components/Subscribe/Subscribe";
-import { SectionTitle } from "./components/SectionTitle/SectionTitle";
-import { ProductsCarousel } from "./components/ProductsCarousel/ProductsCarousel";
-import { Bestsellers } from "./components/Bestsellers/Bestsellers";
-import { Hero } from "./components/Hero/Hero";
+
+import { Bestsellers } from "@/components/Bestsellers/Bestsellers";
+import { Hero } from "@/components/Hero/Hero";
+import { ProductsCarousel } from "@/components/ProductsCarousel/ProductsCarousel";
+import { SectionTitle } from "@/components/SectionTitle/SectionTitle";
+import { Subscribe } from "@/components/Subscribe/Subscribe";
+
 import { useProducts } from "./context/ProductsContext";
 
 export default function Home() {
@@ -24,12 +26,9 @@ export default function Home() {
         activeCategory={activeCategory}
       />
 
-      <ProductsCarousel activeCategory={activeCategory} products={products}/>
+      <ProductsCarousel activeCategory={activeCategory} products={products} />
 
-      <SectionTitle
-        title1="bestsellers"
-        link1="#"
-      />
+      <SectionTitle title1="bestsellers" link1="#" />
       <Bestsellers />
       <Subscribe />
     </main>

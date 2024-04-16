@@ -1,4 +1,5 @@
-import { Contact } from "@/app/components/AboutUs/Contact";
+import { Contact } from "@/components/AboutUs/Contact";
+
 const questionStyles =
   "text-xxs font-bold uppercase tablet:text-sm desktop:text-l mb-5 tablet:mb-10 desktop:mb-5";
 const textStyles = "text-xxxs font-light uppercase tablet:text-xxs";

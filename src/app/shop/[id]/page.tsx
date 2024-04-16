@@ -1,17 +1,18 @@
-'use client'
+"use client";
 
 import { usePathname } from "next/navigation";
-import { getProduct, getReviewById } from '../../../services/getAPI';
 import { useEffect, useState } from "react";
 
-import Loader from "@/app/components/Loader/Loader";
-import ProductDetails from "@/app/components/ProductDetails/ProductDetails";
-import Recommended from "@/app/components/Recommended/Recommended";
-import { Product } from "@/app/types/Product";
+import { Product } from "@/types/Product";
+import Loader from "@/components/Loader/Loader";
+import ProductDetails from "@/components/ProductDetails/ProductDetails";
+import Recommended from "@/components/Recommended/Recommended";
+
+import { getProduct, getReviewById } from "../../../services/getAPI";
 
 interface Review {
   rating: number;
-};
+}
 
 export default function Book({ params }: { params: { id: string } }) {
   const pathname = usePathname();
@@ -25,7 +26,7 @@ export default function Book({ params }: { params: { id: string } }) {
       try {
         const [product, reviewData] = await Promise.all([
           getProduct(params.id),
-          getReviewById(params.id)
+          getReviewById(params.id),
         ]);
         if (product) {
           setState(product.data);
@@ -48,13 +49,17 @@ export default function Book({ params }: { params: { id: string } }) {
 
       {!loading && (
         <>
-        {state && (
-          <ProductDetails state={state} pathname={pathname} paramsID={params.id} review={review.length ? review[0].rating : 2} />
-        )}
-        <Recommended />
+          {state && (
+            <ProductDetails
+              state={state}
+              pathname={pathname}
+              paramsID={params.id}
+              review={review.length ? review[0].rating : 2}
+            />
+          )}
+          <Recommended />
         </>
       )}
-
     </main>
-  )
+  );
 }
