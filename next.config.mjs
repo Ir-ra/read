@@ -1,15 +1,22 @@
-// /** @type {import('next').NextConfig} */
-// const nextConfig = {};
+import path from "path";
+import { fileURLToPath } from "url";
 
-// export default nextConfig;
+const dirname = fileURLToPath(new URL(".", import.meta.url));
 
-/** @type {import('next').NextConfig} */
 const nextConfig = {
-  // reactStrictMode: true,
-  // swcMinify: true,
   images: {
-    domains: ['book-store-api-tc.s3.amazonaws.com'],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "book-store-api-tc.s3.amazonaws.com",
+      },
+    ],
   },
-}
+
+  webpack: (config) => {
+    config.resolve.alias["@"] = path.resolve(dirname);
+    return config;
+  },
+};
 
 export default nextConfig;
