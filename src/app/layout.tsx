@@ -6,6 +6,7 @@ import { Footer } from "./components/Footer/Footer";
 import { ProductsProvider } from "./context/ProductsContext";
 import CartProvider from "./context/CartContext";
 
+
 const fira = Fira_Sans({ weight: "400", subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -20,6 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+
       <body className={fira.className} suppressHydrationWarning={true}>
         <CartProvider>
           <NavBar />
