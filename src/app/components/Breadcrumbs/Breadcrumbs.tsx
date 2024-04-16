@@ -17,11 +17,6 @@ export const Breadcrumbs = ({ path, name, bookName, id }: {
       <Link href='/shop'>
         {path.slice(1)}
       </Link>
-      <span>/</span>
-
-      <Link href='/shop'>
-        {name}
-      </Link>
 
       {id && (
         <div>

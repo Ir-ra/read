@@ -16,7 +16,7 @@ interface Review {
 export default function Book({ params }: { params: { id: string } }) {
   const pathname = usePathname();
   const [loading, setLoading] = useState(false);
-  const [state, setState] = useState<Product>([]);
+  const [state, setState] = useState<Product | null>(null);
   const [review, setReview] = useState<Review[]>([]);
 
   useEffect(() => {
@@ -48,7 +48,9 @@ export default function Book({ params }: { params: { id: string } }) {
 
       {!loading && (
         <>
-        <ProductDetails state={state} pathname={pathname} paramsID={params.id} review={review.length ? review[0].rating : 2} />
+        {state && (
+          <ProductDetails state={state} pathname={pathname} paramsID={params.id} review={review.length ? review[0].rating : 2} />
+        )}
         <Recommended />
         </>
       )}

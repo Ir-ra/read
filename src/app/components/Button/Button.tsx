@@ -1,31 +1,25 @@
 import React from 'react';
-import {getProducts} from '../../../services/getAPI';
 
 type ButtonProps = {
   title: string;
+  onClick?: () => void;
+  isButtonSelected?: boolean;
 }
 
-export const Button: React.FC<ButtonProps> = ({ title }) => {
-  const buttonType = title === 'Subscribe' ? 'submit' : 'button';
-  const handleProducts = async () => {
-    try {
-      const category = await getProducts();
-      console.log(category.data)
-    } catch (error) {
-      console.log(error)
-    } 
-  }
+export const Button: React.FC<ButtonProps> = ({ title, onClick, isButtonSelected }) => {
+  const buttonType = title === 'Subscribe' || 'Submit order' ? 'submit' : 'button';
 
   return (
     <button
       type={buttonType}
-      className='flex justify-center bg-Black py-4 px-8
+      className={`flex justify-center bg-Black py-4 px-8
       text-Background text-s tablet:text-sm desktop:text-m w-full font-normal uppercase
       box-border border border-Black
       transition duration-300 ease-in-out
       hover:bg-White hover:text-Black
-      active:bg-White active:text-Black'
-      onClick={handleProducts}
+      active:bg-White active:text-Black
+      ${isButtonSelected === true && 'bg-White text-Black hover:bg-Black hover:text-Background'}`}
+      onClick={onClick}
     >
       {title}
     </button>
