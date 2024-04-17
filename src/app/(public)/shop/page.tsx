@@ -1,6 +1,7 @@
 "use client";
 import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
+import { useSelector } from "react-redux";
 
 import { Breadcrumbs } from "@/components/Breadcrumbs/Breadcrumbs";
 import { VerticalCard } from "@/components/Card/VerticalCard";
@@ -16,8 +17,6 @@ import Title from "@/components/Title/Title";
 import { Product } from "../../../types/Product";
 import { useLocalStorage } from "../../../utils/useLocalStorage";
 import { useProducts } from "../../context/ProductsContext";
-import { useSelector } from "react-redux";
-import { selectProducts } from "@/redux/products/slice";
 
 function Shop() {
   const pathname = usePathname();

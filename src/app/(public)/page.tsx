@@ -7,9 +7,6 @@ import { Hero } from "@/components/Hero/Hero";
 import { ProductsCarousel } from "@/components/ProductsCarousel/ProductsCarousel";
 import { SectionTitle } from "@/components/SectionTitle/SectionTitle";
 import { Subscribe } from "@/components/Subscribe/Subscribe";
-import { fetchProducts } from "@/redux/products/operations";
-import { selectProducts } from "@/redux/products/slice";
-import { AppDispatch } from "@/redux/store";
 
 import { useProducts } from "../context/ProductsContext";
 
