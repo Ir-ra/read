@@ -19,6 +19,7 @@ export default function Book({ params }: { params: { id: string } }) {
   const [loading, setLoading] = useState(false);
   const [state, setState] = useState<Product | null>(null);
   const [review, setReview] = useState<Review[]>([]);
+  // console.log();
 
   useEffect(() => {
     setLoading(true);
