@@ -1,7 +1,7 @@
 "use client";
-
 import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
+import { useSelector } from "react-redux";
 
 import { Breadcrumbs } from "@/components/Breadcrumbs/Breadcrumbs";
 import { VerticalCard } from "@/components/Card/VerticalCard";
@@ -60,6 +60,7 @@ function Shop() {
   };
 
   const { products, loading } = useProducts();
+  // const { products, loading } = useSelector(selectProducts);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [recentlyViewed, setRecentlyViewed] = useLocalStorage(

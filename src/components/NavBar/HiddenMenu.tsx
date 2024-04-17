@@ -22,7 +22,9 @@ export const HiddenMenu: React.FC<Hidden> = ({ isOpen, closeMenu }) => {
 
           <Link href="/shop">shop</Link>
 
-          <Link href="/about">about us</Link>
+          <Link href="/about/payment" scroll={false}>
+            about us
+          </Link>
 
           <Link href="/login">log in</Link>
         </ul>
