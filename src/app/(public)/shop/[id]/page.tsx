@@ -3,10 +3,10 @@
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
-import { Product } from "@/types/Product";
 import Loader from "@/components/Loader/Loader";
 import ProductDetails from "@/components/ProductDetails/ProductDetails";
 import Recommended from "@/components/Recommended/Recommended";
+import { Product } from "@/types/Product";
 
 import { getProduct, getReviewById } from "../../../../services/getAPI";
 
