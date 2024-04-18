@@ -35,7 +35,7 @@ export const LeftSideNav: React.FC<Props> = ({ closeMenu }) => {
         />
 
         <span className="absolute bottom-6 right-1 tablet:right-4 desktop:bottom-4 text-xxs font-light">
-          {cartItems.length}
+          {cartItems && cartItems.length}
         </span>
       </Link>
 
