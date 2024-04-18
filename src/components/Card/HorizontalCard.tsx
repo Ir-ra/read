@@ -13,7 +13,7 @@ import del from "../../../public/img/delete.svg";
 import plug_book from "../../../public/img/plugs/plug_book.jpg";
 
 type HorizontalCardType = {
-  book?: Product;
+  book: Product;
   pathname?: string;
   cartItem?: CartItem;
 };
@@ -23,9 +23,22 @@ export const HorizontalCard = ({
   pathname,
   cartItem,
 }: HorizontalCardType) => {
-  const [isHovered, setIsHovered] = useState(false);
-  const { addToCart, removeFromCart, plusItem, minusItem } =
+  const { addToCart, removeFromCart, plusItem, minusItem, checkAdded } =
     useContext(CartContext);
+
+  const [isButtonSelected, setIsButtonSelected] = useState(
+    checkAdded(book?.id)
+  );
+
+  const handleAddToCart = () => {
+    addToCart({
+      id: book.id,
+      product: book,
+      quantity: 1,
+      price: book.price,
+    });
+    setIsButtonSelected(true);
+  };
 
   const author = book?.fields.find((p) => p.lable_name === "Author")?.value;
 
@@ -203,11 +216,13 @@ export const HorizontalCard = ({
                   </div>
                   <button
                     className="border-none w-8 h-8 tablet:w-10 tablet:h-10 flex justify-center items-center"
-                    onMouseEnter={() => setIsHovered(true)}
-                    onMouseLeave={() => setIsHovered(false)}
-                    onClick={() => cartItem && addToCart(cartItem)}
+                    onClick={handleAddToCart}
                   >
-                    <Image src={isHovered ? cartFull : cart} alt="cart icon" />
+                    <Image
+                      src={isButtonSelected ? cartFull : cart}
+                      alt="cart icon"
+                      priority={false}
+                    />
                   </button>
                 </>
               )}
