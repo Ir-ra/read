@@ -7,8 +7,8 @@ import { Hero } from "@/components/Hero/Hero";
 import { ProductsCarousel } from "@/components/ProductsCarousel/ProductsCarousel";
 import { SectionTitle } from "@/components/SectionTitle/SectionTitle";
 import { Product } from "@/types/Product";
+import useAddToCart from "@/utils/useAddToCart";
 
-import { CartContext } from "../context/CartContext";
 import { useProducts } from "../context/ProductsContext";
 
 export default function Home() {
@@ -16,15 +16,17 @@ export default function Home() {
     "new"
   );
   const { products } = useProducts();
-  const { addToCart, checkAdded } = useContext(CartContext);
 
   const getSuggestedProducts = useMemo(() => {
     return (prods: Product[]) => {
-      const suggested = prods.sort((a, b) => b.price - a.price).slice(0, 3);
+      const suggested = prods
+        .sort((a, b) => a.quantity - b.quantity)
+        .slice(0, 3);
       return suggested;
     };
   }, []);
   const suggestedProds = getSuggestedProducts(products);
+  console.log("suggestedProds", suggestedProds);
 
   // const dispatch = useDispatch() as AppDispatch;
   // const { products, loading } = useSelector(selectProducts);
@@ -33,19 +35,12 @@ export default function Home() {
   //   dispatch(fetchProducts());
   // }, [dispatch]);
   const verticalBestsellerId = suggestedProds[0]?.id;
-  const [isButtonSelected, setIsButtonSelected] = useState(
-    checkAdded(verticalBestsellerId)
-  );
 
-  const handleAddToCart = () => {
-    addToCart({
-      id: verticalBestsellerId,
-      product: suggestedProds[0],
-      quantity: 1,
-      price: suggestedProds[0].price,
-    });
-    setIsButtonSelected(true);
-  };
+  const { handleAddToCart, isButtonSelected } = useAddToCart({
+    id: verticalBestsellerId,
+    product: suggestedProds[0],
+    price: suggestedProds[0]?.price,
+  });
   return (
     <main className="bg-Background">
       <Hero />

@@ -24,6 +24,7 @@ interface Cart {
   removeFromCart: (cartItemToRemove: CartItem) => void;
   plusItem: (cartItem: CartItem) => void;
   minusItem: (cartItem: CartItem) => void;
+  clearCart: () => void;
   cartCount: number;
   cartTotalPrice: number;
   cartTotal: number;
@@ -36,6 +37,7 @@ export const CartContext = createContext<Cart>({
   removeFromCart: () => {},
   plusItem: () => {},
   minusItem: () => {},
+  clearCart: () => {},
   cartCount: 0,
   cartTotalPrice: 0,
   cartTotal: 0,
@@ -81,7 +83,8 @@ const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   useEffect(() => {
     const newCartTotal = cartItems.reduce(
       (total: number, cartItem: CartItem) =>
-        total + cartItem.quantity * cartItem.price, 0
+        total + cartItem.quantity * cartItem.price,
+      0
     );
 
     setCartTotal(newCartTotal);
@@ -123,6 +126,10 @@ const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     );
   };
 
+  const clearCart = () => {
+    setCartItems([]);
+  };
+
   const checkAdded = (id: string) => {
     return cartItems.some((item: CartItem) => item.id === id);
   };
@@ -133,6 +140,7 @@ const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     removeFromCart: removeItemFromCart,
     plusItem,
     minusItem,
+    clearCart,
     cartCount,
     cartTotalPrice,
     cartTotal,

@@ -1,11 +1,12 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 
 import { CartContext } from "@/app/context/CartContext";
 import { CartItem } from "@/types/CartItem";
 import { Product } from "@/types/Product";
+import useAddToCart from "@/utils/useAddToCart";
 
 import cart from "../../../public/img/cart.svg";
 import cartFull from "../../../public/img/cart_full.svg";
@@ -24,22 +25,13 @@ export const HorizontalCard = ({
   pathname,
   cartItem,
 }: HorizontalCardType) => {
-  const { addToCart, removeFromCart, plusItem, minusItem, checkAdded } =
-    useContext(CartContext);
+  const { removeFromCart, plusItem, minusItem } = useContext(CartContext);
 
-  const [isButtonSelected, setIsButtonSelected] = useState(
-    checkAdded(book?.id)
-  );
-
-  const handleAddToCart = () => {
-    addToCart({
-      id: book.id,
-      product: book,
-      quantity: 1,
-      price: book.price,
-    });
-    setIsButtonSelected(true);
-  };
+  const { handleAddToCart, isButtonSelected } = useAddToCart({
+    id: book?.id,
+    product: book,
+    price: book?.price,
+  });
 
   const author = book?.fields.find((p) => p.lable_name === "Author")?.value;
 

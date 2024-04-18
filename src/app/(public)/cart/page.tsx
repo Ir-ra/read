@@ -1,17 +1,9 @@
-// "use client";
-import { usePathname } from "next/navigation";
-import { useContext } from "react";
-
 import { Breadcrumbs } from "@/components/Breadcrumbs/Breadcrumbs";
-import { HorizontalCard } from "@/components/Card/HorizontalCard";
 import { CartItem } from "@/components/CartItem/CartItem";
 import CartOrder from "@/components/CartOrder/CartOrder";
 import { Subscribe } from "@/components/Subscribe/Subscribe";
 
 function Cart() {
-  // const pathname = usePathname();
-  console.log("rerender Cart");
-
   return (
     <>
       <main className="p-6 tablet:p-10">
