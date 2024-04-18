@@ -72,7 +72,7 @@ export const Bestsellers = ({
                   </div>
                   <div className="flex flex-col items-center gap-1 flex-1 justify-between">
                     <div className="flex flex-col items-start gap-1 w-full">
-                      <p className="text-xxxs tablet:text- xxs font-light uppercase">
+                      <p className="text-xxxs tablet:text-xxs font-light uppercase">
                         {author}
                       </p>
                       <p className="text-xs tablet:text-cartL uppercase font-normal mb-10 desktop:mb-0 desktop:min-h-[42px] h-full">

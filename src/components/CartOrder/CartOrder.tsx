@@ -1,3 +1,4 @@
+"use client";
 import { useContext } from "react";
 
 import { CartContext } from "@/app/context/CartContext";
@@ -5,9 +6,7 @@ import { CartContext } from "@/app/context/CartContext";
 import { Button } from "../Button/Button";
 
 export default function CartOrder() {
-  const { cartTotalPrice, cartItems, cartCount, cartTotal } =
-    useContext(CartContext);
-  console.log(cartTotal);
+  const { cartTotalPrice, cartCount, cartTotal } = useContext(CartContext);
 
   return (
     <div className="flex flex-col bg-AccentBackground h-max border border-Black p-6 tablet:py-16 tablet:px-8 gap-10">
@@ -16,7 +15,7 @@ export default function CartOrder() {
           Total order
         </p>
         <p className="text-s tablet:text-cartL font-bold uppercase">
-          ${cartTotal}
+          ${cartTotal.toFixed(2)}
         </p>
       </div>
 
@@ -44,7 +43,7 @@ export default function CartOrder() {
               Total discount
             </p>
             <p className="text-s tablet:text-cartL font-bold uppercase">
-              -${cartTotal - cartTotalPrice}
+              -${(cartTotal - cartTotalPrice).toFixed(2)}
             </p>
           </div>
 
@@ -56,7 +55,7 @@ export default function CartOrder() {
               {cartCount}pc
             </p>
             <p className="text-m tablet:text-l font-bold uppercase">
-              ${cartTotalPrice}
+              ${cartTotalPrice.toFixed(2)}
             </p>
           </div>
         </div>

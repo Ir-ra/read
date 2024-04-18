@@ -4,15 +4,11 @@ import { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 
 import { Breadcrumbs } from "@/components/Breadcrumbs/Breadcrumbs";
-import { VerticalCard } from "@/components/Card/VerticalCard";
 import FiltersBlock from "@/components/FiltersBlock/FiltersBlock";
-import { FiltersContainer } from "@/components/FiltersBlock/FiltersContainer";
 import Pagination from "@/components/FiltersBlock/Pagination";
 import Loader from "@/components/Loader/Loader";
 import ProductList from "@/components/ProductList/ProductList";
-import { ProductsCarousel } from "@/components/ProductsCarousel/ProductsCarousel";
 import RecentlyViewed from "@/components/RecentlyViewed/RecentlyViewed";
-import Title from "@/components/Title/Title";
 
 import { Product } from "../../../types/Product";
 import { useLocalStorage } from "../../../utils/useLocalStorage";
