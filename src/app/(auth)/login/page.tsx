@@ -1,15 +1,17 @@
 "use client";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Link from "next/link";
+import Router from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 import * as yup from "yup";
 
+import { Button } from "@/components/Button/Button";
 import { Cross } from "@/components/icons";
 import { Logo } from "@/components/Logo/Logo";
 
-import { singIn } from "../../../services/getAPI";
+import { signIn } from "../../../services/getAPI";
 
 type FormData = {
   email: string;
@@ -33,6 +35,7 @@ const schema = yup.object({
 
 function Login() {
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState<string>("");
 
   const {
     register,
@@ -48,11 +51,15 @@ function Login() {
       email: data.email,
       password: data.password,
     };
-    const res = await singIn(user);
 
-    if (res?.data) {
-      reset();
-      window.location.href = "/account";
+    try {
+      const response = await signIn(user, setError);
+      if (response?.data.token) {
+        reset();
+        Router.push("/account");
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -93,14 +100,14 @@ function Login() {
                     outline: "none",
                     borderBottomWidth: "1px",
                     borderColor: errors.email ? "#E64035" : "#1C1C1C",
-                    marginBottom: errors.email ? "8px" : "24px",
+                    marginBottom: errors.email || error ? "8px" : "24px",
                     backgroundColor: "transparent",
                   }}
                 />
-                {errors.email && (
+                {(errors.email || error) && (
                   <div className="flex gap-1 items-center mb-6">
                     <Cross />
-                    <p className={errText}>{errors.email.message}</p>
+                    <p className={errText}>{errors.email?.message || error}</p>
                   </div>
                 )}
                 <label className={text}>password</label>
@@ -108,7 +115,7 @@ function Login() {
                   style={{
                     borderBottomWidth: "1px",
                     borderColor: errors.password ? "#E64035" : "#1C1C1C",
-                    marginBottom: errors.password ? "8px" : "24px",
+                    marginBottom: errors.email || error ? "8px" : "24px",
                     display: "flex",
                     alignItems: "center",
                   }}
@@ -125,7 +132,6 @@ function Login() {
                       outline: "none",
                     }}
                   />
-
                   <button
                     onClick={() => setShowPassword(!showPassword)}
                     type="button"
@@ -149,10 +155,12 @@ function Login() {
                     )}
                   </button>
                 </div>
-                {errors.password && (
+                {(errors.password || error) && (
                   <div className="flex gap-1 items-center mb-6">
-                    <Cross />{" "}
-                    <p className={errText}>{errors.password.message}</p>
+                    <Cross />
+                    <p className={errText}>
+                      {errors.password?.message || error}
+                    </p>
                   </div>
                 )}
                 <div className="flex justify-between mb-10">
@@ -175,9 +183,7 @@ function Login() {
                     forgot password?
                   </Link>
                 </div>
-                <button className="px-8 py-4 text-m font-normal uppercase text-White bg-Black">
-                  Log in
-                </button>
+                <Button title="Log in" />
               </form>
             </div>
           </div>

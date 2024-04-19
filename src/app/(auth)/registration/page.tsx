@@ -1,11 +1,13 @@
 "use client";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Link from "next/link";
+import Router from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 import * as yup from "yup";
 
+import { Button } from "@/components/Button/Button";
 import { Cross } from "@/components/icons";
 import { Logo } from "@/components/Logo/Logo";
 
@@ -40,7 +42,7 @@ const schema = yup.object({
 function Registration() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
-
+  const [error, setError] = useState<string>("");
   const {
     register,
     handleSubmit,
@@ -58,9 +60,10 @@ function Registration() {
       password: data.password,
     };
     try {
-      const res = await createUser(newUser);
+      const res = await createUser(newUser, setError);
       if (res) {
         reset();
+        Router.push("/account");
       }
     } catch (error) {
       console.log(error);
@@ -99,16 +102,16 @@ function Registration() {
                   style={{
                     borderBottomWidth: "1px",
                     borderColor: errors.email ? "#E64035" : "#1C1C1C",
-                    marginBottom: errors.email ? "8px" : "24px",
+                    marginBottom: errors.email || error ? "8px" : "24px",
                     backgroundColor: "transparent",
                     padding: "16px 24px",
                     outline: "none",
                   }}
                 />
-                {errors.email && (
+                {(errors.email || error) && (
                   <div className="flex gap-1 items-center mb-6">
                     <Cross />
-                    <p className={errText}>{errors.email.message}</p>
+                    <p className={errText}>{errors.email?.message || error}</p>
                   </div>
                 )}
 
@@ -238,9 +241,7 @@ function Registration() {
                     <p className={errText}>{errors.confirmPassword.message}</p>
                   </div>
                 )}
-                <button className="px-8 py-4 text-m font-normal uppercase text-White bg-Black">
-                  sign up
-                </button>
+                <Button title="sign up" />
               </form>
             </div>
           </div>
