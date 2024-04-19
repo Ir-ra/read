@@ -2,10 +2,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useContext, useState } from "react";
 
-import { CartContext } from "@/app/context/CartContext";
 import { Product } from "@/types/Product";
+import useAddToCart from "@/utils/useAddToCart";
 
 import cart from "../../../public/img/cart.svg";
 import cartFull from "../../../public/img/cart_full.svg";
@@ -19,23 +18,16 @@ export const VerticalCard = ({
   product: Product;
   onBookClick?: (product: Product) => void;
 }) => {
-  const { addToCart, checkAdded } = useContext(CartContext);
   const pathname = usePathname();
   const author = product.fields?.find((p) => p.lable_name === "Author")?.value;
   const { id, category_name, image, name, fields, special_price, price } =
     product;
 
-  const [isButtonSelected, setIsButtonSelected] = useState(checkAdded(id));
-
-  const handleAddToCart = () => {
-    addToCart({
-      id: product.id,
-      product,
-      quantity: 1,
-      price: product.price,
-    });
-    setIsButtonSelected(true);
-  };
+  const { handleAddToCart, isButtonSelected } = useAddToCart({
+    id: product.id,
+    product: product,
+    price: product.price,
+  });
 
   return (
     <div

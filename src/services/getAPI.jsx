@@ -26,7 +26,7 @@ export const getAllCategories = () => {
 export const getProducts = () => {
   const response = api.get("/api/v1/products");
 
-  console.log("prods", response);
+  // console.log("prods", response);
 
   return response;
 };
@@ -34,7 +34,7 @@ export const getProducts = () => {
 export const getProduct = (id) => {
   const response = api.get(`/api/v1/products/${id}`);
 
-  console.log("prod", response);
+  // console.log("prod", response);
 
   return response;
 };
