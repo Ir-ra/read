@@ -1,9 +1,11 @@
 export const ArrowLeftIcon = ({
   className,
   strokeWidth = "1",
+  disabled = false,
 }: {
-  className: string;
+  className?: string;
   strokeWidth?: string;
+  disabled: boolean;
 }) => {
   return (
     <svg
@@ -16,14 +18,14 @@ export const ArrowLeftIcon = ({
     >
       <path
         d="M31.6666 20H8.33331"
-        stroke="#1C1C1C"
+        stroke={disabled ? "#BFBFBF" : "#1C1C1C"}
         strokeWidth={strokeWidth}
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d="M20 31.6667L8.33331 20L20 8.33337"
-        stroke="#1C1C1C"
+        stroke={disabled ? "#BFBFBF" : "#1C1C1C"}
         strokeWidth={strokeWidth}
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -35,9 +37,11 @@ export const ArrowLeftIcon = ({
 export const ArrowRightIcon = ({
   className,
   strokeWidth = "1",
+  disabled = false,
 }: {
-  className: string;
+  className?: string;
   strokeWidth?: string;
+  disabled: boolean;
 }) => {
   return (
     <svg
@@ -50,14 +54,14 @@ export const ArrowRightIcon = ({
     >
       <path
         d="M8.33331 20H31.6666"
-        stroke="#1C1C1C"
+        stroke={disabled ? "#BFBFBF" : "#1C1C1C"}
         strokeWidth={strokeWidth}
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d="M20 8.33337L31.6667 20L20 31.6667"
-        stroke="#1C1C1C"
+        stroke={disabled ? "#BFBFBF" : "#1C1C1C"}
         strokeWidth={strokeWidth}
         strokeLinecap="round"
         strokeLinejoin="round"

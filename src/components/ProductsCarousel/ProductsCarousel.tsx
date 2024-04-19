@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Product } from "@/types/Product";
 
 import { VerticalCard } from "../Card/VerticalCard";
+import { ArrowLeftIcon, ArrowRightIcon } from "./../icons";
 
 interface ProductsCarouselProps {
   activeCategory?: string;
@@ -68,15 +69,16 @@ export const ProductsCarousel: React.FC<ProductsCarouselProps> = ({
           <button
             onClick={() => scrollCarousel(-200)}
             disabled={!canScroll.left}
+            aria-label="back button"
           >
-            назад
+            <ArrowLeftIcon disabled={!canScroll.left} />
           </button>
           <button
             onClick={() => scrollCarousel(200)}
             disabled={!canScroll.right}
-            className={!canScroll.right ? "text-AccentRed" : "text-green-500"}
+            aria-label="forward button"
           >
-            вперед
+            <ArrowRightIcon disabled={!canScroll.right} />
           </button>
         </div>
       )}
