@@ -36,6 +36,7 @@ const schema = yup.object({
 function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string>("");
+  const [rememberMe, setRememberMe] = useState(false);
 
   const {
     register,
@@ -65,6 +66,8 @@ function Login() {
 
   const text = "text-xxxs font-light uppercase";
   const errText = "text-supperSmall text-AccentRed uppercase font-light";
+
+  console.log("Remember me:", rememberMe);
 
   return (
     <>
@@ -168,18 +171,14 @@ function Login() {
                     <input
                       type="checkbox"
                       {...register("rememberMe")}
-                      style={{
-                        width: "16px",
-                        height: "16px",
-                        border: "1px solid #BFBFBF",
-                        backgroundColor: "transparent",
-                        appearance: "none",
-                      }}
+                      checked={rememberMe}
+                      onChange={(e) => setRememberMe(e.target.checked)}
+                      className={`checkbox ${rememberMe ? "checked" : ""}`}
                     />
                     <p className={text}>remember me</p>
                   </div>
 
-                  <Link href="/reset-password" className={text}>
+                  <Link href="/forgot_password" className={text}>
                     forgot password?
                   </Link>
                 </div>

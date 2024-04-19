@@ -140,3 +140,29 @@ input[type="range"]::-webkit-slider-runnable-track {
 body {
   background-color: #f8f7f3;
 }
+
+.checkbox {
+  width: 16px;
+  height: 16px;
+  border: 1px solid #bfbfbf;
+  background-color: transparent;
+  position: relative;
+  cursor: pointer;
+  appearance: none;
+}
+
+.checkbox::before {
+  content: "✓";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+  color: #1C1C1C;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.checkbox.checked::before {
+  opacity: 1;
+}
