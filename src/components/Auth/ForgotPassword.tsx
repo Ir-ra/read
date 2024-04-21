@@ -5,7 +5,7 @@ import Router from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
-import { Reset } from "@/components/Auth/ResetPassword";
+import { ResetPassword } from "@/components/Auth/ResetPassword";
 import { Button } from "@/components/Button/Button";
 import { Cross } from "@/components/icons";
 // import { signIn } from "../../../services/getAPI";
@@ -104,7 +104,7 @@ function Forgot_password() {
               </form>
             </>
           ) : (
-            <Reset email={userEmail} />
+            <ResetPassword email={userEmail} />
           )}
         </div>
       </div>

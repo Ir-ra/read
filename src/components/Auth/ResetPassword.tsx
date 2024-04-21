@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export const Reset = ({ email }: { email: string }) => {
+export const ResetPassword = ({ email }: { email: string }) => {
   const handleResendClick = () => {
     window.location.reload();
   };
