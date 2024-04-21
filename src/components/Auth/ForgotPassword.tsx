@@ -50,17 +50,17 @@ function Forgot_password() {
 
   return (
     <div>
-      {!isUser ? (
-        <>
-          <div className=" desktop:mt-10"></div>
-          <div className="hidden desktop:block desktop:mb-[72px]">
-            <Logo />
-          </div>
-          <div className="px-4 desktop:px-[135px] ">
-            <div
-              className=" flex flex-col max-w-[327px] mx-auto 
+      <div className=" desktop:mt-10"></div>
+      <div className="hidden desktop:block desktop:mb-[72px]">
+        <Logo />
+      </div>
+      <div className="px-4 desktop:px-[135px] ">
+        <div
+          className=" flex flex-col max-w-[327px] mx-auto 
               tablet:max-w-[436px] desktop:mx-0 desktop:min-w-[440px]"
-            >
+        >
+          {!isUser ? (
+            <>
               <h2 className="text-s font-bold uppercase mb-6 desktop:text-l">
                 Forgot password
               </h2>
@@ -102,12 +102,12 @@ function Forgot_password() {
                 )}
                 <Button title="Send" />
               </form>
-            </div>
-          </div>
-        </>
-      ) : (
-        <Reset email={userEmail} />
-      )}
+            </>
+          ) : (
+            <Reset email={userEmail} />
+          )}
+        </div>
+      </div>
     </div>
   );
 }
