@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 import { ResetPassword } from "@/components/Auth/ResetPassword";
 import { Button } from "@/components/Button/Button";
 import { Cross } from "@/components/icons";
-// import { signIn } from "../../../services/getAPI";
+import { resetPassword } from "@/services/getAPI";
 import { ForgotPasswordSchema } from "@/services/yupSchems";
 
 import { Logo } from "../Logo/Logo";
@@ -25,7 +25,6 @@ function Forgot_password() {
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm<FormData>({
     resolver: yupResolver(ForgotPasswordSchema),
@@ -38,14 +37,13 @@ function Forgot_password() {
 
     console.log(user);
     setUserEmail(user.email);
-    setIsUser(true);
-    // try {
-    //   const response = await signIn(user, setError);
-    //   console.log(response);
-    //   Router.push("/reset_password");
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    try {
+      const response = await resetPassword(user, setError);
+      console.log(response);
+      setIsUser(true);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

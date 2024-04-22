@@ -1,16 +1,15 @@
 "use client";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Link from "next/link";
-import Router from "next/router";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 
 import { Button } from "@/components/Button/Button";
 import { Cross } from "@/components/icons";
-
-import { signIn } from "../../services/getAPI";
-import { loginSchema } from "../../services/yupSchems";
+import { signIn } from "@/services/getAPI";
+import { loginSchema } from "@/services/yupSchems";
 
 type FormData = {
   email: string;
@@ -23,6 +22,8 @@ export const LoginForm = () => {
   const [error, setError] = useState<string>("");
   const [rememberMe, setRememberMe] = useState(false);
 
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -32,17 +33,18 @@ export const LoginForm = () => {
     resolver: yupResolver(loginSchema),
   });
 
-  const onSubmit = async (data: FormData) => {
+  const onSubmit = async (FormData: FormData) => {
     const user = {
-      email: data.email,
-      password: data.password,
+      email: FormData.email,
+      password: FormData.password,
     };
 
     try {
-      const response = await signIn(user, setError);
-      if (response?.data.token) {
+      const res = await signIn(user, setError);
+
+      if (res?.data.token) {
         reset();
-        Router.push("/account");
+        router.push(`/account`);
       }
     } catch (error) {
       console.log(error);

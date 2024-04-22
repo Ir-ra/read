@@ -1,5 +1,5 @@
 import axios from "axios";
-import Router from "next/router";
+
 // import { useSearchParams } from 'next/navigation';
 
 const URL = "https://book-store-api-tc-5855f695cf77.herokuapp.com";
@@ -73,8 +73,8 @@ export const createUser = async (user, setError) => {
     const response = await api.post("/api/v1/users/", user);
     if (response.data.token) {
       setAuthHeader(response.data.token);
-      return response;
     }
+    return response;
   } catch (error) {
     const emailError = "User already exists";
     if (error.response.data.errors === emailError) {
@@ -90,11 +90,10 @@ export const signIn = async (user, setError) => {
     const response = await api.post("/api/v1/login", user);
     if (response.data.token) {
       setAuthHeader(response.data.token);
-      Router.push("/account");
-      return response;
     }
+    return response;
   } catch (error) {
-    setError(error.response.data.erros);
+    return setError(error.response.data.erros);
   }
 };
 
@@ -102,4 +101,15 @@ export const getReviewById = (id) => {
   const response = api.get(`/api/v1/products/${id}/reviews`);
 
   return response;
+};
+
+export const resetPassword = (user, setError) => {
+  try {
+    const response = api.post("/api/v1/password_reset", user);
+    if (response.data) {
+      return response;
+    }
+  } catch (error) {
+    setError(error.response.data.errors);
+  }
 };

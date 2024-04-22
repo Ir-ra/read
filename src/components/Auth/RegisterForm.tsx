@@ -1,6 +1,6 @@
 "use client";
 import { yupResolver } from "@hookform/resolvers/yup";
-import Router from "next/router";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
@@ -22,6 +22,8 @@ export const RegisterForm = () => {
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [error, setError] = useState<string>("");
 
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -41,9 +43,9 @@ export const RegisterForm = () => {
 
     try {
       const res = await createUser(newUser, setError);
-      if (res) {
+      if (res?.data.token) {
         reset();
-        Router.push("/account");
+        router.push(`/account`);
       }
     } catch (error) {
       console.log(error);
