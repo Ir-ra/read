@@ -5,7 +5,7 @@ export const ArrowLeftIcon = ({
 }: {
   className?: string;
   strokeWidth?: string;
-  disabled: boolean;
+  disabled?: boolean;
 }) => {
   return (
     <svg
@@ -41,7 +41,7 @@ export const ArrowRightIcon = ({
 }: {
   className?: string;
   strokeWidth?: string;
-  disabled: boolean;
+  disabled?: boolean;
 }) => {
   return (
     <svg
