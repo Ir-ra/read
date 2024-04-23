@@ -7,7 +7,6 @@ import fav from "../../../public/img/favourite.svg";
 import plug_book from "../../../public/img/plugs/plug_book.jpg";
 import { Breadcrumbs } from "../Breadcrumbs/Breadcrumbs";
 import AddToCart from "../Button/AddToCart";
-import { Button } from "../Button/Button";
 import Rating from "../Rating/Rating";
 
 export default function ProductDetails({
@@ -78,7 +77,7 @@ export default function ProductDetails({
         <div className="flex flex-col flex-1 gap-10">
           <div className="flex flex-col gap-4">
             <Breadcrumbs
-              path={pathname.slice(0, -3)}
+              path={pathname.slice(0, 5)}
               name={nameBooks}
               bookName={state && name}
               id={+id}
@@ -146,7 +145,7 @@ export default function ProductDetails({
               {status === "active" ? "in stock" : "out of stock"}
             </p>
 
-            <AddToCart prodId={id} />
+            <AddToCart id={id} product={state} />
           </div>
 
           <div className="flex gap-5">

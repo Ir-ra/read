@@ -23,10 +23,14 @@ export const getAllCategories = () => {
   return response;
 };
 
-export const getProducts = () => {
-  const response = api.get("/api/v1/products");
+export const getProducts = (page, limit) => {
+  const response = api.get(
+    `/api/v1/products?${page ? `page=${page}` : ""}&${
+      limit ? `limit=${limit}` : ""
+    }`
+  );
 
-  // console.log("prods", response);
+  // console.log("getProducts", response);
 
   return response;
 };
@@ -64,7 +68,7 @@ export const getProductsByCategory = (id) => {
 export const getCategoryById = (id) => {
   const response = api.get(`/api/v1/categories/${id}`);
 
-  console.log("CategoryById", response);
+  console.log("CategoryById", response.data);
   return response;
 };
 

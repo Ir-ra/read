@@ -9,10 +9,10 @@ import Pagination from "@/components/FiltersBlock/Pagination";
 import Loader from "@/components/Loader/Loader";
 import ProductList from "@/components/ProductList/ProductList";
 import RecentlyViewed from "@/components/RecentlyViewed/RecentlyViewed";
+import { getProducts } from "@/services/getAPI";
 
 import { Product } from "../../../types/Product";
 import { useLocalStorage } from "../../../utils/useLocalStorage";
-import { useProducts } from "../../context/ProductsContext";
 
 function Shop() {
   const pathname = usePathname();
@@ -20,6 +20,13 @@ function Shop() {
   const [isOpenCategory, setIsOpenCategory] = useState(false);
   const [isOpenSort, setIsOpenSort] = useState(false);
   const [isOpenFilter, setIsOpenFilter] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [recentlyViewed, setRecentlyViewed] = useLocalStorage(
+    "recentlyViewed",
+    []
+  );
+  const [products, setProducts] = useState<Product[]>([]);
+  const [categoryName, setCategoryName] = useState("");
 
   const filters = [
     {
@@ -55,21 +62,30 @@ function Shop() {
     }
   };
 
-  const { products, loading } = useProducts();
   // const { products, loading } = useSelector(selectProducts);
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [recentlyViewed, setRecentlyViewed] = useLocalStorage(
-    "recentlyViewed",
-    []
-  );
-  let pageSize = 8;
+  let limit = 20;
 
-  const currentTableData = useMemo(() => {
-    const firstPageIndex = (currentPage - 1) * pageSize;
-    const lastPageIndex = firstPageIndex + pageSize;
-    return products.slice(firstPageIndex, lastPageIndex);
-  }, [currentPage, pageSize, products]);
+  // const currentTableData = useMemo(() => {
+  //   const firstPageIndex = (currentPage - 1) * pageSize;
+  //   const lastPageIndex = firstPageIndex + pageSize;
+  //   return products.slice(firstPageIndex, lastPageIndex);
+  // }, [currentPage, pageSize, products]);
+
+  useEffect(() => {
+    async function fetchProducts() {
+      try {
+        const response = await getProducts(currentPage, limit);
+        if (response) {
+          setProducts(response.data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    fetchProducts();
+  }, [currentPage, limit]);
 
   const onBookClick = (product: Product) => {
     const isProductInRecentlyViewed = recentlyViewed.some(
@@ -90,30 +106,40 @@ function Shop() {
 
   return (
     <main>
-      {loading && <Loader />}
-      {!loading && (
+      {products.length === 0 && <Loader />}
+      {products.length > 0 && (
         <>
           <div className="px-6 py-10 tablet:px-10">
             <div className="flex flex-col gap-4">
-              <Breadcrumbs path={pathname} name={nameBooks} />
+              <Breadcrumbs
+                path={pathname}
+                categoryName={categoryName}
+                setCategoryName={setCategoryName}
+              />
               <h1 className="mb-5 text-s tablet:text-sm desktop:text-l font-bold uppercase">
                 {nameBooks}
               </h1>
             </div>
 
-            <FiltersBlock filters={filters} onFilterClick={handleFilterClick} />
+            <FiltersBlock
+              filters={filters}
+              onFilterClick={handleFilterClick}
+              setProducts={setProducts}
+              setCategoryName={setCategoryName}
+            />
           </div>
 
           <section className="flex flex-col gap-10 px-6 pb-10 tablet:px-10">
             <ProductList
-              currentTableData={currentTableData}
+              currentTableData={products}
               onBookClick={onBookClick}
             />
 
             <Pagination
               currentPage={currentPage}
-              totalCount={products.length}
-              pageSize={pageSize}
+              // totalCount={products.length}
+              totalCount={26}
+              pageSize={limit}
               onPageChange={(page) => setCurrentPage(page)}
             />
           </section>

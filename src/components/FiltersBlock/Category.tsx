@@ -1,25 +1,41 @@
 "use client";
 
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, Dispatch, SetStateAction, useEffect } from "react";
 
+import { getProductsByCategory } from "@/services/getAPI";
+import { Product } from "@/types/Product";
 import { useLocalStorage } from "@/utils/useLocalStorage";
 
 import FilterOptions from "./FilterOptions";
 
-export const Category = ({ isOpen }: { isOpen?: boolean }) => {
+export const Category = ({
+  isOpen,
+  setProducts,
+  setCategoryName,
+}: {
+  isOpen?: boolean;
+  setProducts: Dispatch<SetStateAction<Product[]>>;
+  setCategoryName: Dispatch<SetStateAction<string>>;
+}) => {
   const [selectedCategory, setSelectedCategory] = useLocalStorage(
     "selectedCategory",
     ""
   );
 
   const categories = [
-    "Fiction",
-    "Non-fiction",
-    "Mystery",
-    "Poetry",
-    "Drama",
-    "Fantasy",
+    { category_name: "Mystery", category_id: 1 },
+    { category_name: "Fiction", category_id: 2 },
+    { category_name: "Romance", category_id: 3 },
+    { category_name: "Science Fiction", category_id: 4 },
+    { category_name: "Poetry", category_id: 5 },
+    { category_name: "Non-fiction", category_id: 5 },
   ];
+  const categoryNames = categories.map(({ category_name }) => category_name);
+  const categoryIDs = categories.map(({ category_id }) => category_id);
+
+  useEffect(() => {
+    handleCategory();
+  }, [selectedCategory]);
 
   const handleCategoryChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value, dataset } = event.target;
@@ -27,6 +43,23 @@ export const Category = ({ isOpen }: { isOpen?: boolean }) => {
 
     if (type === "category") {
       setSelectedCategory(value);
+      setCategoryName(value);
+    }
+  };
+
+  const handleCategory = async () => {
+    try {
+      const selectedIndex = categoryNames.findIndex(
+        (name) => name === selectedCategory
+      );
+      if (selectedIndex !== -1) {
+        const selectedCategoryId = categoryIDs[selectedIndex];
+        const category = await getProductsByCategory(selectedCategoryId);
+        console.log("category.data", category.data);
+        setProducts(category.data);
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -35,7 +68,7 @@ export const Category = ({ isOpen }: { isOpen?: boolean }) => {
       {isOpen && (
         <div className="flex flex-col tablet:flex-row w-full desktop:w-full  tablet:h-[80px]">
           <ul className=" grid grid-cols tablet:grid-cols-2 desktop:grid-cols-3 gap-2 w-full tablet:justify-between mb-2">
-            {categories.map((category, i) => (
+            {categoryNames?.map((category, i) => (
               <div
                 key={category}
                 className="flex text-xxxs uppercase font-light tablet:hover:font-bold"
