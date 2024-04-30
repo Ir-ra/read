@@ -1,9 +1,6 @@
 import axios from "axios";
-import Router from "next/router";
-// import { useSearchParams } from 'next/navigation';
 
 const URL = "https://book-store-api-tc-5855f695cf77.herokuapp.com";
-// const query = useSearchParams()
 
 export const api = axios.create({
   baseURL: URL,
@@ -59,10 +56,16 @@ export const getComingSoon = () => {
   return response;
 };
 
-export const getProductsByCategory = (id) => {
-  const response = api.get(`/api/v1/categories/${id}/products`);
+export const getProductsByCategory = (id, page, limit, price, order) => {
+  let queryString = `/api/v1/categories/${id}/products?page=${page}&order=${
+    order || "asc"
+  }`;
+  if (limit) queryString += `&limit=${limit}`;
+  if (price) queryString += `&price=${price}`;
 
-  console.log("ProductsByCategory", response);
+  const response = api.get(queryString);
+
+  console.log("ProductsByCategory", queryString);
   return response;
 };
 

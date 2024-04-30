@@ -52,24 +52,21 @@ function Shop() {
   useEffect(() => {
     async function fetchProducts() {
       try {
+        const price = searchParams.get("price");
+        const order = searchParams.get("order");
+        const rating = searchParams.get("rating");
+        const page = searchParams.get("page") || "1";
+
         if (searchParams.has("category")) {
           const category = await getProductsByCategory(
-            searchParams.get("category")
+            searchParams.get("category"),
+            page,
+            limit,
+            price,
+            order
           );
           setProducts(category.data);
         } else {
-          let price = undefined;
-          let rating = undefined;
-          const order = searchParams.get("order");
-
-          if (searchParams.has("price")) {
-            price = searchParams.get("price");
-          }
-
-          if (searchParams.has("rating")) {
-            rating = searchParams.get("rating");
-          }
-
           const response = await getProducts(page, limit, price, order, rating);
 
           if (response) {
