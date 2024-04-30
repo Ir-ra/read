@@ -13,7 +13,7 @@ export const SortBy = ({ isOpen }: { isOpen?: boolean }) => {
     "Newest first"
   );
 
-  const { setSortPrice, setSortNewest } = useShop();
+  const { setSortPrice, setSortNewest, setSortRating } = useShop();
 
   const handleSortChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
@@ -27,6 +27,9 @@ export const SortBy = ({ isOpen }: { isOpen?: boolean }) => {
     }
     if (value === "Newest first") {
       setSortNewest("asc");
+    }
+    if (value === "Top rated") {
+      setSortRating("desc");
     }
   };
 

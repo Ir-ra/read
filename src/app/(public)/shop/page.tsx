@@ -52,8 +52,6 @@ function Shop() {
   useEffect(() => {
     async function fetchProducts() {
       try {
-        const currentPage = searchParams.get("page") || "1";
-
         if (searchParams.has("category")) {
           const category = await getProductsByCategory(
             searchParams.get("category")
@@ -61,12 +59,19 @@ function Shop() {
           setProducts(category.data);
         } else {
           let price = undefined;
+          let rating = undefined;
           const order = searchParams.get("order");
+
           if (searchParams.has("price")) {
             price = searchParams.get("price");
           }
 
-          const response = await getProducts(currentPage, limit, price, order);
+          if (searchParams.has("rating")) {
+            rating = searchParams.get("rating");
+          }
+
+          const response = await getProducts(page, limit, price, order, rating);
+
           if (response) {
             setProducts(response.data);
           }

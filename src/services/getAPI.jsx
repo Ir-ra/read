@@ -23,10 +23,11 @@ export const getAllCategories = () => {
   return response;
 };
 
-export const getProducts = async (page, limit, price, order) => {
+export const getProducts = async (page, limit, price, order, rating) => {
   let queryString = `/api/v1/products?page=${page}&order=${order || "asc"}`;
   if (limit) queryString += `&limit=${limit}`;
   if (price) queryString += `&price=${price}`;
+  if (rating) queryString += `&rating=${rating}`;
 
   const response = await api.get(queryString);
 
