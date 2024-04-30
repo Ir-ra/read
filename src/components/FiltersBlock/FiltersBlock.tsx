@@ -1,7 +1,5 @@
 import React, { Dispatch, SetStateAction } from "react";
 
-import { Product } from "@/types/Product";
-
 import { FiltersContainer } from "./FiltersContainer";
 
 type FiltersBlockType = {
@@ -11,14 +9,12 @@ type FiltersBlockType = {
     setOpen: Dispatch<SetStateAction<boolean>>;
   }[];
   onFilterClick: (filterName: string) => void;
-  setProducts: Dispatch<SetStateAction<Product[]>>;
   setCategoryName: Dispatch<SetStateAction<string>>;
 };
 
 export default function FiltersBlock({
   filters,
   onFilterClick,
-  setProducts,
   setCategoryName,
 }: FiltersBlockType) {
   return (
@@ -32,7 +28,6 @@ export default function FiltersBlock({
           key={el.filterName}
           onClick={() => onFilterClick(el.filterName)}
           isOpen={el.isOpen}
-          setProducts={setProducts}
           setCategoryName={setCategoryName}
         />
       ))}

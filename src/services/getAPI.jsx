@@ -23,14 +23,14 @@ export const getAllCategories = () => {
   return response;
 };
 
-export const getProducts = (page, limit) => {
-  const response = api.get(
-    `/api/v1/products?${page ? `page=${page}` : ""}&${
-      limit ? `limit=${limit}` : ""
-    }`
-  );
+export const getProducts = async (page, limit, price, order) => {
+  let queryString = `/api/v1/products?page=${page}&order=${order || "asc"}`;
+  if (limit) queryString += `&limit=${limit}`;
+  if (price) queryString += `&price=${price}`;
 
-  // console.log("getProducts", response);
+  const response = await api.get(queryString);
+
+  console.log("getProducts", queryString);
 
   return response;
 };

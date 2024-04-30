@@ -1,20 +1,17 @@
 "use client";
 
-import { ChangeEvent, Dispatch, SetStateAction, useEffect } from "react";
+import { ChangeEvent, Dispatch, SetStateAction } from "react";
 
-import { getProductsByCategory } from "@/services/getAPI";
-import { Product } from "@/types/Product";
+import { useShop } from "@/app/context/ShopContext";
 import { useLocalStorage } from "@/utils/useLocalStorage";
 
 import FilterOptions from "./FilterOptions";
 
 export const Category = ({
   isOpen,
-  setProducts,
   setCategoryName,
 }: {
   isOpen?: boolean;
-  setProducts: Dispatch<SetStateAction<Product[]>>;
   setCategoryName: Dispatch<SetStateAction<string>>;
 }) => {
   const [selectedCategory, setSelectedCategory] = useLocalStorage(
@@ -23,44 +20,31 @@ export const Category = ({
   );
 
   const categories = [
-    { category_name: "Mystery", category_id: 1 },
-    { category_name: "Fiction", category_id: 2 },
-    { category_name: "Romance", category_id: 3 },
-    { category_name: "Science Fiction", category_id: 4 },
-    { category_name: "Poetry", category_id: 5 },
-    { category_name: "Non-fiction", category_id: 5 },
+    { category_name: "Mystery", category_id: "1" },
+    { category_name: "Fiction", category_id: "2" },
+    { category_name: "Romance", category_id: "3" },
+    { category_name: "Science Fiction", category_id: "4" },
+    { category_name: "Poetry", category_id: "5" },
+    { category_name: "Non-fiction", category_id: "6" },
   ];
+
   const categoryNames = categories.map(({ category_name }) => category_name);
-  const categoryIDs = categories.map(({ category_id }) => category_id);
+  const { setCategory } = useShop();
 
-  useEffect(() => {
-    handleCategory();
-  }, [selectedCategory]);
-
-  const handleCategoryChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleCategoryChange = async (event: ChangeEvent<HTMLInputElement>) => {
     const { value, dataset } = event.target;
     const type = dataset.type;
 
     if (type === "category") {
       setSelectedCategory(value);
       setCategoryName(value);
+      setCategory(getIdByCategoryName(value));
     }
   };
 
-  const handleCategory = async () => {
-    try {
-      const selectedIndex = categoryNames.findIndex(
-        (name) => name === selectedCategory
-      );
-      if (selectedIndex !== -1) {
-        const selectedCategoryId = categoryIDs[selectedIndex];
-        const category = await getProductsByCategory(selectedCategoryId);
-        console.log("category.data", category.data);
-        setProducts(category.data);
-      }
-    } catch (error) {
-      console.log(error);
-    }
+  const getIdByCategoryName = (categoryName: string) => {
+    return categories.find((el) => el.category_name === categoryName)
+      ?.category_id;
   };
 
   return (

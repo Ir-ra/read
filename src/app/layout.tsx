@@ -5,6 +5,7 @@ import { Fira_Sans } from "next/font/google";
 
 import CartProvider from "./context/CartContext";
 import { ProductsProvider } from "./context/ProductsContext";
+import { ShopProvider } from "./context/ShopContext";
 
 const fira = Fira_Sans({ weight: "400", subsets: ["latin"] });
 
@@ -22,7 +23,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={fira.className} suppressHydrationWarning={true}>
         <CartProvider>
-          <ProductsProvider>{children}</ProductsProvider>
+          <ShopProvider>
+            <ProductsProvider>{children}</ProductsProvider>
+          </ShopProvider>
         </CartProvider>
       </body>
     </html>

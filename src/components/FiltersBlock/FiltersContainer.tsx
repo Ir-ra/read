@@ -1,8 +1,6 @@
 import Image from "next/image";
 import { Dispatch, SetStateAction } from "react";
 
-import { Product } from "@/types/Product";
-
 import up from "../../../public/img/selector_up.svg";
 import { Category } from "./Category";
 import { Filters } from "./Filters";
@@ -12,13 +10,11 @@ export const FiltersContainer = ({
   filterName,
   isOpen,
   onClick,
-  setProducts,
   setCategoryName,
 }: {
   onClick?: () => void;
   isOpen?: boolean;
   filterName?: string;
-  setProducts: Dispatch<SetStateAction<Product[]>>;
   setCategoryName: Dispatch<SetStateAction<string>>;
 }) => {
   return (
@@ -57,11 +53,7 @@ export const FiltersContainer = ({
         <div className="flex flex-col w-full tablet:absolute tablet:left-0 gap-4">
           {isOpen && filterName === "Sort by" && <SortBy isOpen={isOpen} />}
           {isOpen && filterName === "Category" && (
-            <Category
-              isOpen={isOpen}
-              setProducts={setProducts}
-              setCategoryName={setCategoryName}
-            />
+            <Category isOpen={isOpen} setCategoryName={setCategoryName} />
           )}
           {isOpen && filterName === "Filters" && <Filters isOpen={isOpen} />}
         </div>

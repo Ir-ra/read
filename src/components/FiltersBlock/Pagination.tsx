@@ -3,10 +3,10 @@ import React from "react";
 import { DOTS, usePagination } from "../../utils/usePagination";
 
 interface PaginationProps {
-  onPageChange: (pageNumber: number) => void;
+  onPageChange: (pageNumber: string) => void;
   totalCount: number;
   siblingCount?: number;
-  currentPage: number;
+  currentPage: string;
   pageSize: number;
 }
 
@@ -18,25 +18,29 @@ const Pagination: React.FC<PaginationProps> = ({
   pageSize,
 }) => {
   const paginationRange = usePagination({
-    currentPage,
+    currentPage: parseInt(currentPage, 10),
     totalCount,
     siblingCount,
     pageSize,
   });
 
-  if (!paginationRange || currentPage === 0 || paginationRange.length < 2) {
+  if (!paginationRange || +currentPage === 0 || paginationRange.length < 2) {
     return null;
   }
 
   const onNext = () => {
-    if (currentPage !== lastPage) {
-      onPageChange(currentPage + 1);
+    const numericCurrentPage = parseInt(currentPage, 10);
+    if (numericCurrentPage !== lastPage) {
+      const nextPage = (numericCurrentPage + 1).toString();
+      onPageChange(nextPage);
     }
   };
 
   const onPrevious = () => {
-    if (currentPage !== 1) {
-      onPageChange(currentPage - 1);
+    const numericCurrentPage = parseInt(currentPage, 10);
+    if (numericCurrentPage !== 1) {
+      const previousPage = (numericCurrentPage - 1).toString();
+      onPageChange(previousPage);
     }
   };
 
@@ -50,7 +54,7 @@ const Pagination: React.FC<PaginationProps> = ({
       >
         <p
           className={`text-xxs desktop:text-cartL font-light uppercase ${
-            currentPage === 1 ? "text-Grey pointer-events-none" : ""
+            +currentPage === 1 ? "text-Grey pointer-events-none" : ""
           }`}
         >
           Previous
@@ -74,9 +78,11 @@ const Pagination: React.FC<PaginationProps> = ({
             <li
               key={pageNumber}
               className={`flex px-0 py-2 justify-center items-center gap-2 text-xxs desktop:text-cartL font-light cursor-pointer uppercase ${
-                pageNumber === currentPage ? "text-Black" : "text-Grey"
+                pageNumber.toString() === currentPage
+                  ? "text-Black"
+                  : "text-Grey"
               }`}
-              onClick={() => onPageChange(parseInt(String(pageNumber), 10))}
+              onClick={() => onPageChange(String(pageNumber))}
             >
               <span>{pageNumber}</span>
             </li>
@@ -89,7 +95,9 @@ const Pagination: React.FC<PaginationProps> = ({
       >
         <p
           className={`text-xxs desktop:text-cartL font-light uppercase ${
-            currentPage === lastPage ? "text-Grey pointer-events-none" : ""
+            currentPage.toString() === lastPage.toString()
+              ? "text-Grey pointer-events-none"
+              : ""
           }`}
         >
           Next
