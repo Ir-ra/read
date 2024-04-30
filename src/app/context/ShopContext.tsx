@@ -16,6 +16,7 @@ type SearchParams = {
   setSortPrice: (price?: string | undefined) => void;
   setSortNewest: (order?: string | undefined) => void;
   setSortRating: (rating?: string | undefined) => void;
+  setFilterComingSoon: (awaiting?: string | undefined) => void;
 };
 
 export const ShopContext = createContext<SearchParams>({
@@ -30,6 +31,7 @@ export const ShopContext = createContext<SearchParams>({
   setSortPrice: () => {},
   setSortNewest: () => {},
   setSortRating: () => {},
+  setFilterComingSoon: () => {},
 });
 
 type Props = {
@@ -83,6 +85,10 @@ export const ShopProvider: React.FC<Props> = ({ children }) => {
     setQueryParam("rating", rating, ["price", "order"]);
   };
 
+  const setFilterComingSoon = (awaiting?: string | undefined) => {
+    setQueryParam("awaiting", awaiting);
+  };
+
   return (
     <ShopContext.Provider
       value={{
@@ -91,6 +97,7 @@ export const ShopProvider: React.FC<Props> = ({ children }) => {
         setSortPrice,
         setSortNewest,
         setSortRating,
+        setFilterComingSoon,
       }}
     >
       {children}

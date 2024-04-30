@@ -48,10 +48,17 @@ export const getSearchNavBar = (query) => {
   return response;
 };
 
-// поки що пустий масив
-export const getComingSoon = () => {
-  const response = api.get("/api/v1/products_awaitings");
+export const getComingSoon = (page, limit, price, order, rating) => {
+  // const response = api.get("/api/v1/products_awaitings");
+  let queryString = `/api/v1/products_awaitings?page=${page}&order=${
+    order || "asc"
+  }`;
+  if (limit) queryString += `&limit=${limit}`;
+  if (price) queryString += `&price=${price}`;
+  if (rating) queryString += `&rating=${rating}`;
 
+  const response = api.get(queryString);
+  
   console.log("comingSoon", response);
   return response;
 };

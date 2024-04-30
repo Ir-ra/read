@@ -9,7 +9,7 @@ import Pagination from "@/components/FiltersBlock/Pagination";
 import Loader from "@/components/Loader/Loader";
 import ProductList from "@/components/ProductList/ProductList";
 import RecentlyViewed from "@/components/RecentlyViewed/RecentlyViewed";
-import { getProducts, getProductsByCategory } from "@/services/getAPI";
+import { getComingSoon, getProducts, getProductsByCategory } from "@/services/getAPI";
 
 import { Product } from "../../../types/Product";
 import { useLocalStorage } from "../../../utils/useLocalStorage";
@@ -66,6 +66,11 @@ function Shop() {
             order
           );
           setProducts(category.data);
+        } else if (searchParams.has("awaiting")) {
+          const soon = await getComingSoon(page, limit, price, order, rating);
+          console.log("soon.data", soon.data);
+
+          setProducts(soon.data);
         } else {
           const response = await getProducts(page, limit, price, order, rating);
 

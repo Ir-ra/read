@@ -6,11 +6,13 @@ import { useLocalStorage } from "@/utils/useLocalStorage";
 
 import FilterOptions from "./FilterOptions";
 import Range from "./Range";
+import { useShop } from "@/app/context/ShopContext";
 
 export const Filters = ({ isOpen }: { isOpen?: boolean }) => {
   const filterByItems = ["New", "sale", "bestsellers", "coming soon"];
   const filterByFormat = ["Paper", "E-book"];
   const filterByAvailablet = ["available"];
+  const { setFilterComingSoon } = useShop();
 
   const [selectedFilter, setSelectedFilter] = useLocalStorage(
     "selectedFilter",
@@ -35,6 +37,9 @@ export const Filters = ({ isOpen }: { isOpen?: boolean }) => {
     switch (type) {
       case "filter":
         setSelectedFilter(value);
+        if (value === "coming soon") {
+          setFilterComingSoon(value);
+        }
         break;
 
       case "format":
