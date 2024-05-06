@@ -9,7 +9,12 @@ import Pagination from "@/components/FiltersBlock/Pagination";
 import Loader from "@/components/Loader/Loader";
 import ProductList from "@/components/ProductList/ProductList";
 import RecentlyViewed from "@/components/RecentlyViewed/RecentlyViewed";
-import { getComingSoon, getProducts, getProductsByCategory } from "@/services/getAPI";
+import {
+  getBestsellers,
+  getComingSoon,
+  getProducts,
+  getProductsByCategory,
+} from "@/services/getAPI";
 
 import { Product } from "../../../types/Product";
 import { useLocalStorage } from "../../../utils/useLocalStorage";
@@ -55,6 +60,8 @@ function Shop() {
         const price = searchParams.get("price");
         const order = searchParams.get("order");
         const rating = searchParams.get("rating");
+        const filter = searchParams.get("format");
+        const status = searchParams.get("status");
         const page = searchParams.get("page") || "1";
 
         if (searchParams.has("category")) {
@@ -71,8 +78,40 @@ function Shop() {
           console.log("soon.data", soon.data);
 
           setProducts(soon.data);
+        } else if (searchParams.has("bestsellers")) {
+          const bestsellers = await getBestsellers(
+            page,
+            limit,
+            price,
+            order,
+            rating
+          );
+          console.log("bestsellers.data", bestsellers.data);
+
+          setProducts(bestsellers.data);
+        } else if (searchParams.has("filter")) {
+          const products = await getProducts(
+            page,
+            limit,
+            price,
+            order,
+            rating,
+            filter,
+            status
+          );
+          console.log("products status", products.data);
+
+          setProducts(products.data);
         } else {
-          const response = await getProducts(page, limit, price, order, rating);
+          const response = await getProducts(
+            page,
+            limit,
+            price,
+            order,
+            rating,
+            filter,
+            status
+          );
 
           if (response) {
             setProducts(response.data);

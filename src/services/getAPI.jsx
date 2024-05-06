@@ -20,11 +20,21 @@ export const getAllCategories = () => {
   return response;
 };
 
-export const getProducts = async (page, limit, price, order, rating) => {
+export const getProducts = async (
+  page,
+  limit,
+  price,
+  order,
+  rating,
+  filter,
+  status
+) => {
   let queryString = `/api/v1/products?page=${page}&order=${order || "asc"}`;
   if (limit) queryString += `&limit=${limit}`;
   if (price) queryString += `&price=${price}`;
   if (rating) queryString += `&rating=${rating}`;
+  if (filter) queryString += `&filter=${filter}`;
+  if (status) queryString += `&status=${status}`;
 
   const response = await api.get(queryString);
 
@@ -35,8 +45,6 @@ export const getProducts = async (page, limit, price, order, rating) => {
 
 export const getProduct = (id) => {
   const response = api.get(`/api/v1/products/${id}`);
-
-  // console.log("prod", response);
 
   return response;
 };
@@ -49,7 +57,6 @@ export const getSearchNavBar = (query) => {
 };
 
 export const getComingSoon = (page, limit, price, order, rating) => {
-  // const response = api.get("/api/v1/products_awaitings");
   let queryString = `/api/v1/products_awaitings?page=${page}&order=${
     order || "asc"
   }`;
@@ -58,7 +65,7 @@ export const getComingSoon = (page, limit, price, order, rating) => {
   if (rating) queryString += `&rating=${rating}`;
 
   const response = api.get(queryString);
-  
+
   console.log("comingSoon", response);
   return response;
 };
@@ -73,6 +80,20 @@ export const getProductsByCategory = (id, page, limit, price, order) => {
   const response = api.get(queryString);
 
   console.log("ProductsByCategory", queryString);
+  return response;
+};
+
+export const getBestsellers = (page, limit, price, order, rating) => {
+  let queryString = `/api/v1/products_bestsellers?page=${page}&order=${
+    order || "asc"
+  }`;
+  if (limit) queryString += `&limit=${limit}`;
+  if (price) queryString += `&price=${price}`;
+  if (rating) queryString += `&rating=${rating}`;
+
+  const response = api.get(queryString);
+
+  console.log("bestsell", queryString);
   return response;
 };
 

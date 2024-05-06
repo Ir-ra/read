@@ -17,6 +17,9 @@ type SearchParams = {
   setSortNewest: (order?: string | undefined) => void;
   setSortRating: (rating?: string | undefined) => void;
   setFilterComingSoon: (awaiting?: string | undefined) => void;
+  setFilterBestsellers: (bestsellers?: string | undefined) => void;
+  setFormat: (format?: string | undefined) => void;
+  setStatus: (format?: string | undefined) => void;
 };
 
 export const ShopContext = createContext<SearchParams>({
@@ -32,6 +35,9 @@ export const ShopContext = createContext<SearchParams>({
   setSortNewest: () => {},
   setSortRating: () => {},
   setFilterComingSoon: () => {},
+  setFilterBestsellers: () => {},
+  setFormat: () => {},
+  setStatus: () => {},
 });
 
 type Props = {
@@ -86,7 +92,19 @@ export const ShopProvider: React.FC<Props> = ({ children }) => {
   };
 
   const setFilterComingSoon = (awaiting?: string | undefined) => {
-    setQueryParam("awaiting", awaiting);
+    setQueryParam("awaiting", awaiting, ["bestsellers", "status"]);
+  };
+
+  const setFilterBestsellers = (bestsellers?: string | undefined) => {
+    setQueryParam("bestsellers", bestsellers, ["awaiting", "status"]);
+  };
+
+  const setFormat = (format?: string | undefined) => {
+    setQueryParam("filter", "format=" + format);
+  };
+
+  const setStatus = (status?: string | undefined) => {
+    setQueryParam("status", status, ["awaiting", "bestsellers"]);
   };
 
   return (
@@ -98,6 +116,9 @@ export const ShopProvider: React.FC<Props> = ({ children }) => {
         setSortNewest,
         setSortRating,
         setFilterComingSoon,
+        setFilterBestsellers,
+        setFormat,
+        setStatus,
       }}
     >
       {children}

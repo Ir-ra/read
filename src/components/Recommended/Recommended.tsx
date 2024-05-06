@@ -6,6 +6,8 @@ import Title from "../Title/Title";
 
 export default function Recommended() {
   const { products } = useProducts();
+  console.log("products",products);
+
   const getSuggestedProducts = (prods: Product[]) => {
     const suggested = prods
       .sort(() => Math.random() - Math.random())
