@@ -20,6 +20,8 @@ type SearchParams = {
   setFilterBestsellers: (bestsellers?: string | undefined) => void;
   setFormat: (format?: string | undefined) => void;
   setStatus: (format?: string | undefined) => void;
+  setPriceStart: (format?: string | undefined) => void;
+  setPriceEnd: (format?: string | undefined) => void;
 };
 
 export const ShopContext = createContext<SearchParams>({
@@ -38,6 +40,8 @@ export const ShopContext = createContext<SearchParams>({
   setFilterBestsellers: () => {},
   setFormat: () => {},
   setStatus: () => {},
+  setPriceStart: () => {},
+  setPriceEnd: () => {},
 });
 
 type Props = {
@@ -107,6 +111,14 @@ export const ShopProvider: React.FC<Props> = ({ children }) => {
     setQueryParam("status", status, ["awaiting", "bestsellers"]);
   };
 
+  const setPriceStart = (price_start?: string | undefined) => {
+    setQueryParam("price_start", price_start);
+  };
+
+  const setPriceEnd = (price_end?: string | undefined) => {
+    setQueryParam("price_end", price_end);
+  };
+
   return (
     <ShopContext.Provider
       value={{
@@ -119,6 +131,8 @@ export const ShopProvider: React.FC<Props> = ({ children }) => {
         setFilterBestsellers,
         setFormat,
         setStatus,
+        setPriceStart,
+        setPriceEnd,
       }}
     >
       {children}

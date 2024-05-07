@@ -12,8 +12,14 @@ export const Filters = ({ isOpen }: { isOpen?: boolean }) => {
   const filterByItems = ["new", "sales", "bestsellers", "coming soon"];
   const filterByFormat = ["paper", "e-book"];
   const filterByAvailablet = ["available"];
-  const { setFilterComingSoon, setFilterBestsellers, setFormat, setStatus } =
-    useShop();
+  const {
+    setFilterComingSoon,
+    setFilterBestsellers,
+    setFormat,
+    setStatus,
+    setPriceStart,
+    setPriceEnd,
+  } = useShop();
 
   const [selectedFilter, setSelectedFilter] = useLocalStorage(
     "selectedFilter",
@@ -60,13 +66,18 @@ export const Filters = ({ isOpen }: { isOpen?: boolean }) => {
 
       case "minPrice":
         if (numericValue <= maxPrice) {
+          console.log("numericValue", numericValue);
+          console.log("minPrice", minPrice);
+          console.log("value", value);
           setMinPrice(numericValue);
+          setPriceStart(value);
         }
         break;
 
       case "maxPrice":
         if (numericValue >= minPrice) {
           setMaxPrice(numericValue);
+          setPriceEnd(value);
         }
         break;
 

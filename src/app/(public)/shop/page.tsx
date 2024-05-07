@@ -62,6 +62,8 @@ function Shop() {
         const rating = searchParams.get("rating");
         const filter = searchParams.get("format");
         const status = searchParams.get("status");
+        const price_start = searchParams.get("price_start");
+        const price_end = searchParams.get("price_end");
         const page = searchParams.get("page") || "1";
 
         if (searchParams.has("category")) {
@@ -70,7 +72,8 @@ function Shop() {
             page,
             limit,
             price,
-            order
+            order,
+            status
           );
           setProducts(category.data);
         } else if (searchParams.has("awaiting")) {
@@ -97,7 +100,24 @@ function Shop() {
             order,
             rating,
             filter,
-            status
+            status,
+            price_start,
+            price_end
+          );
+          console.log("products status", products.data);
+
+          setProducts(products.data);
+        } else if (searchParams.has("price_start")) {
+          const products = await getProducts(
+            page,
+            limit,
+            price,
+            order,
+            rating,
+            filter,
+            status,
+            price_start,
+            price_end
           );
           console.log("products status", products.data);
 
@@ -110,7 +130,9 @@ function Shop() {
             order,
             rating,
             filter,
-            status
+            status,
+            price_start,
+            price_end
           );
 
           if (response) {
