@@ -3,6 +3,8 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Fira_Sans } from "next/font/google";
 
+import ReduxProvider from "@/redux/redux-provider";
+
 import CartProvider from "./context/CartContext";
 import { ProductsProvider } from "./context/ProductsContext";
 
@@ -21,9 +23,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={fira.className} suppressHydrationWarning={true}>
-        <CartProvider>
-          <ProductsProvider>{children}</ProductsProvider>
-        </CartProvider>
+        <ReduxProvider>
+          {" "}
+          <CartProvider>
+            <ProductsProvider>{children}</ProductsProvider>
+          </CartProvider>
+        </ReduxProvider>
       </body>
     </html>
   );
