@@ -22,6 +22,7 @@ type SearchParams = {
   setStatus: (format?: string | undefined) => void;
   setPriceStart: (format?: string | undefined) => void;
   setPriceEnd: (format?: string | undefined) => void;
+  resetFilters: () => void;
 };
 
 export const ShopContext = createContext<SearchParams>({
@@ -42,6 +43,7 @@ export const ShopContext = createContext<SearchParams>({
   setStatus: () => {},
   setPriceStart: () => {},
   setPriceEnd: () => {},
+  resetFilters: () => {},
 });
 
 type Props = {
@@ -119,6 +121,18 @@ export const ShopProvider: React.FC<Props> = ({ children }) => {
     setQueryParam("price_end", price_end);
   };
 
+  const resetFilters = () => {
+    const paramsToDelete = [
+      "format",
+      "status",
+      "price_start",
+      "price_end",
+      "bestsellers",
+      "awaiting",
+    ];
+    setQueryParam("", undefined, paramsToDelete);
+  };
+
   return (
     <ShopContext.Provider
       value={{
@@ -133,6 +147,7 @@ export const ShopProvider: React.FC<Props> = ({ children }) => {
         setStatus,
         setPriceStart,
         setPriceEnd,
+        resetFilters,
       }}
     >
       {children}

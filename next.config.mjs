@@ -8,7 +8,7 @@ const nextConfig = {
     return [
       {
         // співставлення всіх API-маршрутів
-        source: "/api/:path*",
+        source: "/api/:shop",
         headers: [
           { key: "Access-Control-Allow-Credentials", value: "true" },
           { key: "Access-Control-Allow-Origin", value: "*" }, // замініть це на список довірених доменів, з яких можна зробити запити

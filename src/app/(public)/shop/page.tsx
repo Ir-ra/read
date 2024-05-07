@@ -107,21 +107,6 @@ function Shop() {
           console.log("products status", products.data);
 
           setProducts(products.data);
-        } else if (searchParams.has("price_start")) {
-          const products = await getProducts(
-            page,
-            limit,
-            price,
-            order,
-            rating,
-            filter,
-            status,
-            price_start,
-            price_end
-          );
-          console.log("products status", products.data);
-
-          setProducts(products.data);
         } else {
           const response = await getProducts(
             page,
@@ -137,6 +122,7 @@ function Shop() {
 
           if (response) {
             setProducts(response.data);
+            console.log("heders", response.headers);
           }
         }
       } catch (error) {
