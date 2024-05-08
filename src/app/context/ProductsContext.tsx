@@ -8,7 +8,7 @@ import {
   useState,
 } from "react";
 
-import { getProducts } from "@/services/getAPI";
+import { getAllProducts } from "@/services/getAPI";
 
 import { Product } from "../../types/Product";
 
@@ -36,7 +36,7 @@ export const ProductsProvider: React.FC<Props> = ({ children }) => {
 
     async function fetchProducts() {
       try {
-        const response = await getProducts();
+        const response = await getAllProducts();
         if (response) {
           setProducts(response.data);
         }

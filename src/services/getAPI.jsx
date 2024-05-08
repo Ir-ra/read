@@ -20,6 +20,13 @@ export const getAllCategories = () => {
   return response;
 };
 
+export const getAllProducts = () => {
+  const response = api.get("/api/v1/products");
+
+  console.log(response);
+  return response;
+};
+
 export const getProducts = async (
   page,
   limit,
@@ -59,6 +66,11 @@ export const getSearchNavBar = (query) => {
   const response = api.get(`/api/v1/search?query=${query}`);
 
   console.log("prod", response);
+  return response;
+};
+
+export const getBestSells = () => {
+  const response = api.get(`/api/v1/products_bestsellers`);
   return response;
 };
 
