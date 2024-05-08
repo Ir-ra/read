@@ -96,6 +96,18 @@ input[type="range"]::-webkit-slider-runnable-track {
   .auth::placeholder {
     @apply text-xxxs font-light uppercase;
   }
+
+  .text {
+    @apply text-xxxs font-light uppercase;
+  }
+
+  .errText {
+    @apply text-supperSmall text-AccentRed uppercase font-light;
+  }
+
+  .bgImg {
+    @apply h-[148px] tablet:h-[260px] desktop:h-[980px] desktop:min-w-[700px] w-full mb-20 desktop:mb-0;
+  }
 }
 
 .small-caps {
@@ -139,4 +151,30 @@ input[type="range"]::-webkit-slider-runnable-track {
 
 body {
   background-color: #f8f7f3;
+}
+
+.checkbox {
+  width: 16px;
+  height: 16px;
+  border: 1px solid #bfbfbf;
+  background-color: transparent;
+  position: relative;
+  cursor: pointer;
+  appearance: none;
+}
+
+.checkbox::before {
+  content: "✓";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+  color: #1c1c1c;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.checkbox.checked::before {
+  opacity: 1;
 }

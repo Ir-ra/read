@@ -119,7 +119,7 @@ export const getCategoryById = (id) => {
   return response;
 };
 
-export const createUser = async (user) => {
+export const createUser = async (user, setError) => {
   try {
     const response = await api.post("/api/v1/users/", user);
     if (response.data.token) {
@@ -127,11 +127,16 @@ export const createUser = async (user) => {
     }
     return response;
   } catch (error) {
-    console.log(error);
+    const emailError = "User already exists";
+    if (error.response.data.errors === emailError) {
+      setError("User already exists");
+    } else {
+      setError("The server is not responding. Please try again later.");
+    }
   }
 };
 
-export const singIn = async (user) => {
+export const signIn = async (user, setError) => {
   try {
     const response = await api.post("/api/v1/login", user);
     if (response.data.token) {
@@ -139,7 +144,7 @@ export const singIn = async (user) => {
     }
     return response;
   } catch (error) {
-    console.log(error);
+    return setError(error.response.data.erros);
   }
 };
 
@@ -147,4 +152,15 @@ export const getReviewById = (id) => {
   const response = api.get(`/api/v1/products/${id}/reviews`);
 
   return response;
+};
+
+export const resetPassword = (user, setError) => {
+  try {
+    const response = api.post("/api/v1/password_reset", user);
+    if (response.data) {
+      return response;
+    }
+  } catch (error) {
+    setError(error.response.data.errors);
+  }
 };
