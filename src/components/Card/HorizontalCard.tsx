@@ -18,7 +18,6 @@ type HorizontalCardType = {
   pathname?: string;
   cartItem?: CartItem;
 };
-console.log("rerender HorizontalCard");
 
 export const HorizontalCard = ({
   book,

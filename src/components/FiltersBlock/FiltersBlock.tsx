@@ -9,11 +9,13 @@ type FiltersBlockType = {
     setOpen: Dispatch<SetStateAction<boolean>>;
   }[];
   onFilterClick: (filterName: string) => void;
+  setCategoryName: Dispatch<SetStateAction<string>>;
 };
 
 export default function FiltersBlock({
   filters,
   onFilterClick,
+  setCategoryName,
 }: FiltersBlockType) {
   return (
     <div
@@ -26,6 +28,7 @@ export default function FiltersBlock({
           key={el.filterName}
           onClick={() => onFilterClick(el.filterName)}
           isOpen={el.isOpen}
+          setCategoryName={setCategoryName}
         />
       ))}
     </div>

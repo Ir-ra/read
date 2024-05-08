@@ -1,34 +1,22 @@
 "use client";
-import React, { useContext, useState } from "react";
+import React from "react";
 
-import { CartContext } from "@/app/context/CartContext";
-import { useProducts } from "@/app/context/ProductsContext";
+import { Product } from "@/types/Product";
+import useAddToCart from "@/utils/useAddToCart";
 
 import { Button } from "./Button";
 
 type Props = {
-  prodId: string;
+  id: string;
+  product: Product;
 };
 
-export default function AddToCart({ prodId }: Props) {
-  const { addToCart, checkAdded } = useContext(CartContext);
-  const { products } = useProducts();
-  const [isButtonSelected, setIsButtonSelected] = useState(checkAdded(prodId));
-
-  const handleAddToCart = () => {
-    const product = products.find((p) => p.id === prodId);
-
-    if (product) {
-      addToCart({
-        id: prodId,
-        product,
-        quantity: 1,
-        price: product.price,
-      });
-
-      setIsButtonSelected(true);
-    }
-  };
+export default function AddToCart({ id, product }: Props) {
+  const { handleAddToCart, isButtonSelected } = useAddToCart({
+    id,
+    product,
+    price: product.price,
+  });
 
   return (
     <>

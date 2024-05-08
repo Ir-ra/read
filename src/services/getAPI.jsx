@@ -1,9 +1,6 @@
 import axios from "axios";
 
-// import { useSearchParams } from 'next/navigation';
-
 const URL = "https://book-store-api-tc-5855f695cf77.herokuapp.com";
-// const query = useSearchParams()
 
 export const api = axios.create({
   baseURL: URL,
@@ -23,18 +20,37 @@ export const getAllCategories = () => {
   return response;
 };
 
-export const getProducts = () => {
-  const response = api.get("/api/v1/products");
+export const getProducts = async (
+  page,
+  limit,
+  price,
+  order,
+  rating,
+  filter,
+  status,
+  price_start,
+  price_end
+) => {
+  let queryString = `/api/v1/products?page=${page}&order=${
+    order || "asc"
+  }&price_start=${price_start || "0"}&price_end=${price_end || "100"}`;
+  if (limit) queryString += `&limit=${limit}`;
+  if (price) queryString += `&price=${price}`;
+  if (rating) queryString += `&rating=${rating}`;
+  if (filter) queryString += `&filter=${filter}`;
+  if (status) queryString += `&status=${status}`;
+  if (price_start) queryString += `&price_start=${price_start}`;
+  if (price_end) queryString += `&price_end=${price_end}`;
 
-  // console.log("prods", response);
+  const response = await api.get(queryString);
+
+  console.log("getProducts", queryString);
 
   return response;
 };
 
 export const getProduct = (id) => {
   const response = api.get(`/api/v1/products/${id}`);
-
-  // console.log("prod", response);
 
   return response;
 };
@@ -46,25 +62,60 @@ export const getSearchNavBar = (query) => {
   return response;
 };
 
-// поки що пустий масив
-export const getComingSoon = () => {
-  const response = api.get("/api/v1/products_awaitings");
+export const getComingSoon = (page, limit, price, order, rating) => {
+  let queryString = `/api/v1/products_awaitings?page=${page}&order=${
+    order || "asc"
+  }`;
+  if (limit) queryString += `&limit=${limit}`;
+  if (price) queryString += `&price=${price}`;
+  if (rating) queryString += `&rating=${rating}`;
+
+  const response = api.get(queryString);
 
   console.log("comingSoon", response);
   return response;
 };
 
-export const getProductsByCategory = (id) => {
-  const response = api.get(`/api/v1/categories/${id}/products`);
+export const getProductsByCategory = (
+  id,
+  page,
+  limit,
+  price,
+  order,
+  status
+) => {
+  let queryString = `/api/v1/categories/${id}/products?page=${page}&order=${
+    order || "asc"
+  }`;
+  if (limit) queryString += `&limit=${limit}`;
+  if (price) queryString += `&price=${price}`;
+  if (order) queryString += `&order=${order}`;
+  if (status) queryString += `&status=${status}`;
 
-  console.log("ProductsByCategory", response);
+  const response = api.get(queryString);
+
+  console.log("ProductsByCategory", queryString);
+  return response;
+};
+
+export const getBestsellers = (page, limit, price, order, rating) => {
+  let queryString = `/api/v1/products_bestsellers?page=${page}&order=${
+    order || "asc"
+  }`;
+  if (limit) queryString += `&limit=${limit}`;
+  if (price) queryString += `&price=${price}`;
+  if (rating) queryString += `&rating=${rating}`;
+
+  const response = api.get(queryString);
+
+  console.log("bestsell", queryString);
   return response;
 };
 
 export const getCategoryById = (id) => {
   const response = api.get(`/api/v1/categories/${id}`);
 
-  console.log("CategoryById", response);
+  console.log("CategoryById", response.data);
   return response;
 };
 
