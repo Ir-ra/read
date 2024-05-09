@@ -1,13 +1,13 @@
 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g clip-path="url(#clip0_726_6157)">
-<path d="M8 1.33331V3.99998" stroke="#FDAC42" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M8 12V14.6667" stroke="#FDAC42" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M3.28711 3.28668L5.17378 5.17335" stroke="#FDAC42" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M10.8271 10.8267L12.7138 12.7133" stroke="#FDAC42" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M1.33301 8H3.99967" stroke="#FDAC42" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M12 8H14.6667" stroke="#FDAC42" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M3.28711 12.7133L5.17378 10.8267" stroke="#FDAC42" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M10.8271 5.17335L12.7138 3.28668" stroke="#FDAC42" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M8 1.33331V3.99998" stroke="#FDAC42" stroke-width="2" strokeLinecap="round" stroke-linejoin="round"/>
+<path d="M8 12V14.6667" stroke="#FDAC42" stroke-width="2" strokeLinecap="round" stroke-linejoin="round"/>
+<path d="M3.28711 3.28668L5.17378 5.17335" stroke="#FDAC42" stroke-width="2" strokeLinecap="round" stroke-linejoin="round"/>
+<path d="M10.8271 10.8267L12.7138 12.7133" stroke="#FDAC42" stroke-width="2" strokeLinecap="round" stroke-linejoin="round"/>
+<path d="M1.33301 8H3.99967" stroke="#FDAC42" stroke-width="2" strokeLinecap="round" stroke-linejoin="round"/>
+<path d="M12 8H14.6667" stroke="#FDAC42" stroke-width="2" strokeLinecap="round" stroke-linejoin="round"/>
+<path d="M3.28711 12.7133L5.17378 10.8267" stroke="#FDAC42" stroke-width="2" strokeLinecap="round" stroke-linejoin="round"/>
+<path d="M10.8271 5.17335L12.7138 3.28668" stroke="#FDAC42" stroke-width="2" strokeLinecap="round" stroke-linejoin="round"/>
 </g>
 <defs>
 <clipPath id="clip0_726_6157">
