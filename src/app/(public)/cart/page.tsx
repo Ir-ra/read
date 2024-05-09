@@ -1,7 +1,6 @@
 import { Breadcrumbs } from "@/components/Breadcrumbs/Breadcrumbs";
 import { CartItem } from "@/components/CartItem/CartItem";
 import CartOrder from "@/components/CartOrder/CartOrder";
-import { Subscribe } from "@/components/Subscribe/Subscribe";
 
 function Cart() {
   return (
@@ -14,7 +13,7 @@ function Cart() {
           </h1>
         </div>
 
-        <div className="flex flex-col gap-10 desktop:flex-row">
+        <div className="flex flex-col gap-10 desktop:flex-row desktop:justify-center">
           <CartItem />
 
           <CartOrder />

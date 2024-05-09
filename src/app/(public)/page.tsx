@@ -17,7 +17,6 @@ export default function Home() {
   );
   const [bestsellers, setBestsellers] = useState<Product[]>([]);
   const { products } = useProducts();
-  console.log("products", products);
 
   useEffect(() => {
     const fetchBestSells = async () => {

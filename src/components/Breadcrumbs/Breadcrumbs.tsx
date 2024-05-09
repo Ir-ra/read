@@ -15,11 +15,13 @@ export const Breadcrumbs = ({
   categoryName?: string;
   bookName?: string;
   id?: number;
-  setCategoryName: Dispatch<SetStateAction<string>>;
+  setCategoryName?: Dispatch<SetStateAction<string>>;
 }) => {
   const [, setSelectedCategory] = useLocalStorage("selectedCategory", "");
   const handleClick = () => {
-    setCategoryName("");
+    if (setCategoryName) {
+      setCategoryName("");
+    }
     setSelectedCategory("");
   };
 
