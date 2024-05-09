@@ -56,7 +56,7 @@ export const VerticalCard = ({
             <div
               className={`relative ${
                 pathname.slice(1) === "shop"
-                  ? "min-w-[130px] tablet:w-full"
+                  ? "min-w-[70px] tablet:w-full"
                   : "w-[142px]"
               } h-[212px] tablet:w-[149px] tablet:h-[220px] mx-auto`}
             >
@@ -74,10 +74,10 @@ export const VerticalCard = ({
         </Link>
         <div className="flex flex-col items-center gap-1 flex-1">
           <div className="flex flex-col items-start gap-1 w-full">
-            <p className="text-xxxs tablet:text- xxs font-light uppercase">
+            <p className="text-xxxs tablet:text-xxs font-light uppercase h-8">
               {fields ? author : "book author"}
             </p>
-            <p className="text-xs tablet:text-cartL uppercase font-normal h-12 target:h-[60px]">
+            <p className="text-xs tablet:text-cartL uppercase font-normal h-12 target:h-[60px] overflow-hidden">
               {name || "book name"}
             </p>
           </div>
