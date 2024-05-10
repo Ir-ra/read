@@ -74,7 +74,7 @@ export const ShopProvider: React.FC<Props> = ({ children }) => {
       params.set(key, value);
     }
 
-    if (key === "category" || "rating" || "price") {
+    if (key === "category" || key === "rating" || key === "price") {
       params.set("page", "1");
     }
     router.push(pathname + "?" + params.toString());
