@@ -19,11 +19,12 @@ type SearchParams = {
   setFilterComingSoon: (awaiting?: string | undefined) => void;
   setFilterBestsellers: (bestsellers?: string | undefined) => void;
   setFormat: (format?: string | undefined) => void;
-  setStatus: (format?: string | undefined) => void;
-  setPriceStart: (format?: string | undefined) => void;
-  setPriceEnd: (format?: string | undefined) => void;
+  setStatus: (status?: string | undefined) => void;
+  setPriceStart: (price_start?: string | undefined) => void;
+  setPriceEnd: (price_end?: string | undefined) => void;
   resetFilters: () => void;
   setNew: (order?: string | undefined) => void;
+  setSearchNav: (query?: string | undefined) => void;
 };
 
 export const ShopContext = createContext<SearchParams>({
@@ -46,6 +47,7 @@ export const ShopContext = createContext<SearchParams>({
   setPriceEnd: () => {},
   resetFilters: () => {},
   setNew: () => {},
+  setSearchNav: () => {},
 });
 
 type Props = {
@@ -130,6 +132,9 @@ export const ShopProvider: React.FC<Props> = ({ children }) => {
     setQueryParam("price_end", price_end);
   };
 
+  const setSearchNav = (query?: string | undefined) => {
+    setQueryParam("query", query);
+  };
   const resetFilters = () => {
     const paramsToDelete = [
       "format",
@@ -160,6 +165,7 @@ export const ShopProvider: React.FC<Props> = ({ children }) => {
         setPriceEnd,
         resetFilters,
         setNew,
+        setSearchNav,
       }}
     >
       {children}

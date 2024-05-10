@@ -1,8 +1,12 @@
+"use client";
+
 import Box from "@mui/material/Box";
 import InputBase from "@mui/material/InputBase";
 import { alpha, styled } from "@mui/material/styles";
 import Image from "next/image";
 import React, { useState } from "react";
+
+import { useShop } from "@/app/context/ShopContext";
 
 import Search_icon from "../../../../public/img/search.svg";
 import Search_cross from "../../../../public/img/search_cross.svg";
@@ -43,11 +47,14 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export const SearchAppBar = () => {
   const [isSearching, setIsSearching] = useState(false);
   const [inputValue, setInputValue] = useState("");
+  const { setSearchNav } = useShop();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setInputValue(value);
     setIsSearching(value !== "");
+    console.log("nav", value);
+    setSearchNav(value);
   };
 
   const handleClearInput = () => {

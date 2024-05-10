@@ -14,6 +14,7 @@ import {
   getComingSoon,
   getProducts,
   getProductsByCategory,
+  getSearchNavBar,
 } from "@/services/getAPI";
 
 import { Product } from "../../../types/Product";
@@ -65,6 +66,7 @@ function Shop() {
         const status = searchParams.get("status");
         const price_start = searchParams.get("price_start");
         const price_end = searchParams.get("price_end");
+        const query = searchParams.get("query");
         const page = searchParams.get("page") || "1";
 
         if (searchParams.has("category")) {
@@ -106,6 +108,12 @@ function Shop() {
             price_end
           );
           console.log("bestsellers.data", bestsellers.data);
+
+          setProducts(bestsellers.data);
+          setTotalCount(bestsellers.headers["total-count"]);
+        } else if (searchParams.has("query")) {
+          const bestsellers = await getSearchNavBar(query, limit, price, order);
+          console.log("query.data", bestsellers.data);
 
           setProducts(bestsellers.data);
           setTotalCount(bestsellers.headers["total-count"]);

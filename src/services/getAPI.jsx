@@ -62,10 +62,13 @@ export const getProduct = (id) => {
   return response;
 };
 
-export const getSearchNavBar = (query) => {
-  const response = api.get(`/api/v1/search?query=${query}`);
+export const getSearchNavBar = (query, limit, order, price) => {
+  let queryString = `/api/v1/search?query=${query}`;
+  if (limit) queryString += `&limit=${limit}`;
+  if (order) queryString += `&order=${order}`;
+  if (price) queryString += `&price=${price}`;
+  const response = api.get(queryString);
 
-  console.log("prod", response);
   return response;
 };
 
