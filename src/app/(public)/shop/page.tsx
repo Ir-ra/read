@@ -26,6 +26,7 @@ function Shop() {
   const [isOpenCategory, setIsOpenCategory] = useState(false);
   const [isOpenSort, setIsOpenSort] = useState(false);
   const [isOpenFilter, setIsOpenFilter] = useState(false);
+  const [totalCount, setTotalCount] = useState("");
   const [recentlyViewed, setRecentlyViewed] = useLocalStorage(
     "recentlyViewed",
     []
@@ -76,11 +77,13 @@ function Shop() {
             status
           );
           setProducts(category.data);
+          setTotalCount(category.headers["total-count"]);
         } else if (searchParams.has("awaiting")) {
           const soon = await getComingSoon(page, limit, price, order, rating);
           console.log("soon.data", soon.data);
 
           setProducts(soon.data);
+          setTotalCount(soon.headers["total-count"]);
         } else if (searchParams.has("bestsellers")) {
           const bestsellers = await getBestsellers(
             page,
@@ -92,21 +95,7 @@ function Shop() {
           console.log("bestsellers.data", bestsellers.data);
 
           setProducts(bestsellers.data);
-        } else if (searchParams.has("filter")) {
-          const products = await getProducts(
-            page,
-            limit,
-            price,
-            order,
-            rating,
-            filter,
-            status,
-            price_start,
-            price_end
-          );
-          console.log("products status", products.data);
-
-          setProducts(products.data);
+          setTotalCount(bestsellers.headers["total-count"]);
         } else {
           const response = await getProducts(
             page,
@@ -122,7 +111,9 @@ function Shop() {
 
           if (response) {
             setProducts(response.data);
-            console.log("heders", response.headers);
+            const headers = response.headers;
+            setTotalCount(headers["total-count"]);
+            console.log("headers", headers);
           }
         }
       } catch (error) {
@@ -198,8 +189,7 @@ function Shop() {
 
             <Pagination
               currentPage={page}
-              // totalCount={products.length}
-              totalCount={26}
+              totalCount={+totalCount}
               pageSize={limit}
               onPageChange={(p) => handleCurrentPage(p)}
             />
