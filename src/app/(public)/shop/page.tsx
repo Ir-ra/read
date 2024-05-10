@@ -81,7 +81,16 @@ function Shop() {
           setProducts(category.data);
           setTotalCount(category.headers["total-count"]);
         } else if (searchParams.has("awaiting")) {
-          const soon = await getComingSoon(page, limit, price, order, rating);
+          const soon = await getComingSoon(
+            page,
+            limit,
+            price,
+            order,
+            rating,
+            status,
+            price_start,
+            price_end
+          );
           console.log("soon.data", soon.data);
 
           setProducts(soon.data);
@@ -92,7 +101,9 @@ function Shop() {
             limit,
             price,
             order,
-            rating
+            rating,
+            price_start,
+            price_end
           );
           console.log("bestsellers.data", bestsellers.data);
 

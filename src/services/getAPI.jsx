@@ -74,13 +74,25 @@ export const getBestSells = () => {
   return response;
 };
 
-export const getComingSoon = (page, limit, price, order, rating) => {
+export const getComingSoon = (
+  page,
+  limit,
+  price,
+  order,
+  rating,
+  status,
+  price_start,
+  price_end
+) => {
   let queryString = `/api/v1/products_awaitings?page=${page}&order=${
     order || "asc"
-  }`;
+  }&price_start=${price_start || "0"}&price_end=${price_end || "100"}`;
   if (limit) queryString += `&limit=${limit}`;
   if (price) queryString += `&price=${price}`;
   if (rating) queryString += `&rating=${rating}`;
+  if (status) queryString += `&status=${status}`;
+  if (price_start) queryString += `&price_start=${price_start}`;
+  if (price_end) queryString += `&price_end=${price_end}`;
 
   const response = api.get(queryString);
 
@@ -114,13 +126,23 @@ export const getProductsByCategory = (
   return response;
 };
 
-export const getBestsellers = (page, limit, price, order, rating) => {
+export const getBestsellers = (
+  page,
+  limit,
+  price,
+  order,
+  rating,
+  price_start,
+  price_end
+) => {
   let queryString = `/api/v1/products_bestsellers?page=${page}&order=${
     order || "asc"
-  }`;
+  }&price_start=${price_start || "0"}&price_end=${price_end || "100"}`;
   if (limit) queryString += `&limit=${limit}`;
   if (price) queryString += `&price=${price}`;
   if (rating) queryString += `&rating=${rating}`;
+  if (price_start) queryString += `&price_start=${price_start}`;
+  if (price_end) queryString += `&price_end=${price_end}`;
 
   const response = api.get(queryString);
 
