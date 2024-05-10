@@ -132,6 +132,8 @@ export const ShopProvider: React.FC<Props> = ({ children }) => {
       "price_end",
       "bestsellers",
       "awaiting",
+      "price_start",
+      "price_end",
     ];
     setQueryParam("", undefined, paramsToDelete);
   };

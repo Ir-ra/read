@@ -74,7 +74,9 @@ function Shop() {
             limit,
             price,
             order,
-            status
+            status,
+            price_start,
+            price_end
           );
           setProducts(category.data);
           setTotalCount(category.headers["total-count"]);
