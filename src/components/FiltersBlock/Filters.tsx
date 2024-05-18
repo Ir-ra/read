@@ -5,10 +5,9 @@ import { ChangeEvent } from "react";
 import { useShop } from "@/app/context/ShopContext";
 import { useLocalStorage } from "@/utils/useLocalStorage";
 
+import { SearchByAuthor } from "../SearchByAuthor/SearchByAuthor";
 import FilterOptions from "./FilterOptions";
 import Range from "./Range";
-import { SearchAppBar } from "../NavBar/Search/SearchBar";
-import { SearchByAuthor } from "../SearchByAuthor/SearchByAuthor";
 
 export const Filters = ({ isOpen }: { isOpen?: boolean }) => {
   const filterByItems = ["new", "sales", "bestsellers", "coming soon"];
