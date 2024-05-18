@@ -7,6 +7,8 @@ import { useLocalStorage } from "@/utils/useLocalStorage";
 
 import FilterOptions from "./FilterOptions";
 import Range from "./Range";
+import { SearchAppBar } from "../NavBar/Search/SearchBar";
+import { SearchByAuthor } from "../SearchByAuthor/SearchByAuthor";
 
 export const Filters = ({ isOpen }: { isOpen?: boolean }) => {
   const filterByItems = ["new", "sales", "bestsellers", "coming soon"];
@@ -145,6 +147,11 @@ export const Filters = ({ isOpen }: { isOpen?: boolean }) => {
                   type={"available"}
                 />
               ))}
+            </div>
+
+            <div className="flex flex-col gap-2 w-full">
+              <h3 className="text-xxxs font-bold uppercase">Author</h3>
+              <SearchByAuthor />
             </div>
 
             <div className="flex flex-col gap-2 w-full">

@@ -6,7 +6,6 @@ import { useShop } from "@/app/context/ShopContext";
 import { Breadcrumbs } from "@/components/Breadcrumbs/Breadcrumbs";
 import FiltersBlock from "@/components/FiltersBlock/FiltersBlock";
 import Pagination from "@/components/FiltersBlock/Pagination";
-import Loader from "@/components/Loader/Loader";
 import ProductList from "@/components/ProductList/ProductList";
 import RecentlyViewed from "@/components/RecentlyViewed/RecentlyViewed";
 import {
@@ -67,6 +66,7 @@ function Shop() {
         const price_start = searchParams.get("price_start");
         const price_end = searchParams.get("price_end");
         const query = searchParams.get("query");
+        const author_name = searchParams.get("author_name");
         const page = searchParams.get("page") || "1";
 
         if (searchParams.has("category")) {
@@ -112,11 +112,16 @@ function Shop() {
           setProducts(bestsellers.data);
           setTotalCount(bestsellers.headers["total-count"]);
         } else if (searchParams.has("query")) {
-          const bestsellers = await getSearchNavBar(query, limit, price, order);
-          console.log("query.data", bestsellers.data);
+          const searchResults = await getSearchNavBar(
+            query,
+            limit,
+            price,
+            order
+          );
+          console.log("query.data", searchResults.data);
 
-          setProducts(bestsellers.data);
-          setTotalCount(bestsellers.headers["total-count"]);
+          setProducts(searchResults.data);
+          setTotalCount(searchResults.headers["total-count"]);
         } else {
           const response = await getProducts(
             page,
@@ -127,14 +132,15 @@ function Shop() {
             filter,
             status,
             price_start,
-            price_end
+            price_end,
+            author_name
           );
 
           if (response) {
             setProducts(response.data);
             const headers = response.headers;
             setTotalCount(headers["total-count"]);
-            console.log("headers", headers);
+            console.log("response.data", response.data);
           }
         }
       } catch (error) {
@@ -180,28 +186,26 @@ function Shop() {
 
   return (
     <main>
-      {products.length === 0 && <Loader />}
+      <div className="px-6 py-10 tablet:px-10">
+        <div className="flex flex-col gap-4">
+          <Breadcrumbs
+            path={pathname}
+            categoryName={categoryName}
+            setCategoryName={setCategoryName}
+          />
+          <h1 className="mb-5 text-s tablet:text-sm desktop:text-l font-bold uppercase">
+            Books
+          </h1>
+        </div>
+
+        <FiltersBlock
+          filters={filters}
+          onFilterClick={handleFilterClick}
+          setCategoryName={setCategoryName}
+        />
+      </div>
       {products.length > 0 && (
         <>
-          <div className="px-6 py-10 tablet:px-10">
-            <div className="flex flex-col gap-4">
-              <Breadcrumbs
-                path={pathname}
-                categoryName={categoryName}
-                setCategoryName={setCategoryName}
-              />
-              <h1 className="mb-5 text-s tablet:text-sm desktop:text-l font-bold uppercase">
-                Books
-              </h1>
-            </div>
-
-            <FiltersBlock
-              filters={filters}
-              onFilterClick={handleFilterClick}
-              setCategoryName={setCategoryName}
-            />
-          </div>
-
           <section className="flex flex-col gap-10 px-6 pb-10 tablet:px-10">
             <ProductList
               currentTableData={products}
@@ -215,11 +219,19 @@ function Shop() {
               onPageChange={(p) => handleCurrentPage(p)}
             />
           </section>
-
-          {!!recentlyViewed.length && (
-            <RecentlyViewed recentlyViewed={recentlyViewed} />
-          )}
         </>
+      )}
+
+      {products.length === 0 && (
+        <div className="flex m-auto px-16 py-10 justify-center text-center">
+          <p className="text-cartL uppercase">
+            Sorry, nothing was found for your request. Please try again
+          </p>
+        </div>
+      )}
+
+      {!!recentlyViewed.length && (
+        <RecentlyViewed recentlyViewed={recentlyViewed} />
       )}
     </main>
   );

@@ -25,6 +25,7 @@ type SearchParams = {
   resetFilters: () => void;
   setNew: (order?: string | undefined) => void;
   setSearchNav: (query?: string | undefined) => void;
+  setAuthorName: (author_name?: string | undefined) => void;
 };
 
 export const ShopContext = createContext<SearchParams>({
@@ -48,6 +49,7 @@ export const ShopContext = createContext<SearchParams>({
   resetFilters: () => {},
   setNew: () => {},
   setSearchNav: () => {},
+  setAuthorName: () => {},
 });
 
 type Props = {
@@ -74,8 +76,10 @@ export const ShopProvider: React.FC<Props> = ({ children }) => {
       });
     }
 
-    if (value !== undefined) {
+    if (value !== undefined && value !== "") {
       params.set(key, value);
+    } else {
+      params.delete(key);
     }
 
     if (key === "category" || key === "rating" || key === "price") {
@@ -135,6 +139,11 @@ export const ShopProvider: React.FC<Props> = ({ children }) => {
   const setSearchNav = (query?: string | undefined) => {
     setQueryParam("query", query);
   };
+
+  const setAuthorName = (author_name?: string | undefined) => {
+    setQueryParam("author_name", author_name);
+  };
+
   const resetFilters = () => {
     const paramsToDelete = [
       "format",
@@ -145,6 +154,7 @@ export const ShopProvider: React.FC<Props> = ({ children }) => {
       "awaiting",
       "price_start",
       "price_end",
+      "author_name",
     ];
     setQueryParam("", undefined, paramsToDelete);
   };
@@ -166,6 +176,7 @@ export const ShopProvider: React.FC<Props> = ({ children }) => {
         resetFilters,
         setNew,
         setSearchNav,
+        setAuthorName,
       }}
     >
       {children}

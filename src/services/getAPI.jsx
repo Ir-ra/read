@@ -36,7 +36,8 @@ export const getProducts = async (
   filter,
   status,
   price_start,
-  price_end
+  price_end,
+  author_name
 ) => {
   let queryString = `/api/v1/products?page=${page}&order=${
     order || "asc"
@@ -48,6 +49,7 @@ export const getProducts = async (
   if (status) queryString += `&status=${status}`;
   if (price_start) queryString += `&price_start=${price_start}`;
   if (price_end) queryString += `&price_end=${price_end}`;
+  if (author_name) queryString += `&author_name=${author_name}`;
 
   const response = await api.get(queryString);
 
