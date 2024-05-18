@@ -18,18 +18,6 @@ export const Bestsellers = ({
   isButtonSelected: boolean;
   handleAddToCart: () => void;
 }) => {
-  // useEffect(() => {
-  //   const handleCategory = async () => {
-  //     try {
-  //       const category = await getProduct(13);
-
-  //       console.log("category.data", category.data);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   handleCategory();
-  // }, []);
   const author = products[0]?.fields?.find(
     (p) => p.lable_name === "Author"
   )?.value;

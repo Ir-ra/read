@@ -20,7 +20,6 @@ function Cart() {
           <CartOrder />
         </div>
       </main>
-      <Subscribe />
     </>
   );
 }

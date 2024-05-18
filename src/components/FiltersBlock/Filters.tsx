@@ -2,15 +2,25 @@
 
 import { ChangeEvent } from "react";
 
+import { useShop } from "@/app/context/ShopContext";
 import { useLocalStorage } from "@/utils/useLocalStorage";
 
 import FilterOptions from "./FilterOptions";
 import Range from "./Range";
 
 export const Filters = ({ isOpen }: { isOpen?: boolean }) => {
-  const filterByItems = ["New", "sale", "bestsellers", "coming soon"];
-  const filterByFormat = ["Paper", "E-book"];
+  const filterByItems = ["new", "sales", "bestsellers", "coming soon"];
+  const filterByFormat = ["paper", "e-book"];
   const filterByAvailablet = ["available"];
+  const {
+    setFilterComingSoon,
+    setFilterBestsellers,
+    setFormat,
+    setStatus,
+    setPriceStart,
+    setPriceEnd,
+    resetFilters,
+  } = useShop();
 
   const [selectedFilter, setSelectedFilter] = useLocalStorage(
     "selectedFilter",
@@ -31,14 +41,24 @@ export const Filters = ({ isOpen }: { isOpen?: boolean }) => {
     const { value, dataset } = event.target;
     const type = dataset.type;
     const numericValue = parseInt(value);
-
+    console.log("handleFilterChange", "value:", value, "type: ", type);
     switch (type) {
       case "filter":
         setSelectedFilter(value);
+        if (value === "coming soon") {
+          setFilterComingSoon(value);
+        }
+        if (value === "bestsellers") {
+          setFilterBestsellers(value);
+        }
+        if (value === "sales") {
+          setStatus(value);
+        }
         break;
 
       case "format":
         setSelectedFormat(value);
+        setFormat(value);
         break;
 
       case "available":
@@ -47,13 +67,18 @@ export const Filters = ({ isOpen }: { isOpen?: boolean }) => {
 
       case "minPrice":
         if (numericValue <= maxPrice) {
+          console.log("numericValue", numericValue);
+          console.log("minPrice", minPrice);
+          console.log("value", value);
           setMinPrice(numericValue);
+          setPriceStart(value);
         }
         break;
 
       case "maxPrice":
         if (numericValue >= minPrice) {
           setMaxPrice(numericValue);
+          setPriceEnd(value);
         }
         break;
 
@@ -63,11 +88,12 @@ export const Filters = ({ isOpen }: { isOpen?: boolean }) => {
   };
 
   const clear = () => {
-    setSelectedFilter("");
+    setSelectedFilter([]);
     setSelectedFormat("");
     setSelectedAvailable("");
     setMinPrice(0);
     setMaxPrice(100);
+    resetFilters();
   };
 
   return (

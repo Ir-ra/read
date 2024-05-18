@@ -44,7 +44,8 @@ export default function FilterOptions({
             ${selectedCategory && "font-bold"}
             ${type === "sort" ? "before:rounded-lg" : ""}
             ${
-              type !== "category" && selectedFilter === item
+              (type !== "category" && selectedFilter === item) ||
+              selectedFilter === item[0]
                 ? "before:border-Black before:border-[5px] "
                 : ""
             }

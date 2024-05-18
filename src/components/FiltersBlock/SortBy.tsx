@@ -1,6 +1,8 @@
 "use client";
 
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent } from "react";
+
+import { useShop } from "@/app/context/ShopContext";
 
 import { useLocalStorage } from "../../utils/useLocalStorage";
 import FilterOptions from "./FilterOptions";
@@ -8,17 +10,32 @@ import FilterOptions from "./FilterOptions";
 export const SortBy = ({ isOpen }: { isOpen?: boolean }) => {
   const [selectedOption, setSelectedOption] = useLocalStorage(
     "selectedSortOption",
-    ""
+    "Newest first"
   );
+
+  const { setSortPrice, setSortNewest, setSortRating } = useShop();
 
   const handleSortChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     setSelectedOption(value);
+
+    if (value === "Price: high to low") {
+      setSortPrice("desc");
+    }
+    if (value === "Price: Low to high") {
+      setSortPrice("asc");
+    }
+    if (value === "Newest first") {
+      setSortNewest("asc");
+    }
+    if (value === "Top rated") {
+      setSortRating("desc");
+    }
   };
 
   const sortByItems = [
     "Newest first",
-    "Popular first",
+    // "Popular first",
     "Top rated",
     "Price: high to low",
     "Price: Low to high",

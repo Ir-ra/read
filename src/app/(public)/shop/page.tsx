@@ -1,25 +1,40 @@
 "use client";
-import { usePathname } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
-import { useSelector } from "react-redux";
+import { usePathname, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
+import { useShop } from "@/app/context/ShopContext";
 import { Breadcrumbs } from "@/components/Breadcrumbs/Breadcrumbs";
 import FiltersBlock from "@/components/FiltersBlock/FiltersBlock";
 import Pagination from "@/components/FiltersBlock/Pagination";
 import Loader from "@/components/Loader/Loader";
 import ProductList from "@/components/ProductList/ProductList";
 import RecentlyViewed from "@/components/RecentlyViewed/RecentlyViewed";
+import {
+  getBestsellers,
+  getComingSoon,
+  getProducts,
+  getProductsByCategory,
+} from "@/services/getAPI";
 
 import { Product } from "../../../types/Product";
 import { useLocalStorage } from "../../../utils/useLocalStorage";
-import { useProducts } from "../../context/ProductsContext";
 
 function Shop() {
   const pathname = usePathname();
-  const nameBooks = "Books";
+  const searchParams = useSearchParams();
+
   const [isOpenCategory, setIsOpenCategory] = useState(false);
   const [isOpenSort, setIsOpenSort] = useState(false);
   const [isOpenFilter, setIsOpenFilter] = useState(false);
+  const [recentlyViewed, setRecentlyViewed] = useLocalStorage(
+    "recentlyViewed",
+    []
+  );
+  const [products, setProducts] = useState<Product[]>([]);
+  const [categoryName, setCategoryName] = useState("");
+  const { handleCurrentPage } = useShop();
+  const page = searchParams.get("page") || "1";
+  let limit = 20;
 
   const filters = [
     {
@@ -39,6 +54,85 @@ function Shop() {
     },
   ];
 
+  useEffect(() => {
+    async function fetchProducts() {
+      try {
+        const price = searchParams.get("price");
+        const order = searchParams.get("order");
+        const rating = searchParams.get("rating");
+        const filter = searchParams.get("format");
+        const status = searchParams.get("status");
+        const price_start = searchParams.get("price_start");
+        const price_end = searchParams.get("price_end");
+        const page = searchParams.get("page") || "1";
+
+        if (searchParams.has("category")) {
+          const category = await getProductsByCategory(
+            searchParams.get("category"),
+            page,
+            limit,
+            price,
+            order,
+            status
+          );
+          setProducts(category.data);
+        } else if (searchParams.has("awaiting")) {
+          const soon = await getComingSoon(page, limit, price, order, rating);
+          console.log("soon.data", soon.data);
+
+          setProducts(soon.data);
+        } else if (searchParams.has("bestsellers")) {
+          const bestsellers = await getBestsellers(
+            page,
+            limit,
+            price,
+            order,
+            rating
+          );
+          console.log("bestsellers.data", bestsellers.data);
+
+          setProducts(bestsellers.data);
+        } else if (searchParams.has("filter")) {
+          const products = await getProducts(
+            page,
+            limit,
+            price,
+            order,
+            rating,
+            filter,
+            status,
+            price_start,
+            price_end
+          );
+          console.log("products status", products.data);
+
+          setProducts(products.data);
+        } else {
+          const response = await getProducts(
+            page,
+            limit,
+            price,
+            order,
+            rating,
+            filter,
+            status,
+            price_start,
+            price_end
+          );
+
+          if (response) {
+            setProducts(response.data);
+            console.log("heders", response.headers);
+          }
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    fetchProducts();
+  }, [searchParams, limit, pathname]);
+
   const handleFilterClick = (filterName: string) => {
     if (filterName === "Category") {
       setIsOpenCategory((prev) => !prev);
@@ -54,22 +148,6 @@ function Shop() {
       setIsOpenSort(false);
     }
   };
-
-  const { products, loading } = useProducts();
-  // const { products, loading } = useSelector(selectProducts);
-
-  const [currentPage, setCurrentPage] = useState(1);
-  const [recentlyViewed, setRecentlyViewed] = useLocalStorage(
-    "recentlyViewed",
-    []
-  );
-  let pageSize = 8;
-
-  const currentTableData = useMemo(() => {
-    const firstPageIndex = (currentPage - 1) * pageSize;
-    const lastPageIndex = firstPageIndex + pageSize;
-    return products.slice(firstPageIndex, lastPageIndex);
-  }, [currentPage, pageSize, products]);
 
   const onBookClick = (product: Product) => {
     const isProductInRecentlyViewed = recentlyViewed.some(
@@ -90,31 +168,40 @@ function Shop() {
 
   return (
     <main>
-      {loading && <Loader />}
-      {!loading && (
+      {products.length === 0 && <Loader />}
+      {products.length > 0 && (
         <>
           <div className="px-6 py-10 tablet:px-10">
             <div className="flex flex-col gap-4">
-              <Breadcrumbs path={pathname} name={nameBooks} />
+              <Breadcrumbs
+                path={pathname}
+                categoryName={categoryName}
+                setCategoryName={setCategoryName}
+              />
               <h1 className="mb-5 text-s tablet:text-sm desktop:text-l font-bold uppercase">
-                {nameBooks}
+                Books
               </h1>
             </div>
 
-            <FiltersBlock filters={filters} onFilterClick={handleFilterClick} />
+            <FiltersBlock
+              filters={filters}
+              onFilterClick={handleFilterClick}
+              setCategoryName={setCategoryName}
+            />
           </div>
 
           <section className="flex flex-col gap-10 px-6 pb-10 tablet:px-10">
             <ProductList
-              currentTableData={currentTableData}
+              currentTableData={products}
               onBookClick={onBookClick}
             />
 
             <Pagination
-              currentPage={currentPage}
-              totalCount={products.length}
-              pageSize={pageSize}
-              onPageChange={(page) => setCurrentPage(page)}
+              currentPage={page}
+              // totalCount={products.length}
+              totalCount={26}
+              pageSize={limit}
+              onPageChange={(p) => handleCurrentPage(p)}
             />
           </section>
 

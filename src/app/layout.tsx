@@ -7,6 +7,7 @@ import ReduxProvider from "@/redux/redux-provider";
 
 import CartProvider from "./context/CartContext";
 import { ProductsProvider } from "./context/ProductsContext";
+import { ShopProvider } from "./context/ShopContext";
 
 const fira = Fira_Sans({ weight: "400", subsets: ["latin"] });
 

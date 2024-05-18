@@ -1,5 +1,12 @@
 "use client";
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  Dispatch,
+  SetStateAction,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 import { getProducts } from "@/services/getAPI";
 
@@ -8,10 +15,12 @@ import { Product } from "../../types/Product";
 type ContextItems = {
   products: Product[];
   loading: boolean;
+  setProducts: Dispatch<SetStateAction<Product[]>>;
 };
 export const ProductsContext = createContext<ContextItems>({
   products: [],
   loading: false,
+  setProducts: () => {},
 });
 
 type Props = {
@@ -42,7 +51,7 @@ export const ProductsProvider: React.FC<Props> = ({ children }) => {
   }, []);
 
   return (
-    <ProductsContext.Provider value={{ products, loading }}>
+    <ProductsContext.Provider value={{ products, loading, setProducts }}>
       {children}
     </ProductsContext.Provider>
   );
