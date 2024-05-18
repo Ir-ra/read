@@ -7,7 +7,9 @@ import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 
 import { Button } from "@/components/Button/Button";
 import { Cross } from "@/components/icons";
-import { createUser } from "@/services/getAPI";
+import { createUser } from "@/redux/auth/operations";
+import { selectIsLoggedIn, selectUser } from "@/redux/auth/selectors";
+import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { RegistrSchema } from "@/services/yupSchems";
 
 type FormData = {
@@ -22,7 +24,11 @@ export const RegisterForm = () => {
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [error, setError] = useState<string>("");
 
+  const isLoggedIn = useAppSelector(selectIsLoggedIn);
+  const user = useAppSelector(selectUser);
+
   const router = useRouter();
+  const dispatch = useAppDispatch();
 
   const {
     register,
@@ -42,14 +48,24 @@ export const RegisterForm = () => {
     };
 
     try {
-      const res = await createUser(newUser, setError);
-      if (res?.data.token) {
+      await dispatch(createUser(newUser));
+      if (isLoggedIn) {
         reset();
         router.push(`/account`);
       }
     } catch (error) {
-      console.log(error);
+      console.error("Registration error:", error);
     }
+
+    // try {
+    //   const res = await createUser(newUser, setError);
+    //   if (res?.data.token) {
+    //     reset();
+    //     router.push(`/account`);
+    //   }
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
   return (
