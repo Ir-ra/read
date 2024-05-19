@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { createContext, useCallback, useContext } from "react";
+import { createContext, Suspense, useContext } from "react";
 
 type SearchParams = {
   category?: string;
@@ -160,27 +160,29 @@ export const ShopProvider: React.FC<Props> = ({ children }) => {
   };
 
   return (
-    <ShopContext.Provider
-      value={{
-        handleCurrentPage,
-        setCategory,
-        setSortPrice,
-        setSortNewest,
-        setSortRating,
-        setFilterComingSoon,
-        setFilterBestsellers,
-        setFormat,
-        setStatus,
-        setPriceStart,
-        setPriceEnd,
-        resetFilters,
-        setNew,
-        setSearchNav,
-        setAuthorName,
-      }}
-    >
-      {children}
-    </ShopContext.Provider>
+    <Suspense fallback={<div>Loading...</div>}>
+      <ShopContext.Provider
+        value={{
+          handleCurrentPage,
+          setCategory,
+          setSortPrice,
+          setSortNewest,
+          setSortRating,
+          setFilterComingSoon,
+          setFilterBestsellers,
+          setFormat,
+          setStatus,
+          setPriceStart,
+          setPriceEnd,
+          resetFilters,
+          setNew,
+          setSearchNav,
+          setAuthorName,
+        }}
+      >
+        {children}
+      </ShopContext.Provider>
+    </Suspense>
   );
 };
 
