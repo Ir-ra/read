@@ -36,7 +36,8 @@ export const getProducts = async (
   filter,
   status,
   price_start,
-  price_end
+  price_end,
+  author_name
 ) => {
   let queryString = `/api/v1/products?page=${page}&order=${
     order || "asc"
@@ -48,6 +49,7 @@ export const getProducts = async (
   if (status) queryString += `&status=${status}`;
   if (price_start) queryString += `&price_start=${price_start}`;
   if (price_end) queryString += `&price_end=${price_end}`;
+  if (author_name) queryString += `&author_name=${author_name}`;
 
   const response = await api.get(queryString);
 
@@ -62,10 +64,13 @@ export const getProduct = (id) => {
   return response;
 };
 
-export const getSearchNavBar = (query) => {
-  const response = api.get(`/api/v1/search?query=${query}`);
+export const getSearchNavBar = (query, limit, order, price) => {
+  let queryString = `/api/v1/search?query=${query}`;
+  if (limit) queryString += `&limit=${limit}`;
+  if (order) queryString += `&order=${order}`;
+  if (price) queryString += `&price=${price}`;
+  const response = api.get(queryString);
 
-  console.log("prod", response);
   return response;
 };
 

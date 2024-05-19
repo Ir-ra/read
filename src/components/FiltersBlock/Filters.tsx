@@ -5,6 +5,7 @@ import { ChangeEvent } from "react";
 import { useShop } from "@/app/context/ShopContext";
 import { useLocalStorage } from "@/utils/useLocalStorage";
 
+import { SearchByAuthor } from "../SearchByAuthor/SearchByAuthor";
 import FilterOptions from "./FilterOptions";
 import Range from "./Range";
 
@@ -145,6 +146,11 @@ export const Filters = ({ isOpen }: { isOpen?: boolean }) => {
                   type={"available"}
                 />
               ))}
+            </div>
+
+            <div className="flex flex-col gap-2 w-full">
+              <h3 className="text-xxxs font-bold uppercase">Author</h3>
+              <SearchByAuthor />
             </div>
 
             <div className="flex flex-col gap-2 w-full">

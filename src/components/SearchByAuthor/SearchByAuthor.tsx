@@ -8,15 +8,12 @@ import React, { useState } from "react";
 
 import { useShop } from "@/app/context/ShopContext";
 
-import Search_icon from "../../../../public/img/search.svg";
-import Search_cross from "../../../../public/img/search_cross.svg";
-import SearchDis from "../../../../public/img/search_disabled.svg";
+import SearchDis from "../../../public/img/search_disabled.svg";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   display: "flex",
-  alignItems: "center",
-  justifyContent: "flex-end",
+  justifyContent: "flex-start",
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
   "&:hover": {
@@ -33,10 +30,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   width: "100%",
   textTransform: "uppercase",
   "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
+    padding: theme.spacing(1, 0),
     transition: theme.transitions.create("width"),
     [theme.breakpoints.up("sm")]: {
-      width: "12ch",
+      width: "18ch",
       "&:focus": {
         width: "20ch",
       },
@@ -44,54 +41,36 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export const SearchAppBar = () => {
-  const [isSearching, setIsSearching] = useState(false);
+export const SearchByAuthor = () => {
+  // const [isSearching, setIsSearching] = useState(false);
   const [inputValue, setInputValue] = useState("");
-  const { setSearchNav } = useShop();
+  const { setAuthorName } = useShop();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setInputValue(value);
-    setIsSearching(value !== "");
     console.log("nav", value);
-    setSearchNav(value);
-  };
-
-  const handleClearInput = () => {
-    setInputValue("");
-    setIsSearching(false);
-    setSearchNav("");
+    setAuthorName(value);
   };
 
   return (
-    <div className="flex m-auto">
-      <Box sx={{ flexGrow: 1 }}>
+    <div className="flex">
+      <Box>
         <Search>
-          {isSearching && (
+          <div className="flex border-b border-Black pr-2">
             <Image src={SearchDis} alt="search icon" quality={100} />
-          )}
+          </div>
 
           <StyledInputBase
             id="searchInput"
-            placeholder="Search"
+            placeholder="SEARCH AUTHOR"
             inputProps={{ "aria-label": "search" }}
             onChange={handleInputChange}
-            value={inputValue.toUpperCase()}
+            value={inputValue}
+            className="border-b border-Black"
           />
         </Search>
       </Box>
-
-      <div className="flex items-center mr-4 tablet:mr-8">
-        {isSearching ? (
-          <button type="button" onClick={handleClearInput}>
-            <Image src={Search_cross} alt="cross in search box" quality={100} />
-          </button>
-        ) : (
-          <button type="button">
-            <Image src={Search_icon} alt="search icon" quality={100} />
-          </button>
-        )}
-      </div>
     </div>
   );
 };

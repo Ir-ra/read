@@ -19,11 +19,13 @@ type SearchParams = {
   setFilterComingSoon: (awaiting?: string | undefined) => void;
   setFilterBestsellers: (bestsellers?: string | undefined) => void;
   setFormat: (format?: string | undefined) => void;
-  setStatus: (format?: string | undefined) => void;
-  setPriceStart: (format?: string | undefined) => void;
-  setPriceEnd: (format?: string | undefined) => void;
+  setStatus: (status?: string | undefined) => void;
+  setPriceStart: (price_start?: string | undefined) => void;
+  setPriceEnd: (price_end?: string | undefined) => void;
   resetFilters: () => void;
   setNew: (order?: string | undefined) => void;
+  setSearchNav: (query?: string | undefined) => void;
+  setAuthorName: (author_name?: string | undefined) => void;
 };
 
 export const ShopContext = createContext<SearchParams>({
@@ -46,6 +48,8 @@ export const ShopContext = createContext<SearchParams>({
   setPriceEnd: () => {},
   resetFilters: () => {},
   setNew: () => {},
+  setSearchNav: () => {},
+  setAuthorName: () => {},
 });
 
 type Props = {
@@ -72,8 +76,10 @@ export const ShopProvider: React.FC<Props> = ({ children }) => {
       });
     }
 
-    if (value !== undefined) {
+    if (value !== undefined && value !== "") {
       params.set(key, value);
+    } else {
+      params.delete(key);
     }
 
     if (key === "category" || key === "rating" || key === "price") {
@@ -130,6 +136,14 @@ export const ShopProvider: React.FC<Props> = ({ children }) => {
     setQueryParam("price_end", price_end);
   };
 
+  const setSearchNav = (query?: string | undefined) => {
+    setQueryParam("query", query);
+  };
+
+  const setAuthorName = (author_name?: string | undefined) => {
+    setQueryParam("author_name", author_name);
+  };
+
   const resetFilters = () => {
     const paramsToDelete = [
       "format",
@@ -140,6 +154,7 @@ export const ShopProvider: React.FC<Props> = ({ children }) => {
       "awaiting",
       "price_start",
       "price_end",
+      "author_name",
     ];
     setQueryParam("", undefined, paramsToDelete);
   };
@@ -160,6 +175,8 @@ export const ShopProvider: React.FC<Props> = ({ children }) => {
         setPriceEnd,
         resetFilters,
         setNew,
+        setSearchNav,
+        setAuthorName,
       }}
     >
       {children}
