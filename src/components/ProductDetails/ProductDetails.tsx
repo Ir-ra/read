@@ -41,7 +41,6 @@ export default function ProductDetails({
     id,
   } = state;
 
-  const nameBooks = "Books";
   return (
     <section className="px-6 py-10 tablet:px-10">
       <div className="flex flex-col desktop:flex-row gap-[135px]">
@@ -78,7 +77,6 @@ export default function ProductDetails({
           <div className="flex flex-col gap-4">
             <Breadcrumbs
               path={pathname.slice(0, 5)}
-              name={nameBooks}
               bookName={state && name}
               id={+id}
             />
