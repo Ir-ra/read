@@ -27,7 +27,9 @@ export default function RootLayout({
         <ReduxProvider>
           {" "}
           <CartProvider>
-            <ProductsProvider>{children}</ProductsProvider>
+            <ShopProvider>
+              <ProductsProvider>{children}</ProductsProvider>
+            </ShopProvider>
           </CartProvider>
         </ReduxProvider>
       </body>
