@@ -20,6 +20,7 @@ export const Filters = ({ isOpen }: { isOpen?: boolean }) => {
     setPriceStart,
     setPriceEnd,
     resetFilters,
+    setNew,
   } = useShop();
 
   const [selectedFilter, setSelectedFilter] = useLocalStorage(
@@ -53,6 +54,9 @@ export const Filters = ({ isOpen }: { isOpen?: boolean }) => {
         }
         if (value === "sales") {
           setStatus(value);
+        }
+        if (value === "new") {
+          setNew("desc");
         }
         break;
 

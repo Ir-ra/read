@@ -43,6 +43,8 @@ export default function FilterOptions({
             }
             ${selectedCategory && "font-bold"}
             ${type === "sort" ? "before:rounded-lg" : ""}
+            ${item === "Poetry" && "text-Grey"}
+            ${item === "Non-fiction" && "text-Grey"}
             ${
               (type !== "category" && selectedFilter === item) ||
               selectedFilter === item[0]

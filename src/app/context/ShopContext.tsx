@@ -23,6 +23,7 @@ type SearchParams = {
   setPriceStart: (format?: string | undefined) => void;
   setPriceEnd: (format?: string | undefined) => void;
   resetFilters: () => void;
+  setNew: (order?: string | undefined) => void;
 };
 
 export const ShopContext = createContext<SearchParams>({
@@ -44,6 +45,7 @@ export const ShopContext = createContext<SearchParams>({
   setPriceStart: () => {},
   setPriceEnd: () => {},
   resetFilters: () => {},
+  setNew: () => {},
 });
 
 type Props = {
@@ -74,6 +76,9 @@ export const ShopProvider: React.FC<Props> = ({ children }) => {
       params.set(key, value);
     }
 
+    if (key === "category" || key === "rating" || key === "price") {
+      params.set("page", "1");
+    }
     router.push(pathname + "?" + params.toString());
   };
 
@@ -98,11 +103,11 @@ export const ShopProvider: React.FC<Props> = ({ children }) => {
   };
 
   const setFilterComingSoon = (awaiting?: string | undefined) => {
-    setQueryParam("awaiting", awaiting, ["bestsellers", "status"]);
+    setQueryParam("awaiting", awaiting, ["bestsellers", "status", "new"]);
   };
 
   const setFilterBestsellers = (bestsellers?: string | undefined) => {
-    setQueryParam("bestsellers", bestsellers, ["awaiting", "status"]);
+    setQueryParam("bestsellers", bestsellers, ["awaiting", "status", "new"]);
   };
 
   const setFormat = (format?: string | undefined) => {
@@ -110,7 +115,11 @@ export const ShopProvider: React.FC<Props> = ({ children }) => {
   };
 
   const setStatus = (status?: string | undefined) => {
-    setQueryParam("status", status, ["awaiting", "bestsellers"]);
+    setQueryParam("status", status, ["awaiting", "bestsellers", "new"]);
+  };
+
+  const setNew = (order?: string | undefined) => {
+    setQueryParam("order", order, ["awaiting", "bestsellers", "status"]);
   };
 
   const setPriceStart = (price_start?: string | undefined) => {
@@ -129,6 +138,8 @@ export const ShopProvider: React.FC<Props> = ({ children }) => {
       "price_end",
       "bestsellers",
       "awaiting",
+      "price_start",
+      "price_end",
     ];
     setQueryParam("", undefined, paramsToDelete);
   };
@@ -148,6 +159,7 @@ export const ShopProvider: React.FC<Props> = ({ children }) => {
         setPriceStart,
         setPriceEnd,
         resetFilters,
+        setNew,
       }}
     >
       {children}

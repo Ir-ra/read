@@ -1,11 +1,11 @@
 "use client";
-import { useContext, useEffect, useMemo, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 
 import { Bestsellers } from "@/components/Bestsellers/Bestsellers";
 import { Hero } from "@/components/Hero/Hero";
 import { ProductsCarousel } from "@/components/ProductsCarousel/ProductsCarousel";
 import { SectionTitle } from "@/components/SectionTitle/SectionTitle";
+import { getBestSells } from "@/services/getAPI";
 import { Product } from "@/types/Product";
 import useAddToCart from "@/utils/useAddToCart";
 
@@ -15,31 +15,28 @@ export default function Home() {
   const [activeCategory, setActiveCategory] = useState<"new" | "coming soon">(
     "new"
   );
+  const [bestsellers, setBestsellers] = useState<Product[]>([]);
   const { products } = useProducts();
 
-  const getSuggestedProducts = useMemo(() => {
-    return (prods: Product[]) => {
-      const suggested = prods
-        .sort((a, b) => a.quantity - b.quantity)
-        .slice(0, 3);
-      return suggested;
+  useEffect(() => {
+    const fetchBestSells = async () => {
+      try {
+        if (bestsellers.length === 0) {
+          const res = await getBestSells();
+          setBestsellers(res.data);
+        }
+      } catch (error) {
+        console.error("Error fetching bestsellers:", error);
+      }
     };
-  }, []);
-  const suggestedProds = getSuggestedProducts(products);
-  console.log("suggestedProds", suggestedProds);
 
-  // const dispatch = useDispatch() as AppDispatch;
-  // const { products, loading } = useSelector(selectProducts);
-
-  // useEffect(() => {
-  //   dispatch(fetchProducts());
-  // }, [dispatch]);
-  const verticalBestsellerId = suggestedProds[0]?.id;
+    fetchBestSells();
+  }, [bestsellers.length]);
 
   const { handleAddToCart, isButtonSelected } = useAddToCart({
-    id: verticalBestsellerId,
-    product: suggestedProds[0],
-    price: suggestedProds[0]?.price,
+    id: bestsellers.length > 0 ? bestsellers[0].id : "",
+    product: bestsellers[0],
+    price: bestsellers[0]?.price,
   });
   return (
     <main className="bg-Background">
@@ -57,7 +54,7 @@ export default function Home() {
 
       <SectionTitle title1="bestsellers" link1="#" />
       <Bestsellers
-        products={suggestedProds}
+        products={bestsellers}
         isButtonSelected={isButtonSelected}
         handleAddToCart={handleAddToCart}
       />

@@ -125,7 +125,7 @@ export const HorizontalCard = ({
                           d="M6.66797 16H25.3346"
                           stroke="#1C1C1C"
                           stroke-width="2"
-                          stroke-linecap="round"
+                          strokeLinecap="round"
                           stroke-linejoin="round"
                         />
                       </svg>
@@ -158,14 +158,14 @@ export const HorizontalCard = ({
                           d="M16 6.6665V25.3332"
                           stroke="#1C1C1C"
                           stroke-width="2"
-                          stroke-linecap="round"
+                          strokeLinecap="round"
                           stroke-linejoin="round"
                         />
                         <path
                           d="M6.66797 16H25.3346"
                           stroke="#1C1C1C"
                           stroke-width="2"
-                          stroke-linecap="round"
+                          strokeLinecap="round"
                           stroke-linejoin="round"
                         />
                       </svg>
@@ -250,7 +250,7 @@ export const HorizontalCard = ({
                     d="M6.66797 16H25.3346"
                     stroke="#1C1C1C"
                     stroke-width="2"
-                    stroke-linecap="round"
+                    strokeLinecap="round"
                     stroke-linejoin="round"
                   />
                 </svg>
@@ -283,14 +283,14 @@ export const HorizontalCard = ({
                     d="M16 6.6665V25.3332"
                     stroke="#1C1C1C"
                     stroke-width="2"
-                    stroke-linecap="round"
+                    strokeLinecap="round"
                     stroke-linejoin="round"
                   />
                   <path
                     d="M6.66797 16H25.3346"
                     stroke="#1C1C1C"
                     stroke-width="2"
-                    stroke-linecap="round"
+                    strokeLinecap="round"
                     stroke-linejoin="round"
                   />
                 </svg>

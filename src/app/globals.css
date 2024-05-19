@@ -11,7 +11,7 @@
 }
 
 .arrow-up:hover {
-  content: url("../../public/img/arrow-up_hover.svg");
+  transform: translateY(-8px);
 }
 
 .hide-scrollbar {
