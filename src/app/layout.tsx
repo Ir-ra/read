@@ -24,14 +24,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={fira.className} suppressHydrationWarning={true}>
-        <ReduxProvider>
-          {" "}
-          <CartProvider>
-            <ShopProvider>
-              <ProductsProvider>{children}</ProductsProvider>
-            </ShopProvider>
-          </CartProvider>
-        </ReduxProvider>
+        {/* <ReduxProvider> */}
+        <CartProvider>
+          <ShopProvider>
+            <ProductsProvider>{children}</ProductsProvider>
+          </ShopProvider>
+        </CartProvider>
+        {/* </ReduxProvider> */}
       </body>
     </html>
   );

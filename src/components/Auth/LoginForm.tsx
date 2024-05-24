@@ -8,9 +8,9 @@ import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 
 import { Button } from "@/components/Button/Button";
 import { Cross } from "@/components/icons";
-import { logIn } from "@/redux/auth/operations";
-import { selectIsLoggedIn } from "@/redux/auth/selectors";
-import { useAppDispatch, useAppSelector } from "@/redux/store";
+// import { logIn } from "@/redux/auth/operations";
+// import { selectIsLoggedIn } from "@/redux/auth/selectors";
+// import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { signIn } from "@/services/getAPI";
 import { loginSchema } from "@/services/yupSchems";
 
@@ -26,8 +26,8 @@ export const LoginForm = () => {
   const [rememberMe, setRememberMe] = useState(false);
 
   const router = useRouter();
-  const isLoggedIn = useAppSelector(selectIsLoggedIn);
-  const dispatch = useAppDispatch();
+  // const isLoggedIn = useAppSelector(selectIsLoggedIn);
+  // const dispatch = useAppDispatch();
 
   const {
     register,
@@ -44,26 +44,26 @@ export const LoginForm = () => {
       password: FormData.password,
     };
 
-    try {
-      await dispatch(logIn(user));
-
-      if (isLoggedIn) {
-        reset();
-        router.push(`/account`);
-      }
-    } catch (error) {
-      console.log(error);
-    }
     // try {
-    //   const res = await signIn(user, setError);
+    //   await dispatch(logIn(user));
 
-    //   if (res?.data.token) {
+    //   if (isLoggedIn) {
     //     reset();
     //     router.push(`/account`);
     //   }
     // } catch (error) {
     //   console.log(error);
     // }
+    try {
+      const res = await signIn(user, setError);
+
+      if (res?.data.token) {
+        reset();
+        router.push(`/account`);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
